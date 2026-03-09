@@ -1,0 +1,28 @@
+{
+  "[typescript]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
+  "[html]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
+  "workbench.colorCustomizations": {
+    "[Vira*]": {
+      "tab.activeBorder": "#ff669e5c",
+      "tab.activeModifiedBorder": "#ff669e"
+    }
+  },
+  "explorer.fileNesting.enabled": true,
+  "explorer.fileNesting.patterns": {
+    "*.ts": "${capture}.html, ${capture}.css",
+    "tsconfig.json": "tsconfig.*.json",
+    "package.json": "package-lock.json, .editorconfig, eslint.*, angular.json, .postcssrc.json"
+  },
+  "editor.codeActionsOnSave": {
+    "source.addMissingImports.ts": "explicit",
+    "source.fixAll.prettier": "explicit",
+    "source.fixAll.ts": "explicit",
+    "source.organizeImports": "explicit",
+    "source.removeUnused.ts": "explicit",
+    "source.removeUnusedImports": "explicit"
+  }
+}
