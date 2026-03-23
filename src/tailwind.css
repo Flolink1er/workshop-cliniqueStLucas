@@ -1,2 +1,36 @@
 @import 'tailwindcss';
 @plugin 'daisyui';
+@plugin "daisyui/theme" {
+  name: "industrial-blue";
+  default: true;
+  prefersdark: true;
+  color-scheme: "light";
+  --color-base-100: #f4f8fb;
+  --color-base-200: #d6e8f7;
+  --color-base-300: #fff;
+  --color-base-content: #1c2b3a;
+  --color-primary: #1a5f9e;
+  --color-primary-content: #fff;
+  --color-secondary: #0D3D6B;
+  --color-secondary-content: #fff;
+  --color-accent: #00c9a7;
+  --color-accent-content: oklch(98% 0.003 247.858);
+  --color-neutral: oklch(14% 0.005 285.823);
+  --color-neutral-content: #fff;
+  --color-info: #d6e8f7;
+  --color-info-content: #0d3d6b;
+  --color-success: #e0faf5;
+  --color-success-content: #4fa293;
+  --color-warning: #fef3e2;
+  --color-warning-content: #8a5800;
+  --color-error: #fee8e7;
+  --color-error-content: #e5534b;
+  --radius-selector: 2rem;
+  --radius-field: 1rem;
+  --radius-box: 1rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+  --border: 1px;
+  --depth: 0;
+  --noise: 0;
+}
