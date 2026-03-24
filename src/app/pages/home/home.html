@@ -1,1 +1,46 @@
-<p>Home works!</p>
+@if (pageData) {
+  <div class="bg-base-200">
+    <div class="hero min-h-screen">
+      <div class="hero-content text-center">
+        <div class="max-w-md">
+          <h1 class="text-5xl font-bold">{{ pageData.hero.title }}</h1>
+          <p class="py-6">{{ pageData.hero.subtitle }}</p>
+          <div class="flex justify-center gap-4">
+            <button class="btn btn-primary" [routerLink]="pageData.hero.cta.href">
+              {{ pageData.hero.cta.label }}
+            </button>
+            <button class="btn btn-secondary" [routerLink]="pageData.hero.ctaSecondary.href">
+              {{ pageData.hero.ctaSecondary.label }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-white py-12">
+      <div class="mx-auto grid max-w-4xl grid-cols-2 gap-4 px-4 md:grid-cols-4">
+        @for (stat of pageData.stats; track stat) {
+          <div class="rounded-box border p-4 text-center shadow-sm">
+            <div class="text-3xl font-bold text-primary">{{ stat.value }}</div>
+            <div class="text-sm opacity-70">{{ stat.label }}</div>
+          </div>
+        }
+      </div>
+      <div
+        class="mx-auto my-6 grid max-w-4xl grid-cols-1 justify-items-center gap-4 px-4 md:grid-cols-2"
+      >
+        @for (section of pageData.sections; track section) {
+          <div class="card w-96 bg-base-100 card-border">
+            <div class="card-body">
+              <h2 class="card-title">{{ section.title }}</h2>
+              <p>{{ section.description }}</p>
+              <!-- <div class="card-actions justify-end">
+                <button class="btn btn-primary">Buy Now</button>
+              </div> -->
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+}

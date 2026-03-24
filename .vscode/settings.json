@@ -11,7 +11,7 @@
     "source.fixAll.prettier": "explicit",
     "source.fixAll.ts": "explicit",
     "source.organizeImports": "explicit",
-    "source.removeUnused.ts": "explicit",
+    // "source.removeUnused.ts": "explicit",
     "source.removeUnusedImports": "explicit"
   },
   "explorer.fileNesting.enabled": true,
