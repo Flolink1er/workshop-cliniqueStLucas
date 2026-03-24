@@ -3,6 +3,12 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "paths": {
+      "components/*": ["./src/app/components/*"],
+      "models/*": ["./src/app/models/*"],
+      "pages/*": ["./src/app/pages/*"],
+      "services/*": ["./src/app/services/*"],
+    },
     "strict": true,
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
