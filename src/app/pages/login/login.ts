@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import axios from 'axios';
 
 @Component({
@@ -9,22 +10,12 @@ import axios from 'axios';
   styleUrl: './login.scss',
 })
 export class Login {
-  public loginForm = new FormGroup({
-    email: new FormControl('', Validators.required),
-    password: new FormControl('', Validators.required),
-  });
+  private _router: Router = inject(Router);
 
-  // public login = async (email: string, password: string) => {
-  //   return await fetch('http://localhost:5150/api/patients/login', {
-  //     method: 'POST',
-  //     headers: { 'Content-Type': 'application/json' },
-  //     body: JSON.stringify({ email, password })
-  //   })
-  //     .then(res => res.json())
-  //     .then(data => {
-  //       localStorage['token'] = data.token;
-  //     })
-  // }
+  public loginForm = new FormGroup({
+    email: new FormControl('patient@clinique.be', Validators.required),
+    password: new FormControl('Patient2026!', Validators.required),
+  });
 
   public async login(email: string, password: string): Promise<void> {
     return await axios
@@ -40,9 +31,10 @@ export class Login {
           },
         },
       )
-      .then((res) => {
+      .then(res => {
         localStorage.setItem('token', res.data.token);
+        this._router.navigate(['']);
       })
-      .catch((err) => console.error(err));
+      .catch(err => console.error(err));
   }
 }

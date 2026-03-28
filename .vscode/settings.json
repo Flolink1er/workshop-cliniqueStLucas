@@ -8,11 +8,15 @@
   "css.lint.unknownAtRules": "ignore",
   "editor.codeActionsOnSave": {
     "source.addMissingImports.ts": "explicit",
+    "source.fixAll.eslint": "explicit",
+    "source.fixAll.markdownlint": "explicit",
     "source.fixAll.prettier": "explicit",
     "source.fixAll.ts": "explicit",
     "source.organizeImports": "explicit",
-    // "source.removeUnused.ts": "explicit",
-    "source.removeUnusedImports": "explicit"
+    "source.organizeLinkDefinitions": "explicit",
+    "source.removeUnusedImports": "explicit",
+    "source.sort.json": "explicit",
+    "source.sortImports": "explicit"
   },
   "explorer.fileNesting.enabled": true,
   "explorer.fileNesting.patterns": {
@@ -20,6 +24,11 @@
     "package.json": "package-lock.json, .editorconfig, eslint.*, angular.json, .postcssrc.json, .prettierrc*",
     "tsconfig.json": "tsconfig.*.json"
   },
+  "prettier.configPath": ".prettierrc",
+  "prettier.documentSelectors": [
+    "**/*.{css,scss,json,jsonc,md}"
+  ],
+  "prettier.prettierPath": "./node_modules/prettier",
   "workbench.colorCustomizations": {
     "[Vira*]": {
       "tab.activeBorder": "#ff669e5c",

@@ -1,0 +1,30 @@
+{
+  "arrowParens": "avoid",
+  "bracketSameLine": true,
+  "bracketSpacing": true,
+  "htmlWhitespaceSensitivity": "strict",
+  "overrides": [
+    {
+      "files": "*.html",
+      "options": {
+        "parser": "angular"
+      }
+    }
+  ],
+  "plugins": [
+    "prettier-plugin-tailwindcss"
+  ],
+  "printWidth": 100,
+  "quoteProps": "as-needed",
+  "semi": true,
+  "singleQuote": true,
+  "tailwindAttributes": [
+    "myClassList",
+    "/data-.*/"
+  ],
+  "tailwindFunctions": [
+    "clsx"
+  ],
+  "tailwindStylesheet": "./src/tailwind.css",
+  "trailingComma": "all"
+}
