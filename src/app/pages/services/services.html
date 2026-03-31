@@ -1,0 +1,57 @@
+@if (pageData) {
+  <div class="bg-base-100">
+    @for (service of pageData; track service.id) {
+      <div class="hero min-h-screen">
+        <div class="hero-content flex-col lg:flex-row">
+          <img
+            [src]="service.image"
+            class="aspect-4/7 max-w-sm rounded-lg object-cover object-center shadow-2xl"
+            alt />
+          <div>
+            <hgroup>
+              <h1 class="text-5xl/snug font-bold">{{ service.name }}</h1>
+              <h3 class="text-3xl font-semibold">{{ service.shortDescription }}</h3>
+            </hgroup>
+            <p class="py-6">{{ service.description }}</p>
+            <ul class="list">
+              <li class="p-4 pb-2 text-xs tracking-wide opacity-60">Disponibilités</li>
+
+              <li class="list-row">
+                <div>
+                  <div>Contact</div>
+                  <div class="text-xs font-semibold uppercase opacity-60">{{ service.phone }}</div>
+                </div>
+              </li>
+              <li class="list-row">
+                <div>
+                  <div>Horaires</div>
+                  <div class="text-xs font-semibold uppercase opacity-60">{{ service.hours }}</div>
+                </div>
+              </li>
+            </ul>
+            <span class="mt-10 flex gap-2.5">
+              <a [href]="phoneNbr(service.phone)" class="btn btn-primary">Appeler le service</a>
+
+              @if (service.departmentId !== null) {
+                <button class="btn" (click)="openDialog('modal_' + service.departmentId)">
+                  Plus d'infos
+                </button>
+                <dialog [id]="'modal_' + service.departmentId" class="modal">
+                  <div class="modal-box">
+                    <h3 class="text-lg font-bold">{{ service.name }}</h3>
+                    <p class="py-4">Press ESC key or click the button below to close</p>
+                    <div class="modal-action">
+                      <form method="dialog">
+                        <button class="btn">Close</button>
+                      </form>
+                    </div>
+                  </div>
+                </dialog>
+              }
+            </span>
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+}
