@@ -1,5 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { inject, Injectable } from '@angular/core';
+import { inject, Injectable, signal, WritableSignal } from '@angular/core';
 import { HomeData } from 'models/interfaces/home-data';
 import { ServiceData } from 'models/interfaces/service-data';
 import { Observable } from 'rxjs';
@@ -9,20 +9,29 @@ import { Observable } from 'rxjs';
 })
 export class ApiService {
   private readonly _http: HttpClient = inject(HttpClient);
-  private _headers: HttpHeaders = new HttpHeaders().set(
-    'Authorization',
-    localStorage['token'] as string,
-  );
   private readonly _baseUrl: string = 'http://localhost:5150/api/';
+  private _pagesData: Record<
+    number,
+    WritableSignal<Observable<HomeData> | Observable<ServiceData[]>>
+  > = {
+    0: signal(this.loadData<HomeData>('homepage')),
+    1: signal(this.loadData<ServiceData[]>('services')),
+  };
+
+  private get _headers(): HttpHeaders {
+    return new HttpHeaders().set('Authorization', (localStorage['token'] || '') as string);
+  }
 
   public get homeData(): Observable<HomeData> {
-    return this._http.get<HomeData>(this._baseUrl + 'homepage', {
-      headers: this._headers,
-    });
+    return this._pagesData[0]() as Observable<HomeData>;
   }
 
   public get servicesData(): Observable<ServiceData[]> {
-    return this._http.get<ServiceData[]>(this._baseUrl + 'services', {
+    return this._pagesData[1]() as Observable<ServiceData[]>;
+  }
+
+  private loadData<T>(page: string): Observable<T> {
+    return this._http.get<T>(this._baseUrl + page, {
       headers: this._headers,
     });
   }
