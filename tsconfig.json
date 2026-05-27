@@ -19,9 +19,12 @@
     "noPropertyAccessFromIndexSignature": true,
     "paths": {
       "components/*": ["./src/app/components/*"],
+      "data/*": ["./src/app/models/data/*"],
+      "enums/*": ["./src/app/models/enums/*"],
+      "interfaces/*": ["./src/app/models/interfaces/*"],
       "models/*": ["./src/app/models/*"],
       "pages/*": ["./src/app/pages/*"],
-      "services/*": ["./src/app/services/*"]
+      "services/*": ["./src/app/models/services/*"]
     },
     "skipLibCheck": true,
     "strict": true,

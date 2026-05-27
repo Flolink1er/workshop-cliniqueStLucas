@@ -1,20 +1,24 @@
-import { CommonModule } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { AsyncPipe, CommonModule } from '@angular/common';
+import { Component, effect, inject } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { Observable } from 'rxjs';
+import { ApiService } from 'services/api.service';
 import { HomeData } from '../../models/interfaces/home-data';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, AsyncPipe],
   templateUrl: './home.html',
-  styleUrl: './home.scss',
+  styleUrl: './home.css',
 })
-export class Home implements OnInit {
-  private _route = inject(ActivatedRoute);
-  public pageData: HomeData | null = null;
+export class Home {
+  private readonly _api: ApiService = inject(ApiService);
+  public pageData$?: Observable<HomeData>;
 
-  ngOnInit() {
-    this.pageData = this._route.snapshot.data['homeData'];
+  constructor() {
+    effect(() => {
+      this.pageData$ = this._api.homeData;
+    });
   }
 }

@@ -1,7 +1,6 @@
 import { Routes } from '@angular/router';
-import { mainGuard } from 'models/guards/combined-guard';
-import { homeResolver } from 'models/resolvers/home.resolver';
-import { servicesResolver } from 'models/resolvers/services.resolver';
+import { loggedInGuard } from 'models/guards/logged-in.guard';
+import { loggedOffGuard } from 'models/guards/logged-off.guard';
 import { Error } from 'pages/error/error';
 import { Home } from 'pages/home/home';
 import { Login } from 'pages/login/login';
@@ -9,19 +8,18 @@ import { Services } from 'pages/services/services';
 
 export const routes: Routes = [
   {
-    path: '',
-    canActivate: [mainGuard],
-    resolve: { homeData: homeResolver },
+    path: 'home',
     title: 'Accueil',
     component: Home,
+    canActivate: [loggedInGuard],
   },
-  { path: 'login', title: 'Connexion', component: Login },
+  { path: 'login', title: 'Connexion', component: Login, canActivate: [loggedOffGuard] },
   {
     path: 'services',
-    resolve: { servicesData: servicesResolver },
     title: 'Services',
     component: Services,
+    canActivate: [loggedInGuard],
   },
   { path: 'error', title: 'Error', component: Error },
-  { path: '**', redirectTo: '' },
+  { path: '**', redirectTo: 'home' },
 ];

@@ -1,4 +1,4 @@
-@if (pageData) {
+@if (pageData$ | async; as pageData) {
   <div class="bg-base-100">
     @for (service of pageData; track service.id) {
       <div class="hero min-h-screen">

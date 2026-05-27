@@ -1,17 +1,19 @@
+/* You can add global styles to this file, and also import other style files */
+
 @import 'tailwindcss';
 @plugin 'daisyui';
-@plugin "daisyui/theme" {
-  name: "industrial-blue";
+@plugin 'daisyui/theme' {
+  name: 'industrial-blue';
   default: true;
   prefersdark: true;
-  color-scheme: "light";
+  color-scheme: 'light';
   --color-base-100: #f4f8fb;
   --color-base-200: #d6e8f7;
   --color-base-300: #fff;
   --color-base-content: #1c2b3a;
   --color-primary: #1a5f9e;
   --color-primary-content: #fff;
-  --color-secondary: #0D3D6B;
+  --color-secondary: #0d3d6b;
   --color-secondary-content: #fff;
   --color-accent: #00c9a7;
   --color-accent-content: oklch(98% 0.003 247.858);

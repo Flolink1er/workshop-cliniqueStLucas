@@ -1,17 +1,19 @@
-import { Component, inject, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { AsyncPipe } from '@angular/common';
+import { Component, effect, inject } from '@angular/core';
 import { ServiceData } from 'models/interfaces/service-data';
+import { Observable } from 'rxjs';
+import { ApiService } from 'services/api.service';
 
 @Component({
   selector: 'app-services',
   standalone: true,
-  imports: [],
+  imports: [AsyncPipe],
   templateUrl: './services.html',
-  styleUrl: './services.scss',
+  styleUrl: './services.css',
 })
-export class Services implements OnInit {
-  private _route: ActivatedRoute = inject(ActivatedRoute);
-  public pageData: ServiceData[] | null = null;
+export class Services {
+  private readonly _api: ApiService = inject(ApiService);
+  public pageData$?: Observable<ServiceData[]>;
 
   public phoneNbr(nbr: string): string {
     const formatedNbr: string = nbr.replaceAll(' ', '');
@@ -23,7 +25,9 @@ export class Services implements OnInit {
     dialog.showModal();
   }
 
-  ngOnInit(): void {
-    this.pageData = this._route.snapshot.data['servicesData'];
+  constructor() {
+    effect(() => {
+      this.pageData$ = this._api.servicesData;
+    });
   }
 }

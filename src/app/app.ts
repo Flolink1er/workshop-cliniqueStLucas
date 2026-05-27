@@ -7,7 +7,7 @@ import { Navbar } from 'components/navbar/navbar';
   selector: 'app-root',
   imports: [RouterOutlet, Navbar, Footer],
   templateUrl: './app.html',
-  styleUrl: './app.scss',
+  styleUrl: './app.css',
 })
 export class App {
   protected readonly title = signal('Clinique-St-Lucas');

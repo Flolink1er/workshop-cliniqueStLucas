@@ -11,20 +11,13 @@
       }
     }
   ],
-  "plugins": [
-    "prettier-plugin-tailwindcss"
-  ],
+  "plugins": ["prettier-plugin-tailwindcss"],
   "printWidth": 100,
   "quoteProps": "as-needed",
   "semi": true,
   "singleQuote": true,
-  "tailwindAttributes": [
-    "myClassList",
-    "/data-.*/"
-  ],
-  "tailwindFunctions": [
-    "clsx"
-  ],
-  "tailwindStylesheet": "./src/tailwind.css",
+  "tailwindAttributes": ["myClassList", "/data-.*/"],
+  "tailwindFunctions": ["clsx"],
+  "tailwindStylesheet": "./src/styles.css",
   "trailingComma": "all"
 }

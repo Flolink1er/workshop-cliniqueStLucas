@@ -1,6 +1,4 @@
-<form
-  [formGroup]="loginForm"
-  (submit)="login(loginForm.controls.email.value!, loginForm.controls.password.value!)">
+<form [formGroup]="loginForm" (submit)="onLoginSubmit()">
   <fieldset class="fieldset w-xs rounded-box border border-base-300 bg-base-200 p-4">
     <legend class="fieldset-legend">Login</legend>
 
