@@ -44,6 +44,6 @@ export class UserAccountService {
   }
 
   public get isLoggedIn(): boolean {
-    return localStorage['token'] !== '';
+    return !!localStorage['token'];
   }
 }
