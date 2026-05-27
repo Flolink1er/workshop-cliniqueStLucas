@@ -14,7 +14,7 @@ export class ApiService {
   private _pagesData: Record<number, WritableSignal<unknown>> = {
     0: signal(this.loadData<HomeData>('homepage')),
     1: signal(this.loadData<ServiceData[]>('services')),
-    3: signal(this.loadData<ActualitesData[]>('actualites')),
+    3: signal(this.loadData<ActualitesData[]>('news')),
   };
 
   private get _headers(): HttpHeaders {

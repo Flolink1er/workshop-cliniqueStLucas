@@ -25,8 +25,13 @@ export const routes: Routes = [
   },
   { path: 'services/:id', title: 'Services', component: ServiceInfo, canActivate: [loggedInGuard] },
 
-  { path: 'actualites', title: 'Actualités', component: Actualites, canActivate: [loggedInGuard]},
-  { path: 'actualites/:id', title: 'Actualités', component: ActualiteInfo, canActivate: [loggedInGuard]},
+  { path: 'actualites', title: 'Actualités', component: Actualites, canActivate: [loggedInGuard] },
+  {
+    path: 'actualites/:slug',
+    title: 'Actualités',
+    component: ActualiteInfo,
+    canActivate: [loggedInGuard],
+  },
 
   { path: 'error', title: 'Error', component: Error },
   { path: '**', redirectTo: 'home' },
