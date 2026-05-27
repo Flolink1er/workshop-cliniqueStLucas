@@ -10,10 +10,7 @@ import { Observable } from 'rxjs';
 export class ApiService {
   private readonly _http: HttpClient = inject(HttpClient);
   private readonly _baseUrl: string = 'http://localhost:5150/api/';
-  private _pagesData: Record<
-    number,
-    WritableSignal<Observable<HomeData> | Observable<ServiceData[]>>
-  > = {
+  private _pagesData: Record<number, WritableSignal<any>> = {
     0: signal(this.loadData<HomeData>('homepage')),
     1: signal(this.loadData<ServiceData[]>('services')),
   };

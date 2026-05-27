@@ -5,6 +5,7 @@ import { Error } from 'pages/error/error';
 import { Home } from 'pages/home/home';
 import { Login } from 'pages/login/login';
 import { Services } from 'pages/services/services';
+import { ServiceInfo } from './page/service-info/service-info';
 
 export const routes: Routes = [
   {
@@ -20,6 +21,7 @@ export const routes: Routes = [
     component: Services,
     canActivate: [loggedInGuard],
   },
+  { path: 'services/:id', title: 'Services', component: ServiceInfo, canActivate: [loggedInGuard] },
   { path: 'error', title: 'Error', component: Error },
   { path: '**', redirectTo: 'home' },
 ];

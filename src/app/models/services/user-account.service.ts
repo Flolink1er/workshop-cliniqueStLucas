@@ -20,7 +20,7 @@ interface LoginResponseBody {
 export class UserAccountService {
   private readonly _http: HttpClient = inject(HttpClient);
   private readonly _router: Router = inject(Router);
-  private token?: string;
+  private _isLoggedIn = localStorage['token'] !== undefined;
 
   public userLogin(email: string, password: string) {
     this._http
@@ -37,13 +37,13 @@ export class UserAccountService {
         },
       )
       .subscribe(res => {
-        this.token = res.tokenType + ' ' + res.token;
-        localStorage['token'] = this.token;
+        localStorage['token'] = res.tokenType + ' ' + res.token;
+        this._isLoggedIn = localStorage['token'] !== undefined;
         this._router.navigateByUrl('/home');
       });
   }
 
   public get isLoggedIn(): boolean {
-    return !!localStorage['token'];
+    return this._isLoggedIn;
   }
 }
