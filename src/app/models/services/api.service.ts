@@ -11,10 +11,10 @@ import { Observable } from 'rxjs';
 export class ApiService {
   private readonly _http: HttpClient = inject(HttpClient);
   private readonly _baseUrl: string = 'http://localhost:5150/api/';
-  private _pagesData: Record<number, WritableSignal<any>> = {
+  private _pagesData: Record<number, WritableSignal<unknown>> = {
     0: signal(this.loadData<HomeData>('homepage')),
     1: signal(this.loadData<ServiceData[]>('services')),
-    3: signal(this.loadData<ActualitesData[]>('actualites'))
+    3: signal(this.loadData<ActualitesData[]>('actualites')),
   };
 
   private get _headers(): HttpHeaders {
@@ -33,7 +33,7 @@ export class ApiService {
     return this._pagesData[3]() as Observable<ActualitesData[]>;
   }
 
-  private loadData<T>(page: string): Observable<T> {
+  public loadData<T>(page: string): Observable<T> {
     return this._http.get<T>(this._baseUrl + page, {
       headers: this._headers,
     });

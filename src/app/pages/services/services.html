@@ -31,23 +31,7 @@
             </ul>
             <span class="mt-10 flex gap-2.5">
               <a [href]="phoneNbr(service.phone)" class="btn btn-primary">Appeler le service</a>
-
-              @if (service.departmentId !== null) {
-                <button class="btn" (click)="openDialog('modal_' + service.departmentId)">
-                  Plus d'infos
-                </button>
-                <dialog [id]="'modal_' + service.departmentId" class="modal">
-                  <div class="modal-box">
-                    <h3 class="text-lg font-bold">{{ service.name }}</h3>
-                    <p class="py-4">Press ESC key or click the button below to close</p>
-                    <div class="modal-action">
-                      <form method="dialog">
-                        <button class="btn">Close</button>
-                      </form>
-                    </div>
-                  </div>
-                </dialog>
-              }
+              <button class="btn" routerLink="/services/{{ service.id }}"> Plus d'infos </button>
             </span>
           </div>
         </div>

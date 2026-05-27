@@ -1,5 +1,6 @@
 import { AsyncPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { ServiceData } from 'models/interfaces/service-data';
 import { Observable } from 'rxjs';
 import { ApiService } from 'services/api.service';
@@ -7,7 +8,7 @@ import { ApiService } from 'services/api.service';
 @Component({
   selector: 'app-services',
   standalone: true,
-  imports: [AsyncPipe],
+  imports: [AsyncPipe, RouterLink],
   templateUrl: './services.html',
   styleUrl: './services.css',
 })
@@ -18,10 +19,5 @@ export class Services {
   public phoneNbr(nbr: string): string {
     const formatedNbr: string = nbr.replaceAll(' ', '');
     return `tel:${formatedNbr}`;
-  }
-
-  public openDialog(id: string): void {
-    const dialog = document.getElementById(id) as HTMLDialogElement;
-    dialog.showModal();
   }
 }

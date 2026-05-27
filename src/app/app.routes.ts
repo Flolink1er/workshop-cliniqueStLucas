@@ -6,8 +6,8 @@ import { Actualites } from 'pages/actualites/actualites';
 import { Error } from 'pages/error/error';
 import { Home } from 'pages/home/home';
 import { Login } from 'pages/login/login';
+import { ServiceInfo } from 'pages/service-info/service-info';
 import { Services } from 'pages/services/services';
-import { ServiceInfo } from './page/service-info/service-info';
 
 export const routes: Routes = [
   {

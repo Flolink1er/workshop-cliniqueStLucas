@@ -1,0 +1,25 @@
+@if (pageData$ | async; as pageData) {
+  <div class="hero min-h-screen bg-base-200">
+    <div class="hero-content flex-col lg:flex-row">
+      <img
+        [src]="pageData.image"
+        class="aspect-4/5 max-w-sm rounded-lg object-cover object-center shadow-2xl"
+        alt />
+      <div>
+        <h1 class="text-5xl font-bold">{{ pageData.name }}</h1>
+        <p class="py-3">{{ pageData.shortDescription }}</p>
+        <p class="py-6">
+          {{ pageData.description }}
+        </p>
+        <!-- <button class="btn btn-primary">Get Started</button> -->
+      </div>
+    </div>
+  </div>
+  <div class="stats w-full shadow">
+    <div class="stat place-items-center">
+      <div class="stat-title">Contacter le Service</div>
+      <div class="stat-value">{{ pageData.phone }}</div>
+      <div class="stat-desc">{{ pageData.hours }}</div>
+    </div>
+  </div>
+}
