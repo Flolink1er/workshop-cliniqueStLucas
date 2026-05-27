@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { inject, Injectable, signal, WritableSignal } from '@angular/core';
+import { ActualitesData } from 'interfaces/actualites-data';
 import { HomeData } from 'models/interfaces/home-data';
 import { ServiceData } from 'models/interfaces/service-data';
 import { Observable } from 'rxjs';
@@ -13,6 +14,7 @@ export class ApiService {
   private _pagesData: Record<number, WritableSignal<any>> = {
     0: signal(this.loadData<HomeData>('homepage')),
     1: signal(this.loadData<ServiceData[]>('services')),
+    3: signal(this.loadData<ActualitesData[]>('actualites'))
   };
 
   private get _headers(): HttpHeaders {
@@ -25,6 +27,10 @@ export class ApiService {
 
   public get servicesData(): Observable<ServiceData[]> {
     return this._pagesData[1]() as Observable<ServiceData[]>;
+  }
+
+  public get actualitesData(): Observable<ActualitesData[]> {
+    return this._pagesData[3]() as Observable<ActualitesData[]>;
   }
 
   private loadData<T>(page: string): Observable<T> {
