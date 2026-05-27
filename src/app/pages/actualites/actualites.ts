@@ -16,8 +16,6 @@ export class Actualites {
   constructor() {
     this.apiService.actualitesData.subscribe(actusArray =>
       actusArray.forEach(actu => {
-        console.log(actu);
-
         this.actus.update(current => [...current, actu]);
       }),
     );
