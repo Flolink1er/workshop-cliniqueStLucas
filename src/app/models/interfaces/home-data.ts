@@ -6,6 +6,7 @@ interface Cta {
 interface Stat {
   label: string;
   value: string;
+  icon: string;
 }
 
 interface Section {

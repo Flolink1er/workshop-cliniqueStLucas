@@ -1,29 +1,12 @@
 @if (pageData$ | async; as pageData) {
-  <div
-    class="hero min-h-screen bg-cover bg-fixed bg-center"
-    style="
-      background-image: url('{{ pageData.image }}');
-    ">
-    <div class="hero-overlay backdrop-blur-sm"></div>
-    <div class="hero-content text-center text-neutral-content">
-      <div class="max-w-xl">
-        <h1 class="mb-5 text-5xl font-bold">{{ pageData.name }}</h1>
-        <p class="mb-5">{{ pageData.shortDescription }}</p>
-        <p class="mt-4">{{ pageData.description }}</p>
-        <!-- <button class="btn btn-primary">Get Started</button> -->
-      </div>
-    </div>
-  </div>
-  <div class="py-4 text-center">
-    <h2 class="mb-4 text-4xl font-bold">Infos Pratiques</h2>
-    <div class="flex justify-center gap-x-4">
-      <div class="rounded-md bg-base-200 p-4 shadow-sm">
-        <div class="text-sm opacity-70">Contact</div>
-        <div class="text-2xl font-semibold text-primary">{{ pageData.phone }}</div>
-      </div>
-      <div class="rounded-md bg-base-200 p-4 shadow-sm">
-        <div class="text-sm opacity-70">Horaire</div>
-        <div class="text-2xl font-semibold text-primary">{{ pageData.hours }}</div>
+  <div class="bg-base-200">
+    <div class="hero min-h-screen">
+      <div class="hero-content text-center">
+        <div class="max-w-3xl">
+          <h1 class="mb-5 text-5xl font-bold">{{ pageData.name }}</h1>
+          <p class="mt-4">{{ pageData.description }}</p>
+          <!-- <button class="btn btn-primary">Get Started</button> -->
+        </div>
       </div>
     </div>
   </div>
@@ -44,6 +27,7 @@
             </thead>
             <tbody>
               @for (member of team; track member.id) {
+                @let memberName = member.title + ' ' + member.firstName + ' ' + member.lastName;
                 <tr>
                   <td>
                     <div class="flex items-center gap-3">
@@ -53,10 +37,10 @@
                         </div>
                       </div>
                       <div>
-                        <div class="font-bold"
-                          >{{ member.title }} {{ member.firstName }} {{ member.lastName }}</div
-                        >
-                        <!-- <div class="text-sm opacity-50">United States</div> -->
+                        <div class="font-bold">{{ memberName }}</div>
+                        @if (pageData.head === memberName) {
+                          <div class="text-sm opacity-50">A la tête</div>
+                        }
                       </div>
                     </div>
                   </td>
@@ -79,4 +63,9 @@
       </div>
     }
   }
+
+  <div class="flex flex-col items-center gap-4 py-4 text-center">
+    <h2 class="text-4xl font-bold">Notre Équipement</h2>
+    <span class="loading loading-xs loading-dots"></span>
+  </div>
 }

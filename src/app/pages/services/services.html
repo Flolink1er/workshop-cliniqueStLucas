@@ -1,38 +1,39 @@
+<div class="hero bg-base-200">
+  <div class="hero-content text-center">
+    <div class="max-w-md">
+      <h1 class="text-5xl font-bold">Services</h1>
+      <label class="input my-6 w-80">
+        <svg class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <g
+            stroke-linejoin="round"
+            stroke-linecap="round"
+            stroke-width="2.5"
+            fill="none"
+            stroke="currentColor">
+            <circle cx="11" cy="11" r="8"></circle>
+            <path d="m21 21-4.3-4.3"></path>
+          </g>
+        </svg>
+        <input [formControl]="searchInput" type="search" class="grow" placeholder="Search" />
+      </label>
+    </div>
+  </div>
+</div>
 @if (pageData$ | async; as pageData) {
-  <div class="bg-base-100">
+  <div class="flex flex-col gap-4 p-8">
     @for (service of pageData; track service.id) {
-      <div class="hero min-h-screen">
-        <div class="hero-content flex-col lg:flex-row">
+      <div class="card card-side w-xl bg-base-100 shadow-sm even:self-end">
+        <figure>
           <img
+            class="aspect-3/4 w-48 object-cover object-center"
             [src]="service.image"
-            class="aspect-4/7 max-w-sm rounded-lg object-cover object-center shadow-2xl"
-            alt />
-          <div>
-            <hgroup>
-              <h1 class="text-5xl/snug font-bold">{{ service.name }}</h1>
-              <h3 class="text-3xl font-semibold">{{ service.shortDescription }}</h3>
-            </hgroup>
-            <p class="py-6">{{ service.description }}</p>
-            <ul class="list">
-              <li class="p-4 pb-2 text-xs tracking-wide opacity-60">Disponibilités</li>
-
-              <li class="list-row">
-                <div>
-                  <div>Contact</div>
-                  <div class="text-xs font-semibold uppercase opacity-60">{{ service.phone }}</div>
-                </div>
-              </li>
-              <li class="list-row">
-                <div>
-                  <div>Horaires</div>
-                  <div class="text-xs font-semibold uppercase opacity-60">{{ service.hours }}</div>
-                </div>
-              </li>
-            </ul>
-            <span class="mt-10 flex gap-2.5">
-              <a [href]="phoneNbr(service.phone)" class="btn btn-primary">Appeler le service</a>
-              <button class="btn" routerLink="/services/{{ service.id }}"> Plus d'infos </button>
-            </span>
+            alt="Service" />
+        </figure>
+        <div class="card-body">
+          <h2 class="card-title">{{ service.name }}</h2>
+          <p>{{ service.shortDescription }}</p>
+          <div class="card-actions justify-end">
+            <button class="btn btn-primary" routerLink="/services/{{ service.id }}">Détails</button>
           </div>
         </div>
       </div>

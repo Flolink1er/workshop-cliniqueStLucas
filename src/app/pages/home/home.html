@@ -1,4 +1,4 @@
-@if (pageData$ | async; as pageData) {
+@if (homeData$ | async; as pageData) {
   <div class="bg-base-200">
     <div class="hero min-h-screen">
       <div class="hero-content text-center">
@@ -21,21 +21,24 @@
       <div class="mx-auto grid max-w-4xl grid-cols-2 gap-4 px-4 md:grid-cols-4">
         @for (stat of pageData.stats; track stat) {
           <div class="rounded-box border p-4 text-center shadow-sm">
+            <img src="/icons/{{ stat.icon }}.svg" width="24" alt="" />
             <div class="text-3xl font-bold text-primary">{{ stat.value }}</div>
             <div class="text-sm opacity-70">{{ stat.label }}</div>
           </div>
         }
       </div>
       <div
-        class="mx-auto my-6 grid max-w-4xl grid-cols-1 justify-items-center gap-4 px-4 md:grid-cols-2">
+        class="mx-auto my-6 grid w-fit max-w-4xl grid-cols-1 justify-items-center gap-4 px-4 md:grid-cols-2">
         @for (section of pageData.sections; track section) {
           <div class="card w-96 bg-base-100 card-border">
             <div class="card-body">
               <h2 class="card-title">{{ section.title }}</h2>
               <p>{{ section.description }}</p>
-              <!-- <div class="card-actions justify-end">
-                <button class="btn btn-primary">Buy Now</button>
-              </div> -->
+              <div class="card-actions justify-end">
+                <button class="btn btn-primary" routerLink="/{{ section.id }}"
+                  >En Savoir Plus</button
+                >
+              </div>
             </div>
           </div>
         }

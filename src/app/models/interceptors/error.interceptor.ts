@@ -13,6 +13,12 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
         return EMPTY;
       }
 
+      if (error.status === 401) {
+        delete localStorage['token'];
+        router.navigateByUrl('/login');
+        return EMPTY;
+      }
+
       throw error;
     }),
   );

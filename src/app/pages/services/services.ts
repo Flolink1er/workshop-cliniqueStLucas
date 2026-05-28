@@ -1,20 +1,29 @@
 import { AsyncPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { ServiceData } from 'models/interfaces/service-data';
-import { Observable } from 'rxjs';
+import { combineLatest, map, Observable, startWith } from 'rxjs';
 import { ApiService } from 'services/api.service';
 
 @Component({
   selector: 'app-services',
-  standalone: true,
-  imports: [AsyncPipe, RouterLink],
+  imports: [AsyncPipe, RouterLink, ReactiveFormsModule],
   templateUrl: './services.html',
   styleUrl: './services.css',
 })
 export class Services {
   private readonly _api: ApiService = inject(ApiService);
-  public pageData$: Observable<ServiceData[]> = this._api.servicesData;
+  public searchInput = new FormControl<string | null>('');
+  public pageData$: Observable<ServiceData[]> = combineLatest([
+    this._api.servicesData,
+    this.searchInput.valueChanges.pipe(startWith('')),
+  ]).pipe(
+    map(([services, searchTerm]) => {
+      const search = (searchTerm || '').toLowerCase();
+      return services.filter(service => service.name.toLowerCase().includes(search));
+    }),
+  );
 
   public phoneNbr(nbr: string): string {
     const formatedNbr: string = nbr.replaceAll(' ', '');
