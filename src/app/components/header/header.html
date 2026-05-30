@@ -1,5 +1,5 @@
 <header>
-  <div class="navbar bg-base-100 shadow-sm">
+  <div class="navbar px-8 shadow-sm">
     <div class="navbar-start">
       <div class="dropdown">
         <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
@@ -21,24 +21,33 @@
           class="dropdown-content menu z-1 mt-3 w-52 menu-sm rounded-box bg-base-100 p-2 shadow">
           @for (link of links; track link.url) {
             <li
-              ><button [routerLink]="link.url">{{ link.label }}</button></li
+              ><button [routerLink]="link.url" routerLinkActive="active">{{
+                link.label
+              }}</button></li
             >
           }
         </ul>
       </div>
-      <a class="btn text-xl btn-ghost" routerLink>Saint-Lucas</a>
+      <a class="navbar-logo text-xl btn-ghost" routerLink
+        >Saint<span class="text-accent">-Lucas</span></a
+      >
     </div>
     <div class="navbar-center hidden lg:flex">
-      <ul class="menu menu-horizontal px-1">
+      <ul class="menu menu-horizontal gap-x-2 px-1">
         @for (link of links; track link.url) {
           <li
-            ><button [routerLink]="link.url">{{ link.label }}</button></li
+            ><button
+              class="menu-link"
+              [routerLink]="link.url"
+              routerLinkActive="menu-link-active"
+              >{{ link.label }}</button
+            ></li
           >
         }
       </ul>
     </div>
     <div class="navbar-end">
-      <a class="btn" routerLink="login">Espace patient</a>
+      <a class="btn btn-sm btn-primary" routerLink="login">Espace patient</a>
     </div>
   </div>
 </header>

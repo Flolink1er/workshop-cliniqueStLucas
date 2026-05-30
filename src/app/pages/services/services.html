@@ -20,12 +20,12 @@
   </div>
 </div>
 @if (pageData$ | async; as pageData) {
-  <div class="flex flex-col gap-4 p-8">
+  <div class="flex flex-col gap-4 p-4 md:p-8">
     @for (service of pageData; track service.id) {
-      <div class="card card-side w-xl bg-base-100 shadow-sm even:self-end">
+      <div class="card card-side w-full bg-base-100 shadow-sm md:w-xl md:even:self-end">
         <figure>
           <img
-            class="aspect-3/4 w-48 object-cover object-center"
+            class="aspect-3/4 w-24 object-cover object-center md:w-48"
             [src]="service.image"
             alt="Service" />
         </figure>

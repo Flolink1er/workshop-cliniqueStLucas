@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, WritableSignal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Footer } from 'components/footer/footer';
 import { Header } from 'components/header/header';
@@ -10,5 +10,14 @@ import { Header } from 'components/header/header';
   styleUrl: './app.css',
 })
 export class App {
-  protected readonly title = signal('Clinique-St-Lucas');
+  public shrinkHeader: WritableSignal<boolean> = signal(false);
+  constructor() {
+    this.animateHeader();
+  }
+
+  private animateHeader(): void {
+    window.onscroll = () => {
+      this.shrinkHeader.set(window.pageYOffset <= 120);
+    };
+  }
 }

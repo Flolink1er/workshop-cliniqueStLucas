@@ -50,4 +50,10 @@ export class ApiService {
       headers: this._headers,
     });
   }
+
+  public sendData(page: string, body: object): Observable<object> {
+    return this._http.post(this._baseUrl + page, body, {
+      headers: this._headers.set('Content-Type', 'application/json'),
+    });
+  }
 }

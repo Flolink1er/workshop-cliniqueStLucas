@@ -4,11 +4,13 @@ import { loggedInGuard } from 'models/guards/logged-in.guard';
 import { loggedOffGuard } from 'models/guards/logged-off.guard';
 import { ActualiteInfo } from 'pages/actualite-info/actualite-info';
 import { Actualites } from 'pages/actualites/actualites';
+import { Contact } from 'pages/contact/contact';
 import { DepartmentsInfo } from 'pages/departments-info/departments-info';
 import { Departments } from 'pages/departments/departments';
 import { Error } from 'pages/error/error';
 import { Home } from 'pages/home/home';
 import { Login } from 'pages/login/login';
+import { RendezVous } from 'pages/rendez-vous/rendez-vous';
 import { ServiceInfo } from 'pages/service-info/service-info';
 import { Services } from 'pages/services/services';
 import { Team } from 'pages/team/team';
@@ -51,7 +53,13 @@ export const routes: Routes = [
     component: ActualiteInfo,
     canActivate: [loggedInGuard],
   },
-
+  { path: 'contact', title: 'Contact', component: Contact, canActivate: [loggedInGuard] },
+  {
+    path: 'rendez-vous',
+    title: 'Prendre Rendez-vous',
+    component: RendezVous,
+    canActivate: [loggedInGuard],
+  },
   { path: 'error', title: 'Error', component: Error },
   { path: '', pathMatch: 'full', redirectTo: 'home' },
   { path: '**', redirectTo: 'error' },
