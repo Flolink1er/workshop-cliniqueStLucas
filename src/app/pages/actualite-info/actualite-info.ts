@@ -1,13 +1,13 @@
 import { DatePipe } from '@angular/common';
 import { ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ActualitesData } from 'interfaces/actualites-data';
 import { ApiService } from 'models/services/api.service';
 import { combineLatest } from 'rxjs';
 
 @Component({
   selector: 'app-actualite-info',
-  imports: [DatePipe],
+  imports: [DatePipe, RouterLink],
   templateUrl: './actualite-info.html',
   styleUrl: './actualite-info.css',
 })
@@ -17,6 +17,7 @@ export class ActualiteInfo implements OnInit {
   private readonly cdr = inject(ChangeDetectorRef);
 
   public currentActu?: ActualitesData;
+  public annexedActu: ActualitesData[] = [];
 
   ngOnInit(): void {
     combineLatest([this.route.params, this.apiService.actualitesData]).subscribe(
@@ -31,5 +32,19 @@ export class ActualiteInfo implements OnInit {
         this.cdr.detectChanges();
       },
     );
+
+    this.apiService.actualitesData.subscribe(actus => {
+      if (!this.currentActu) {
+        this.annexedActu = [];
+        return;
+      }
+
+      this.annexedActu = actus.filter(
+        actu =>
+          actu.tags.some(tag => this.currentActu!.tags.includes(tag)) &&
+          this.currentActu!.id != actu.id,
+      );
+      this.cdr.detectChanges();
+    });
   }
 }

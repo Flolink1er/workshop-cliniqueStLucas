@@ -1,37 +1,76 @@
-<div class="flex w-full justify-center px-4 pt-6 md:px-6 md:pt-10">
-  <img
-    src="{{ currentActu?.image }}"
-    alt="Image actualité"
-    class="max-h-[500px] w-full max-w-5xl rounded-lg object-cover shadow-md" />
-</div>
+<div class="flex w-full flex-col items-center justify-center gap-10 p-4 md:p-6 lg:p-10">
+  <div class="flex w-full justify-center px-4 pt-6 md:px-6 md:pt-10">
+    <img
+      src="{{ currentActu?.image }}"
+      alt="Image actualité"
+      class="max-h-125 w-full max-w-5xl rounded-lg object-cover shadow-md" />
+  </div>
 
-<div class="mx-auto flex w-full max-w-4xl flex-col px-4 py-6 md:px-6">
-  <h1 class="text-3xl font-bold">
-    {{ currentActu?.title }}
-  </h1>
+  <div class="mx-auto flex w-full max-w-4xl flex-col px-4 py-6 md:px-6">
+    <h1 class="text-3xl font-bold">
+      {{ currentActu?.title }}
+    </h1>
 
-  <div class="mt-5 flex flex-wrap items-center gap-2 text-xs text-base-content">
-    <span class="font-semibold">Tags :</span>
+    <div class="mt-5 flex flex-wrap items-center gap-2 text-xs text-base-content">
+      <span class="font-semibold">Tags :</span>
 
-    @for (tag of currentActu?.tags; track tag) {
-      <div class="rounded-full bg-accent px-3 py-1 text-accent-content">
-        {{ tag }}
-      </div>
-    }
+      @for (tag of currentActu?.tags; track tag) {
+        <div class="rounded-full bg-accent px-3 py-1 text-accent-content">
+          {{ tag }}
+        </div>
+      }
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="prose max-w-none">
+      <p class="whitespace-pre-line">
+        {{ currentActu?.content }}
+      </p>
+    </div>
+
+    <i class="mt-6 self-end text-right text-xs text-base-content/70">
+      Publié le
+      {{ currentActu?.publishedAt | date: 'd MMMM y' }}
+      par
+      {{ currentActu?.author }}
+    </i>
   </div>
 
   <div class="divider"></div>
 
-  <div class="prose max-w-none">
-    <p class="whitespace-pre-line">
-      {{ currentActu?.content }}
-    </p>
-  </div>
+  <div class="flex w-full max-w-7xl flex-col gap-5">
+    <h1 class="text-center text-2xl font-bold text-base-content"> Actualités connexes </h1>
 
-  <i class="mt-6 self-end text-right text-xs text-base-content/70">
-    Publié le
-    {{ currentActu?.publishedAt | date: 'd MMMM y' }}
-    par
-    {{ currentActu?.author }}
-  </i>
+    @if (annexedActu!.length > 0) {
+      <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-3">
+        @for (actu of annexedActu; track actu.id) {
+          <div class="card bg-base-100 shadow-sm transition-all hover:scale-[1.01] hover:shadow-lg">
+            <figure class="px-4 pt-4 md:px-6 md:pt-6">
+              <img
+                src="https://images.cnrs.fr/system/files/styles/full_image_desktop_watermark/private/media/images/2011/07/CNRS_20110001_1747_42944.jpg?itok=CH6YBufm"
+                alt="{{ actu.image }}"
+                class="h-48 w-full rounded-xl object-cover" />
+            </figure>
+
+            <div class="card-body items-center text-center">
+              <h2 class="card-title">{{ actu.title }}</h2>
+
+              <p>
+                {{ actu.summary }}
+              </p>
+
+              <div class="card-actions">
+                <a routerLink="/news/{{ actu.slug }}" class="btn btn-primary"> Lire plus </a>
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+    } @else {
+      <div class="flex items-center justify-center">
+        <i class="text-xl font-bold"> Aucune actualité disponible pour le moment. </i>
+      </div>
+    }
+  </div>
 </div>
