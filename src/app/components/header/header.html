@@ -1,8 +1,8 @@
 <header>
-  <div class="navbar px-8 shadow-sm">
+  <div class="navbar">
     <div class="navbar-start">
       <div class="dropdown">
-        <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
+        <div tabindex="0" role="button" class="btn btn-sm btn-ghost lg:hidden">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             class="h-5 w-5"
@@ -28,9 +28,7 @@
           }
         </ul>
       </div>
-      <a class="navbar-logo text-xl btn-ghost" routerLink
-        >Saint<span class="text-accent">-Lucas</span></a
-      >
+      <a class="navbar-logo text-xl" routerLink>Saint<span class="text-accent">-Lucas</span></a>
     </div>
     <div class="navbar-center hidden lg:flex">
       <ul class="menu menu-horizontal gap-x-2 px-1">
@@ -46,8 +44,16 @@
         }
       </ul>
     </div>
-    <div class="navbar-end">
-      <a class="btn btn-sm btn-primary" routerLink="login">Espace patient</a>
+    <div class="dropdown dropdown-end navbar-end">
+      @if (!isLoggedIn()) {
+        <div tabindex="0" role="button" class="btn btn-sm btn-primary">Espace patient</div>
+        <ul
+          tabindex="-1"
+          class="dropdown-content menu z-1 mt-32.5 w-52 menu-sm rounded-box bg-base-100 p-2 shadow">
+          <li><button routerLink="/login">Connexion</button></li>
+          <li><button routerLink="/register">Inscription</button></li>
+        </ul>
+      }
     </div>
   </div>
 </header>

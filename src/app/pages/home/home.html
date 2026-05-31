@@ -1,57 +1,21 @@
 @if (homeData$ | async; as pageData) {
-  <div class="bg-linear-135 from-primary via-secondary via-60% to-[#051F38] to-100%">
-    <div class="hero min-h-full">
-      <div class="hero-content">
-        <div class="max-w-md">
-          <span class="hero-tag">Clinique Saint-Lucas · Bruxelles</span>
-          <h1>{{ pageData.hero.title }}</h1>
-          <p class="max-w-110 py-6 font-light! text-white/75!">{{ pageData.hero.subtitle }}</p>
-          <div class="flex gap-4">
-            <button class="btn btn-lg btn-accent" [routerLink]="pageData.hero.cta.href">
-              {{ pageData.hero.cta.label }}
-            </button>
-            <button
-              class="btn btn-lg btn-outline border-white/50! text-white! hover:bg-white/10"
-              [routerLink]="pageData.hero.ctaSecondary.href">
-              {{ pageData.hero.ctaSecondary.label }}
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
+  <div>
+    <app-hero
+      tag="Clinique Saint-Lucas · Bruxelles"
+      [title]="pageData.hero.title"
+      [subtitle]="pageData.hero.subtitle"
+      [actions]="[pageData.hero.cta, pageData.hero.ctaSecondary]" />
 
     <div class="bg-base-100 py-12">
-      <div class="mx-auto grid max-w-4xl grid-cols-2 gap-4 px-4">
+      <div class="mx-auto grid max-w-4xl grid-cols-1 gap-4 px-4 sm:grid-cols-2">
         @for (stat of pageData.stats; track stat) {
-          <div class="flex items-center gap-x-4 rounded-[20px] bg-base-300 p-6 shadow-sm">
-            <img
-              class="rounded-full bg-accent p-5.75"
-              src="/icons/{{ stat.icon }}.svg"
-              width="26px"
-              alt="" />
-            <div>
-              <div class="mb-2 text-3xl font-bold text-primary">
-                {{ stat.value }}
-              </div>
-              <div class="text-alt">{{ stat.label }}</div>
-            </div>
-          </div>
+          <app-stat-card [stat]="stat" />
         }
       </div>
       <div
-        class="mx-auto my-6 grid w-fit max-w-4xl grid-cols-1 justify-items-center gap-4 px-4 sm:px-4 md:grid-cols-2">
+        class="mx-auto my-6 grid w-full max-w-4xl grid-cols-1 justify-items-center gap-4 px-4 sm:grid-cols-2 sm:px-4 lg:grid-cols-3">
         @for (section of pageData.sections; track section) {
-          <div class="card w-full bg-base-100 card-border md:w-96">
-            <div class="card-body">
-              <h2 class="card-title">{{ section.title }}</h2>
-              <p>{{ section.description }}</p>
-              <div class="card-actions justify-end">
-                <button class="btn btn-primary" routerLink="/{{ section.id }}"
-                  >En Savoir Plus</button
-                >
-              </div>
-            </div>
-          </div>
+          <app-info-card [sectionInfo]="section" class="size-full" />
         }
       </div>
     </div>

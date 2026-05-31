@@ -6,5 +6,5 @@ export const loggedInGuard: CanActivateFn = (): true | UrlTree => {
   const router: Router = inject(Router);
   const userAccount: UserAccountService = inject(UserAccountService);
 
-  return userAccount.isLoggedIn ? true : router.createUrlTree(['/login']);
+  return userAccount.isLoggedIn() ? true : router.createUrlTree(['/login']);
 };

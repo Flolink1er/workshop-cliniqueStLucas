@@ -5,10 +5,11 @@ import { RouterLink, RouterOutlet } from '@angular/router';
 import { TeamData } from 'interfaces/team.interface';
 import { ApiService } from 'models/services/api.service';
 import { combineLatest, map, Observable, startWith } from 'rxjs';
+import { Hero } from "components/hero/hero";
 
 @Component({
   selector: 'app-team',
-  imports: [AsyncPipe, RouterLink, RouterOutlet, ReactiveFormsModule],
+  imports: [AsyncPipe, RouterLink, RouterOutlet, ReactiveFormsModule, Hero],
   templateUrl: './team.html',
   styleUrl: './team.css',
 })

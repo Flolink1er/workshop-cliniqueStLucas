@@ -1,5 +1,6 @@
-import { Component, signal, WritableSignal } from '@angular/core';
+import { Component, inject, signal, WritableSignal } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+import { UserAccountService } from 'models/services/user-account.service';
 
 interface LinkObject {
   label: string;
@@ -10,10 +11,12 @@ interface LinkObject {
   selector: 'app-header',
   imports: [RouterLink, RouterLinkActive],
   templateUrl: './header.html',
-  styleUrl: './header.css',
 })
 export class Header {
+  private readonly _account: UserAccountService = inject(UserAccountService);
   public shrinkHeader: WritableSignal<boolean> = signal(true);
+
+  public readonly isLoggedIn = this._account.isLoggedIn;
 
   public readonly links: LinkObject[] = [
     { label: 'Accueil', url: '/home' },

@@ -2,13 +2,14 @@ import { AsyncPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
+import { Hero } from 'components/hero/hero';
 import { ServiceData } from 'models/interfaces/service-data';
 import { combineLatest, map, Observable, startWith } from 'rxjs';
 import { ApiService } from 'services/api.service';
 
 @Component({
   selector: 'app-services',
-  imports: [AsyncPipe, RouterLink, ReactiveFormsModule],
+  imports: [AsyncPipe, RouterLink, ReactiveFormsModule, Hero],
   templateUrl: './services.html',
   styleUrl: './services.css',
 })

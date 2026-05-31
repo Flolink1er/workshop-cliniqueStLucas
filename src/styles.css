@@ -21,7 +21,7 @@ body {
   --color-secondary-content: #fff;
   --color-accent: #00c9a7;
   --color-accent-content: oklch(98% 0.003 247.858);
-  --color-neutral: oklch(14% 0.005 285.823);
+  --color-neutral: oklch(0.141 0.004 285.8);
   --color-neutral-content: #fff;
   --color-info: #d6e8f7;
   --color-info-content: #0d3d6b;
@@ -31,14 +31,20 @@ body {
   --color-warning-content: #8a5800;
   --color-error: #fee8e7;
   --color-error-content: #e5534b;
+  --color-sub-content: #5a7184;
   --radius-selector: 2rem;
   --radius-field: 1rem;
   --radius-box: 1rem;
   --size-selector: 0.25rem;
   --size-field: 0.25rem;
   --border: 1px;
+  --border-main: #d9e6f0;
   --depth: 0;
   --noise: 0;
+}
+
+@utility navbar {
+  @apply h-16 gap-x-10 border-b border-b-(--border-main) bg-white md:px-8;
 }
 
 h1 {
@@ -57,12 +63,12 @@ h4 {
   @apply text-base font-semibold;
 }
 
-p {
-  @apply text-regular;
+@utility text-regular {
+  @apply text-[15px]/[1.6] font-normal text-(--color-sub-content);
 }
 
-@utility text-regular {
-  @apply text-[15px]/[1.6] font-normal text-[#5a7184];
+@utility card-desc {
+  @apply text-sm/normal text-(--color-sub-content);
 }
 
 @utility text-alt {
@@ -78,7 +84,7 @@ p {
 }
 
 @utility navbar-logo {
-  @apply text-lg font-bold text-primary;
+  @apply text-lg font-bold whitespace-nowrap text-primary;
 }
 
 @utility hero-tag {
@@ -86,11 +92,24 @@ p {
 }
 
 @utility hero {
-  @apply place-items-start;
+  @apply place-items-center sm:max-xl:place-items-start;
+
+  h1 {
+    @apply text-white;
+  }
+
+  p {
+    @apply max-w-110 font-light text-white/75;
+  }
+
+  .input:focus,
+  .input:focus-within {
+    @apply shadow-white outline-white;
+  }
 }
 
 @utility hero-content {
-  @apply justify-start px-8 py-12 text-white;
+  @apply justify-start px-8 py-12;
 }
 
 @utility btn-lg {
@@ -101,14 +120,26 @@ p {
   @apply border-primary bg-transparent text-primary hover:bg-base-200;
 }
 
+@utility btn-outline-alt {
+  @apply border-white/50 bg-transparent text-white hover:bg-white/10;
+}
+
 @utility menu-link-active {
   @apply bg-base-200 text-primary!;
 }
 
-@utility menu-link {
-  @apply rounded-md px-3.5 py-2 font-medium text-[#5a7184] hover:menu-link-active;
+.menu-link {
+  @apply rounded-md px-3.5 py-2 font-medium text-(--color-sub-content) hover:menu-link-active;
 }
 
 @utility shadow-sm {
   box-shadow: 0 2px 8px rgba(26, 95, 158, 0.08);
+}
+
+@utility card-img {
+  @apply relative h-35 bg-linear-135 from-primary to-accent;
+}
+
+@utility link {
+  @apply whitespace-nowrap;
 }

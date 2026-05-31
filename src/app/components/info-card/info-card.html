@@ -1,0 +1,12 @@
+<div class="card size-full overflow-hidden bg-white shadow-sm">
+  <div class="card-img"></div>
+  <div class="card-body p-5">
+    <h2 class="card-title text-base!">{{ sectionInfo()?.title }}</h2>
+    <p class="card-desc">{{ sectionInfo()?.description }}</p>
+  </div>
+  <div class="card-actions justify-end border-t border-t-(--border-main) px-5 py-3.5">
+    <button class="btn btn-sm btn-outline btn-primary" routerLink="/{{ sectionInfo()?.id }}"
+      >Détails</button
+    >
+  </div>
+</div>

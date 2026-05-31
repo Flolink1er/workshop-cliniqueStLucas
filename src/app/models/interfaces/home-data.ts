@@ -1,15 +1,15 @@
-interface Cta {
+export interface Cta {
   label: string;
   href: string;
 }
 
-interface Stat {
+export interface Stat {
   label: string;
   value: string;
   icon: string;
 }
 
-interface Section {
+export interface Section {
   id: string;
   title: string;
   description: string;

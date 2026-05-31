@@ -1,32 +1,27 @@
-import { Component, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ApiService } from 'models/services/api.service';
+import { Hero } from 'components/hero/hero';
+
+export interface ContactForm {
+  email: FormControl<string | null>;
+  firstName: FormControl<string | null>;
+  lastName: FormControl<string | null>;
+  message: FormControl<string | null>;
+  subject: FormControl<string | null>;
+}
 
 @Component({
   selector: 'app-contact',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, Hero],
   templateUrl: './contact.html',
   styleUrl: './contact.css',
 })
 export class Contact {
-  private _api: ApiService = inject(ApiService);
-  public readonly contactForm = new FormGroup({
+  public readonly contactForm = new FormGroup<ContactForm>({
     email: new FormControl<string | null>('', [Validators.email, Validators.required]),
     firstName: new FormControl<string | null>('', Validators.required),
     lastName: new FormControl<string | null>('', Validators.required),
     message: new FormControl<string | null>('', Validators.required),
     subject: new FormControl<string | null>('', Validators.required),
   });
-
-  public send() {
-    const body = {
-      email: this.contactForm.value.email!,
-      firstName: this.contactForm.value.firstName!,
-      lastName: this.contactForm.value.lastName!,
-      message: this.contactForm.value.message!,
-      subject: this.contactForm.value.subject!,
-    };
-
-    this._api.sendData('contact', body).subscribe(res => console.log(res));
-  }
 }

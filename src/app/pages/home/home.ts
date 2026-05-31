@@ -1,6 +1,8 @@
 import { AsyncPipe, CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Hero } from 'components/hero/hero';
+import { InfoCard } from 'components/info-card/info-card';
+import { StatCard } from 'components/stat-card/stat-card';
 import { ServiceData } from 'interfaces/service-data';
 import { TeamData } from 'interfaces/team.interface';
 import { Observable } from 'rxjs';
@@ -9,14 +11,12 @@ import { HomeData } from '../../models/interfaces/home-data';
 
 @Component({
   selector: 'app-home',
-  imports: [CommonModule, RouterLink, AsyncPipe],
+  imports: [CommonModule, AsyncPipe, Hero, StatCard, InfoCard],
   templateUrl: './home.html',
-  styleUrl: './home.css',
 })
 export class Home {
   private readonly _api: ApiService = inject(ApiService);
   public homeData$: Observable<HomeData> = this._api.homeData;
   public servicesData$: Observable<ServiceData[]> = this._api.servicesData;
   public teamData$: Observable<TeamData[]> = this._api.teamData;
-  // public pageData$: Observable<HomeData> = this._api.homeData;
 }

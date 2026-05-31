@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { inject, Injectable } from '@angular/core';
+import { inject, Injectable, signal, WritableSignal } from '@angular/core';
 import { Router } from '@angular/router';
 
 interface LoginResponseBody {
@@ -20,7 +20,7 @@ interface LoginResponseBody {
 export class UserAccountService {
   private readonly _http: HttpClient = inject(HttpClient);
   private readonly _router: Router = inject(Router);
-  private _isLoggedIn = localStorage['token'] !== undefined;
+  private _isLoggedIn: WritableSignal<boolean> = signal(localStorage['token'] !== undefined);
 
   public userLogin(email: string, password: string) {
     this._http
@@ -38,12 +38,12 @@ export class UserAccountService {
       )
       .subscribe(res => {
         localStorage['token'] = res.tokenType + ' ' + res.token;
-        this._isLoggedIn = localStorage['token'] !== undefined;
+        this._isLoggedIn.set(true);
         this._router.navigateByUrl('/home');
       });
   }
 
-  public get isLoggedIn(): boolean {
+  public get isLoggedIn() {
     return this._isLoggedIn;
   }
 }

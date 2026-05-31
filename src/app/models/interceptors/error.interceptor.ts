@@ -14,8 +14,8 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
       }
 
       if (error.status === 401) {
-        router.navigateByUrl('/login');
         delete localStorage['token'];
+        router.navigateByUrl('/login');
         return EMPTY;
       }
 
