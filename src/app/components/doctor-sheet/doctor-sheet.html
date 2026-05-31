@@ -1,0 +1,31 @@
+@if (memberData$ | async; as data) {
+  <div
+    class="fixed top-0 left-0 z-10 flex size-full items-center justify-center backdrop-blur-xs backdrop-brightness-75">
+    <div class="card w-lg bg-base-100 shadow-md">
+      <figure>
+        <img
+          [src]="data.avatar"
+          class="aspect-square w-full object-cover object-center"
+          alt="Shoes" />
+      </figure>
+      <div class="card-body">
+        <h2 class="card-title">{{ data.title }} {{ data.firstName }} {{ data.lastName }}</h2>
+        <p>{{ data.bio }}</p>
+        <span class="divider"></span>
+        <div class="flex items-center justify-center gap-4">
+          <span class="text-sm opacity-70">Spécialisation</span>
+          <div class="badge badge-ghost">{{ data.specialty }}</div>
+        </div>
+        <div class="flex items-center justify-center gap-4">
+          <span class="text-sm opacity-70">Département</span>
+          <div class="badge badge-ghost">{{ departName | async }}</div>
+        </div>
+        <button
+          class="btn absolute top-2 right-2 btn-circle btn-ghost btn-sm not-hover:text-white"
+          routerLink="/team"
+          >✕</button
+        >
+      </div>
+    </div>
+  </div>
+}

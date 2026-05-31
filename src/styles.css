@@ -32,6 +32,7 @@ body {
   --color-error: #fee8e7;
   --color-error-content: #e5534b;
   --color-sub-content: #5a7184;
+  --color-light-content: #9bb3c4;
   --radius-selector: 2rem;
   --radius-field: 1rem;
   --radius-box: 1rem;
@@ -72,7 +73,7 @@ h4 {
 }
 
 @utility text-alt {
-  @apply text-[13px] font-light text-[#9bb3c4];
+  @apply text-[13px] font-light text-(--color-light-content);
 }
 
 @utility btn {

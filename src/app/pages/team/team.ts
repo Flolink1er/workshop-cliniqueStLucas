@@ -1,15 +1,16 @@
 import { AsyncPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { RouterOutlet } from '@angular/router';
+import { DoctorCard } from 'components/doctor-card/doctor-card';
+import { Hero } from 'components/hero/hero';
 import { TeamData } from 'interfaces/team.interface';
 import { ApiService } from 'models/services/api.service';
 import { combineLatest, map, Observable, startWith } from 'rxjs';
-import { Hero } from "components/hero/hero";
 
 @Component({
   selector: 'app-team',
-  imports: [AsyncPipe, RouterLink, RouterOutlet, ReactiveFormsModule, Hero],
+  imports: [AsyncPipe, RouterOutlet, ReactiveFormsModule, Hero, DoctorCard],
   templateUrl: './team.html',
   styleUrl: './team.css',
 })

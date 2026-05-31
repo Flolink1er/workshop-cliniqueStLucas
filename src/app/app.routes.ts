@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { DoctorCard } from 'components/doctor-card/doctor-card';
+import { DoctorSheet } from 'components/doctor-sheet/doctor-sheet';
 import { loggedInGuard } from 'models/guards/logged-in.guard';
 import { loggedOffGuard } from 'models/guards/logged-off.guard';
 import { ActualiteInfo } from 'pages/actualite-info/actualite-info';
@@ -43,7 +43,7 @@ export const routes: Routes = [
     component: Team,
     canActivate: [loggedInGuard],
     children: [
-      { path: ':id', title: 'Équipe', component: DoctorCard, canActivate: [loggedInGuard] },
+      { path: ':id', title: 'Équipe', component: DoctorSheet, canActivate: [loggedInGuard] },
     ],
   },
   { path: 'news', title: 'Actualités', component: Actualites, canActivate: [loggedInGuard] },
