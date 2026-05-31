@@ -13,7 +13,7 @@
         <h2 class="card-title">{{ actus()[0].title }}</h2>
         <p>{{ actus()[0].summary }}</p>
         <div class="card-actions justify-end">
-          <button class="btn btn-primary">Lire la suite</button>
+          <a routerLink="/news/{{ actus()[0].slug }}" class="btn btn-primary">Lire la suite</a>
         </div>
       </div>
     </div>
@@ -27,7 +27,7 @@
             {{ actus()[1].summary }}
           </p>
           <div class="card-actions justify-end">
-            <button class="btn btn-primary">Lire la suite</button>
+            <a routerLink="/news/{{ actus()[1].slug }}" class="btn btn-primary">Lire la suite</a>
           </div>
         </div>
       </div>
@@ -40,7 +40,7 @@
             {{ actus()[2].summary }}
           </p>
           <div class="card-actions justify-end">
-            <button class="btn btn-primary">Lire la suite</button>
+            <a routerLink="/news/{{ actus()[2].slug }}" class="btn btn-primary">Lire la suite</a>
           </div>
         </div>
       </div>
@@ -69,14 +69,14 @@
                 {{ actu.summary }}
               </p>
               <div class="card-actions">
-                <a routerLink="/actualites/{{ actu.slug }}" class="btn btn-primary">Lire plus</a>
+                <a routerLink="/news/{{ actu.slug }}" class="btn btn-primary">Lire plus</a>
               </div>
             </div>
           </div>
         }
       </div>
     } @else {
-      <div class="flex-1/2">
+      <div class="flex items-center justify-center">
         <i class="text-xl font-bold">Aucune actualité disponible pour le moment.</i>
       </div>
     }

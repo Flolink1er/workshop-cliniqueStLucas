@@ -1,1 +1,17 @@
-<p>actualite-info works!</p>
+<div class="flex w-full justify-center pt-10">
+  <img src="{{ currentActu?.image }}" alt="Image actus" class="max-h-100 rounded-lg" />
+</div>
+<div class="m-5 flex w-2/3 flex-col items-center justify-self-center">
+  <h1 class="self-start">{{ currentActu?.title }}</h1>
+  <div class="mt-5 flex items-center justify-between gap-5 self-start text-xs text-base-content"
+    >Tags :
+    @for (tag of currentActu?.tags; track tag) {
+      <div class="flex items-center justify-center rounded-3xl bg-accent p-2">{{ tag }}</div>
+    }
+  </div>
+  <div class="divider"></div>
+  <p>{{ currentActu?.content }}</p>
+  <i class="self-end text-xs"
+    >Publié le {{ currentActu?.publishedAt | date: 'd MMMM, y' }} par {{ currentActu?.author }}</i
+  >
+</div>
