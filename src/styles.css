@@ -137,9 +137,17 @@ h4 {
 }
 
 @utility card-img {
-  @apply relative h-35 bg-linear-135 from-primary to-accent;
+  @apply relative h-35 overflow-hidden bg-linear-135 from-primary to-accent bg-cover bg-center;
 }
 
 @utility link {
   @apply whitespace-nowrap;
+}
+
+@utility card-tag {
+  @apply text-[11px] font-bold tracking-[1px] text-accent uppercase;
+}
+
+@utility card-pill {
+  @apply relative;
 }
