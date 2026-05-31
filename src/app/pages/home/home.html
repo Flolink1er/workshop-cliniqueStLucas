@@ -9,7 +9,7 @@
     <div class="bg-base-100 py-12">
       <div class="mx-auto grid max-w-4xl grid-cols-1 gap-4 px-4 sm:grid-cols-2">
         @for (stat of pageData.stats; track stat) {
-          <app-stat-card [stat]="stat" />
+          <app-stat-card [icon]="stat.icon!" [label]="stat.label!" [value]="stat.value" />
         }
       </div>
       <div

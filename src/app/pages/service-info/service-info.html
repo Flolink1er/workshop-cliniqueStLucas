@@ -1,5 +1,5 @@
 @if (pageData$ | async; as pageData) {
-  <div
+  <!-- <div
     class="hero min-h-screen bg-cover bg-fixed bg-center"
     style="
       background-image: url('{{ pageData.image }}');
@@ -10,73 +10,30 @@
         <h1 class="mb-5 text-5xl font-bold">{{ pageData.name }}</h1>
         <p class="mb-5">{{ pageData.shortDescription }}</p>
         <p class="mt-4">{{ pageData.description }}</p>
-        <!-- <button class="btn btn-primary">Get Started</button> -->
       </div>
     </div>
-  </div>
-  <div class="py-4 text-center">
-    <h2 class="mb-4 text-4xl font-bold">Infos Pratiques</h2>
-    <div class="flex justify-center gap-x-4">
-      <div class="rounded-md bg-base-200 p-4 shadow-sm">
-        <div class="text-sm opacity-70">Contact</div>
-        <div class="text-2xl font-semibold text-primary">{{ pageData.phone }}</div>
-      </div>
-      <div class="rounded-md bg-base-200 p-4 shadow-sm">
-        <div class="text-sm opacity-70">Horaire</div>
-        <div class="text-2xl font-semibold text-primary">{{ pageData.hours }}</div>
-      </div>
-    </div>
+  </div> -->
+  <app-hero
+    [title]="pageData.name"
+    [subtitle]="pageData.shortDescription"
+    [actions]="[ctaAppointment]" />
+  <div class="mx-auto grid grid-cols-1 gap-4 p-4 text-center sm:w-md xl:w-3xl">
+    <h2 class="mb-2">Infos Pratiques</h2>
+    <p class="mb-2 text-regular">{{ pageData.description }}</p>
+    <app-stat-card label="Contact" [value]="pageData.phone" icon="phone" />
+    <app-stat-card label="Horaire" [value]="pageData.hours" icon="clock" />
   </div>
 
   @if (team$ | async; as team) {
-    @if (team.length > 0) {
-      <div class="flex flex-col items-center gap-4 py-4 text-center">
-        <h2 class="text-4xl font-bold">Notre Équipe</h2>
-        <div class="max-w-6xl overflow-x-hidden">
-          <table class="table">
-            <thead>
-              <tr>
-                <th>Nom</th>
-                <th>Spécialisation</th>
-                <th>Langues</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              @for (member of team; track member.id) {
-                <tr>
-                  <td>
-                    <div class="flex items-center gap-3">
-                      <div class="avatar">
-                        <div class="mask h-12 w-12 mask-squircle">
-                          <img [src]="member.avatar" alt="Avatar Tailwind CSS Component" />
-                        </div>
-                      </div>
-                      <div>
-                        <div class="font-bold"
-                          >{{ member.title }} {{ member.firstName }} {{ member.lastName }}</div
-                        >
-                        <!-- <div class="text-sm opacity-50">United States</div> -->
-                      </div>
-                    </div>
-                  </td>
-                  <td>
-                    <!-- Zemlak, Daniel and Leannon -->
-                    <!-- <br /> -->
-                    <span class="badge badge-ghost badge-sm">{{ member.specialty }}</span>
-                  </td>
-                  <td>{{ member.languages.sort().join(', ') }}</td>
-                  <th>
-                    <button class="btn btn-ghost btn-xs" routerLink="/team/{{ member.id }}"
-                      >Détails</button
-                    >
-                  </th>
-                </tr>
-              }
-            </tbody></table
-          >
+    <div class="mx-auto py-6 sm:w-md xl:w-3xl">
+      @if (team.length > 0) {
+        <h2 class="mb-2 text-center">Notre Équipe</h2>
+        <div class="grid grid-cols-1 gap-4 px-4">
+          @for (member of team; track member.id) {
+            <app-doctor-card [doctor]="member" />
+          }
         </div>
-      </div>
-    }
+      }
+    </div>
   }
 }

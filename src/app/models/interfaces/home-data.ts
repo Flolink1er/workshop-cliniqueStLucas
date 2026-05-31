@@ -3,10 +3,14 @@ export interface Cta {
   href: string;
 }
 
+export interface FlavouredCta extends Cta {
+  data: string;
+}
+
 export interface Stat {
   label: string;
   value: string;
-  icon: string;
+  icon?: string;
 }
 
 export interface Section {

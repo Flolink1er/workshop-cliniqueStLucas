@@ -1,6 +1,10 @@
 import { AsyncPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
+import { DoctorCard } from 'components/doctor-card/doctor-card';
+import { Hero } from 'components/hero/hero';
+import { StatCard } from 'components/stat-card/stat-card';
+import { Cta } from 'interfaces/home-data';
 import { ServiceData } from 'interfaces/service-data';
 import { TeamData } from 'interfaces/team.interface';
 import { ApiService } from 'models/services/api.service';
@@ -8,7 +12,7 @@ import { map, Observable, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-service-info',
-  imports: [AsyncPipe, RouterLink],
+  imports: [AsyncPipe, Hero, StatCard, DoctorCard],
   templateUrl: './service-info.html',
   styleUrl: './service-info.css',
 })
@@ -28,4 +32,9 @@ export class ServiceInfo {
       );
     }),
   );
+
+  public readonly ctaAppointment: Cta = {
+    label: 'Prendre Rendez-vous',
+    href: '/rendez-vous',
+  };
 }

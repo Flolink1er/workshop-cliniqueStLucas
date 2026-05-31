@@ -1,4 +1,7 @@
-<div class="hero min-h-full bg-linear-135 from-primary via-secondary via-60% to-[#051F38] to-100%">
+<div
+  class="hero min-h-full {{
+    background() ? '' : 'bg-linear-135 from-primary via-secondary via-60% to-[#051F38] to-100%'
+  }}">
   <div
     class="hero-content {{
       contactForm() ? 'flex-col lg:flex-row-reverse' : 'max-sm:text-center xl:text-center'
@@ -15,7 +18,7 @@
         <p class="py-6">{{ subtitle() }}</p>
       }
       @if (actions() && actions()!.length <= 2) {
-        <div class="flex flex-wrap justify-center gap-4">
+        <div class="flex flex-wrap gap-4 max-sm:justify-center xl:justify-center">
           @for (action of actions(); track action.href) {
             <button
               class="btn btn-lg odd:btn-accent even:btn-outline-alt"

@@ -21,6 +21,7 @@ export class Hero {
     input<FormControl<string | null>>();
   public readonly contactForm: InputSignal<FormGroup<ContactForm> | undefined> =
     input<FormGroup<ContactForm>>();
+  public readonly background: InputSignal<string | undefined> = input<string>();
 
   public contactFormSubmit() {
     const body = {
