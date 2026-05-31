@@ -3,7 +3,7 @@
 
   <div class="flex justify-center gap-5">
     <div
-      class="card max-h-full bg-base-100 shadow-sm transition-all hover:scale-101 hover:shadow-lg lg:card-side">
+      class="card max-h-full bg-base-100 shadow-sm transition-all hover:scale-[1.005] hover:shadow-lg lg:card-side">
       <figure>
         <img
           src="https://images.cnrs.fr/system/files/styles/full_image_desktop_watermark/private/media/images/2011/07/CNRS_20110001_1747_42944.jpg?itok=CH6YBufm"
@@ -52,26 +52,33 @@
   <div class="flex flex-col gap-5">
     <h1 class="text-2xl font-bold text-base-content">Liste des actualités</h1>
 
-    <div class="grid grid-cols-3 gap-5">
-      @for (actu of actus(); track actu.id) {
-        <div class="card w-96 bg-base-100 shadow-sm transition-all hover:scale-101 hover:shadow-lg">
-          <figure class="px-10 pt-10">
-            <img
-              src="https://images.cnrs.fr/system/files/styles/full_image_desktop_watermark/private/media/images/2011/07/CNRS_20110001_1747_42944.jpg?itok=CH6YBufm"
-              alt="{{ actu.image }}"
-              class="rounded-xl" />
-          </figure>
-          <div class="card-body items-center text-center">
-            <h2 class="card-title">{{ actu.title }}</h2>
-            <p>
-              {{ actu.summary }}
-            </p>
-            <div class="card-actions">
-              <a routerLink="/actualites/{{ actu.slug }}" class="btn btn-primary">Lire plus</a>
+    @if (actus().length > 0) {
+      <div class="grid grid-cols-3 gap-5">
+        @for (actu of actus(); track actu.id) {
+          <div
+            class="card w-96 bg-base-100 shadow-sm transition-all hover:scale-101 hover:shadow-lg">
+            <figure class="px-10 pt-10">
+              <img
+                src="https://images.cnrs.fr/system/files/styles/full_image_desktop_watermark/private/media/images/2011/07/CNRS_20110001_1747_42944.jpg?itok=CH6YBufm"
+                alt="{{ actu.image }}"
+                class="rounded-xl" />
+            </figure>
+            <div class="card-body items-center text-center">
+              <h2 class="card-title">{{ actu.title }}</h2>
+              <p>
+                {{ actu.summary }}
+              </p>
+              <div class="card-actions">
+                <a routerLink="/actualites/{{ actu.slug }}" class="btn btn-primary">Lire plus</a>
+              </div>
             </div>
           </div>
-        </div>
-      }
-    </div>
+        }
+      </div>
+    } @else {
+      <div class="flex-1/2">
+        <i class="text-xl font-bold">Aucune actualité disponible pour le moment.</i>
+      </div>
+    }
   </div>
 </div>
