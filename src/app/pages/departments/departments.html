@@ -1,25 +1,9 @@
-<div class="hero bg-base-200">
-  <div class="hero-content text-center">
-    <div class="max-w-md">
-      <h1 class="text-5xl font-bold">Départements</h1>
-      <p class="py-6">Liste de nos Départements</p>
-    </div>
-  </div>
-</div>
+<app-hero title="Départements" subtitle="Liste de nos Départements" />
 @if (pageData$ | async; as pageData) {
-  <div class="flex flex-col gap-4 p-8">
+  <div
+    class="mx-auto grid grid-cols-1 gap-4 p-4 sm:grid-cols-2 md:w-2xl lg:w-full lg:grid-cols-3 xl:w-5xl">
     @for (depart of pageData; track depart.id) {
-      <div class="card w-full card-border">
-        <div class="card-body">
-          <h2 class="card-title">{{ depart.name }}</h2>
-          <p class="text-sm opacity-70">{{ depart.phone }}</p>
-          <div class="card-actions justify-end">
-            <button class="btn btn-primary" routerLink="/departments/{{ depart.id }}"
-              >Détails</button
-            >
-          </div>
-        </div>
-      </div>
+      <app-info-card tag="département" [departmentInfo]="depart" />
     }
   </div>
 }

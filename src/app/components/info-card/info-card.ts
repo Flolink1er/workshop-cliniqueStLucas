@@ -4,7 +4,6 @@ import { DepartData } from 'interfaces/departments.interface';
 import { Section } from 'interfaces/home-data';
 import { ServiceData } from 'interfaces/service-data';
 import { ApiService } from 'models/services/api.service';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-info-card',
@@ -14,7 +13,7 @@ import { Observable } from 'rxjs';
 export class InfoCard {
   private readonly _api: ApiService = inject(ApiService);
 
-  public readonly departments$: Observable<DepartData[]> = this._api.departmentsData;
+  public readonly departmentInfo: InputSignal<DepartData | undefined> = input<DepartData>();
 
   public readonly sectionInfo: InputSignal<Section | undefined> = input<Section>();
   public readonly serviceInfo: InputSignal<ServiceData | undefined> = input<ServiceData>();
