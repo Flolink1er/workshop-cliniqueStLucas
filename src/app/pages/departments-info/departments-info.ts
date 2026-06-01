@@ -4,7 +4,6 @@ import { ActivatedRoute } from '@angular/router';
 import { DoctorCard } from 'components/doctor-card/doctor-card';
 import { Hero } from 'components/hero/hero';
 import { DepartData } from 'interfaces/departments.interface';
-import { Cta } from 'interfaces/home-data';
 import { TeamData } from 'interfaces/team.interface';
 import { ApiService } from 'models/services/api.service';
 import { map, Observable, switchMap } from 'rxjs';
@@ -31,8 +30,7 @@ export class DepartmentsInfo {
     }),
   );
 
-  public readonly contact: Cta = {
-    label: 'Contacter le Département',
-    href: '',
-  };
+  public phoneNbrToLink(phoneNbr: string): string {
+    return 'tel:' + phoneNbr.replaceAll(' ', '');
+  }
 }

@@ -1,7 +1,6 @@
 import { Component, inject, input, InputSignal } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
-import { Cta } from 'interfaces/home-data';
 import { ApiService } from 'models/services/api.service';
 import { ContactForm } from 'pages/contact/contact';
 
@@ -16,7 +15,7 @@ export class Hero {
   public readonly tag: InputSignal<string | undefined> = input<string>();
   public readonly title: InputSignal<string> = input.required<string>();
   public readonly subtitle: InputSignal<string | undefined> = input<string>();
-  public readonly actions: InputSignal<Cta[] | undefined> = input<Cta[]>();
+  public readonly actions: InputSignal<any[] | undefined> = input<any[]>();
   public readonly searchField: InputSignal<FormControl<string | null> | undefined> =
     input<FormControl<string | null>>();
   public readonly contactForm: InputSignal<FormGroup<ContactForm> | undefined> =
@@ -36,7 +35,9 @@ export class Hero {
   }
 
   public isRequired(fieldName: string): boolean {
-    const validator = this.contactForm()?.get(fieldName)?.validator?.({} as AbstractControl);
+    const validator = this.contactForm()
+      ?.get(fieldName)
+      ?.validator?.({} as AbstractControl);
     return validator && validator['required'];
   }
 }

@@ -4,7 +4,14 @@
       tag="Clinique Saint-Lucas · Bruxelles"
       [title]="pageData.hero.title"
       [subtitle]="pageData.hero.subtitle"
-      [actions]="[pageData.hero.cta, pageData.hero.ctaSecondary]" />
+      [actions]="[
+        { label: pageData.hero.cta.label, href: pageData.hero.cta.href, type: 'router' },
+        {
+          label: pageData.hero.ctaSecondary.label,
+          href: pageData.hero.ctaSecondary.href,
+          type: 'router',
+        },
+      ]" />
 
     <div class="bg-base-100 py-12">
       <div class="mx-auto grid max-w-4xl grid-cols-1 gap-4 px-4 sm:grid-cols-2">

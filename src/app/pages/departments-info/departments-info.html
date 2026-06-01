@@ -10,7 +10,9 @@
     </div>
   </div> -->
 
-  <app-hero [title]="pageData.name" [actions]="[contact]" />
+  <app-hero
+    [title]="pageData.name"
+    [actions]="[{ label: 'Appeler le Département', href: phoneNbrToLink(pageData.phone) }]" />
 
   <div class="mx-auto max-w-2xl py-4 text-center">
     <h2 class="mb-2">Infos Pratiques</h2>

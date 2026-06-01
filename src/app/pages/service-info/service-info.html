@@ -16,7 +16,14 @@
   <app-hero
     [title]="pageData.name"
     [subtitle]="pageData.shortDescription"
-    [actions]="[ctaAppointment]" />
+    [actions]="[
+      {
+        label: 'Prendre Rendez-vous',
+        href: ['/rendez-vous', { service: pageData.id }],
+        type: 'router',
+      },
+      { label: 'Appeler le Service', href: phoneNbrToLink(pageData.phone) },
+    ]" />
   <div class="mx-auto grid grid-cols-1 gap-4 p-4 text-center sm:w-md xl:w-3xl">
     <h2 class="mb-2">Infos Pratiques</h2>
     <p class="mb-2 text-regular">{{ pageData.description }}</p>

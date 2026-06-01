@@ -4,7 +4,6 @@ import { ActivatedRoute } from '@angular/router';
 import { DoctorCard } from 'components/doctor-card/doctor-card';
 import { Hero } from 'components/hero/hero';
 import { StatCard } from 'components/stat-card/stat-card';
-import { Cta } from 'interfaces/home-data';
 import { ServiceData } from 'interfaces/service-data';
 import { TeamData } from 'interfaces/team.interface';
 import { ApiService } from 'models/services/api.service';
@@ -33,8 +32,7 @@ export class ServiceInfo {
     }),
   );
 
-  public readonly ctaAppointment: Cta = {
-    label: 'Prendre Rendez-vous',
-    href: '/rendez-vous',
-  };
+  public phoneNbrToLink(phoneNbr: string): string {
+    return 'tel:' + phoneNbr.replaceAll(' ', '');
+  }
 }

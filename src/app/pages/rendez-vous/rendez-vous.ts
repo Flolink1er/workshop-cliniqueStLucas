@@ -7,6 +7,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { Hero } from 'components/hero/hero';
 import { ServiceData } from 'interfaces/service-data';
 import { TeamData } from 'interfaces/team.interface';
@@ -20,8 +21,12 @@ import { combineLatest, map, Observable, startWith } from 'rxjs';
   styleUrl: './rendez-vous.css',
 })
 export class RendezVous {
+  private readonly _activatedRoutes: ActivatedRoute = inject(ActivatedRoute);
   private readonly _api: ApiService = inject(ApiService);
   public readonly services$: Observable<ServiceData[]> = this._api.servicesData;
+
+  private readonly _defaultService: number | null =
+    Number(this._activatedRoutes.snapshot.params['service']) || null;
 
   public getClosestDate(): string {
     const defaultDate = new Date();
@@ -39,7 +44,7 @@ export class RendezVous {
     phone: new FormControl<string>('', [Validators.required, Validators.pattern(/^\d{10}$/gm)]),
     preferredDate: new FormControl<string>(this.getClosestDate(), Validators.required),
     reason: new FormControl<string | null>(null),
-    serviceId: new FormControl<number | string | null>(null, [
+    serviceId: new FormControl<number | string | null>(this._defaultService, [
       Validators.pattern(/^-?(?:0|[1-9]\d*)$/gm),
     ]),
   });

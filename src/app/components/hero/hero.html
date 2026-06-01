@@ -20,11 +20,20 @@
       @if (actions() && actions()!.length <= 2) {
         <div class="flex flex-wrap gap-4 pt-2 max-sm:justify-center xl:justify-center">
           @for (action of actions(); track action.href) {
-            <button
-              class="btn btn-lg odd:btn-accent even:btn-outline-alt"
-              [routerLink]="action.href"
-              >{{ action.label }}</button
-            >
+            @if (action.type === 'router') {
+              <button
+                class="btn btn-lg odd:btn-accent even:btn-outline-alt"
+                [routerLink]="action.href"
+                >{{ action.label }}</button
+              >
+            } @else {
+              <a
+                role="button"
+                class="btn btn-lg odd:btn-accent even:btn-outline-alt"
+                [href]="action.href"
+                >{{ action.label }}</a
+              >
+            }
           }
         </div>
       } @else if (searchField()) {

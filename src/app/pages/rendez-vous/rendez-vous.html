@@ -8,14 +8,20 @@
     <label class="label" for="doctor" [class.label-required]="isRequired('doctorId')"
       >Médecin</label
     >
-    <select formControlName="doctorId" class="select w-full" id="doctor">
-      <option value="null">Choisir un Médecin</option>
-      @for (doctor of doctors$ | async; track doctor.id) {
-        <option [value]="doctor.id"
-          >{{ doctor.title }} {{ doctor.firstName }} {{ doctor.lastName }}</option
-        >
-      }
-    </select>
+    @if (doctors$ | async; as doctors) {
+      <select
+        formControlName="doctorId"
+        class="select w-full"
+        [disabled]="doctors.length === 0"
+        id="doctor">
+        <option value="null">Choisir un Médecin</option>
+        @for (doctor of doctors; track doctor.id) {
+          <option [value]="doctor.id"
+            >{{ doctor.title }} {{ doctor.firstName }} {{ doctor.lastName }}</option
+          >
+        }
+      </select>
+    }
     <label for="email" class="label" [class.label-required]="isRequired('email')">Email</label>
     <input
       type="email"
