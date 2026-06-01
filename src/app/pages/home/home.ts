@@ -16,7 +16,7 @@ import { HomeData } from '../../models/interfaces/home-data';
 })
 export class Home {
   private readonly _api: ApiService = inject(ApiService);
-  public homeData$: Observable<HomeData> = this._api.homeData;
-  public servicesData$: Observable<ServiceData[]> = this._api.servicesData;
-  public teamData$: Observable<TeamData[]> = this._api.teamData;
+  public readonly homeData$: Observable<HomeData> = this._api.homeData;
+  public readonly servicesData$: Observable<ServiceData[]> = this._api.servicesData;
+  public readonly teamData$: Observable<TeamData[]> = this._api.teamData;
 }

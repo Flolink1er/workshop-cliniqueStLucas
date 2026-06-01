@@ -1,7 +1,8 @@
-import { Component, signal, WritableSignal } from '@angular/core';
+import { Component, inject, Signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Footer } from 'components/footer/footer';
 import { Header } from 'components/header/header';
+import { UserAccountService } from 'models/services/user-account.service';
 
 @Component({
   selector: 'app-root',
@@ -10,14 +11,6 @@ import { Header } from 'components/header/header';
   styleUrl: './app.css',
 })
 export class App {
-  public shrinkHeader: WritableSignal<boolean> = signal(false);
-  constructor() {
-    this.animateHeader();
-  }
-
-  private animateHeader(): void {
-    window.onscroll = () => {
-      this.shrinkHeader.set(window.pageYOffset <= 120);
-    };
-  }
+  private readonly _userService: UserAccountService = inject(UserAccountService);
+  public readonly isLogged: Signal<boolean> = this._userService.isLoggedIn;
 }

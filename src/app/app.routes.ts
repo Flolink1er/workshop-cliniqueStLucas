@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { DoctorSheet } from 'components/doctor-sheet/doctor-sheet';
+import { errorGuard } from 'models/guards/error.guard';
 import { loggedInGuard } from 'models/guards/logged-in.guard';
 import { loggedOffGuard } from 'models/guards/logged-off.guard';
 import { ActualiteInfo } from 'pages/actualite-info/actualite-info';
@@ -60,7 +61,7 @@ export const routes: Routes = [
     component: RendezVous,
     canActivate: [loggedInGuard],
   },
-  { path: 'error', title: 'Error', component: Error },
+  { path: 'error/:code', title: 'Error', component: Error, canActivate: [errorGuard] },
   { path: '', pathMatch: 'full', redirectTo: 'home' },
-  { path: '**', redirectTo: 'error' },
+  { path: '**', redirectTo: 'error/404' },
 ];

@@ -1,5 +1,11 @@
 import { Component, inject } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { UserAccountService } from 'models/services/user-account.service';
 
 @Component({
@@ -12,7 +18,7 @@ export class Login {
   private readonly userAccount: UserAccountService = inject(UserAccountService);
 
   public loginForm = new FormGroup({
-    email: new FormControl('patient@clinique.be', Validators.required),
+    email: new FormControl('patient@clinique.be', [Validators.required, Validators.email]),
     password: new FormControl('Patient2026!', Validators.required),
   });
 
@@ -21,5 +27,10 @@ export class Login {
       const { email, password } = this.loginForm.getRawValue();
       this.userAccount.userLogin(email!, password!);
     }
+  }
+
+  public isRequired(fieldName: string): boolean {
+    const validator = this.loginForm.get(fieldName)?.validator?.({} as AbstractControl);
+    return validator && validator['required'];
   }
 }

@@ -1,5 +1,5 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { inject, Injectable, signal, WritableSignal } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { inject, Injectable, signal } from '@angular/core';
 import { ActualitesData } from 'interfaces/actualites-data';
 import { DepartData } from 'interfaces/departments.interface';
 import { TeamData } from 'interfaces/team.interface';
@@ -13,47 +13,34 @@ import { Observable } from 'rxjs';
 export class ApiService {
   private readonly _http: HttpClient = inject(HttpClient);
   private readonly _baseUrl: string = 'http://localhost:5150/api/';
-  private _pagesData: Record<number, WritableSignal<any>> = {
-    0: signal(this.loadData<HomeData>('homepage')),
-    1: signal(this.loadData<ServiceData[]>('services')),
-    2: signal(this.loadData<TeamData[]>('team')),
-    3: signal(this.loadData<ActualitesData[]>('news')),
-    4: signal(this.loadData<DepartData[]>('departments')),
-  };
 
-  private get _headers(): HttpHeaders {
-    return new HttpHeaders().set('Authorization', (localStorage['token'] || '') as string);
-  }
+  public token = signal<string>(localStorage.getItem('token') || '');
 
   public get homeData(): Observable<HomeData> {
-    return this._pagesData[0]() as Observable<HomeData>;
+    return this.loadData<HomeData>('homepage');
   }
 
   public get servicesData(): Observable<ServiceData[]> {
-    return this._pagesData[1]() as Observable<ServiceData[]>;
+    return this.loadData<ServiceData[]>('services');
   }
 
   public get teamData(): Observable<TeamData[]> {
-    return this._pagesData[2]() as Observable<TeamData[]>;
+    return this.loadData<TeamData[]>('team');
   }
 
   public get actualitesData(): Observable<ActualitesData[]> {
-    return this._pagesData[3]() as Observable<ActualitesData[]>;
+    return this.loadData<ActualitesData[]>('news');
   }
 
   public get departmentsData(): Observable<DepartData[]> {
-    return this._pagesData[4]() as Observable<DepartData[]>;
+    return this.loadData<DepartData[]>('departments');
   }
 
   public loadData<T>(page: string): Observable<T> {
-    return this._http.get<T>(this._baseUrl + page, {
-      headers: this._headers,
-    });
+    return this._http.get<T>(this._baseUrl + page);
   }
 
   public sendData(page: string, body: object): Observable<object> {
-    return this._http.post(this._baseUrl + page, body, {
-      headers: this._headers.set('Content-Type', 'application/json'),
-    });
+    return this._http.post(this._baseUrl + page, body);
   }
 }

@@ -2,4 +2,6 @@
 <main class="table h-full grow">
   <router-outlet />
 </main>
-<app-footer />
+@if (isLogged()) {
+  <app-footer />
+}

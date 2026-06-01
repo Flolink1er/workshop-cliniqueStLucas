@@ -1,18 +1,40 @@
-<form [formGroup]="loginForm" (submit)="onLoginSubmit()">
-  <fieldset class="fieldset w-xs rounded-box border border-base-300 bg-base-200 p-4">
-    <legend class="fieldset-legend">Login</legend>
+<div class="m-auto w-xs sm:w-md">
+  <form
+    [formGroup]="loginForm"
+    (submit)="onLoginSubmit()"
+    class="fieldset w-full rounded-[20px] bg-white p-6 shadow-sm">
+    <label class="label" for="email" [class.label-required]="isRequired('email')">Email</label>
+    <input
+      type="email"
+      id="email"
+      class="input w-full"
+      [class.input-error]="loginForm.controls.email.touched && loginForm.controls.email.errors"
+      placeholder="Email"
+      formControlName="email" />
+    @if (loginForm.controls.email.touched) {
+      @if (loginForm.controls.email.hasError('required')) {
+        <span class="validator-error">Ce champ est requis.</span>
+      } @else if (loginForm.controls.email.hasError('email')) {
+        <span class="validator-error">Veuillez entrer une adresse email valide.</span>
+      }
+    }
 
-    <label class="label" for="email">Email</label>
-    <input type="email" id="email" class="input" placeholder="Email" formControlName="email" />
-
-    <label class="label" for="password">Password</label>
+    <label class="label" for="password" [class.label-required]="isRequired('password')"
+      >Password</label
+    >
     <input
       type="password"
       id="password"
-      class="input"
+      class="input w-full"
+      [class.input-error]="
+        loginForm.controls.password.touched && loginForm.controls.password.errors
+      "
       placeholder="Password"
       formControlName="password" />
+    @if (loginForm.controls.password.touched && loginForm.controls.password.hasError('required')) {
+      <span class="validator-error">Ce champ est requis.</span>
+    }
 
-    <button type="submit" class="btn mt-4 btn-neutral">Login</button>
-  </fieldset>
-</form>
+    <button type="submit" [disabled]="loginForm.invalid" class="btn mt-4 btn-primary">Login</button>
+  </form>
+</div>
