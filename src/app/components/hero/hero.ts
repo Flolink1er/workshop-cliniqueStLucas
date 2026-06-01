@@ -1,5 +1,5 @@
 import { Component, inject, input, InputSignal } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { Cta } from 'interfaces/home-data';
 import { ApiService } from 'models/services/api.service';
@@ -33,5 +33,10 @@ export class Hero {
     };
 
     this._api.sendData('contact', body).subscribe(res => console.log(res));
+  }
+
+  public isRequired(fieldName: string): boolean {
+    const validator = this.contactForm()?.get(fieldName)?.validator?.({} as AbstractControl);
+    return validator && validator['required'];
   }
 }

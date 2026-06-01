@@ -21,7 +21,7 @@ export class Contact {
     email: new FormControl<string | null>('', [Validators.email, Validators.required]),
     firstName: new FormControl<string | null>('', Validators.required),
     lastName: new FormControl<string | null>('', Validators.required),
-    message: new FormControl<string | null>('', Validators.required),
-    subject: new FormControl<string | null>('', Validators.required),
+    message: new FormControl<string | null>('', [Validators.required, Validators.minLength(20)]),
+    subject: new FormControl<string | null>('Demande de renseignement', Validators.required),
   });
 }

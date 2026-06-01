@@ -25,7 +25,11 @@
     }}</span>
     <button
       class="btn btn-sm btn-outline btn-primary"
-      routerLink="/{{ sectionInfo()?.id || 'services/' + serviceInfo()?.id }}"
+      routerLink="/{{
+        sectionInfo()?.id || serviceInfo()
+          ? 'services/' + serviceInfo()?.id
+          : 'departments/' + departmentInfo()?.id
+      }}"
       >Détails</button
     >
   </div>

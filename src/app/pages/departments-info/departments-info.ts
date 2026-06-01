@@ -1,14 +1,17 @@
 import { AsyncPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
+import { DoctorCard } from 'components/doctor-card/doctor-card';
+import { Hero } from 'components/hero/hero';
 import { DepartData } from 'interfaces/departments.interface';
+import { Cta } from 'interfaces/home-data';
 import { TeamData } from 'interfaces/team.interface';
 import { ApiService } from 'models/services/api.service';
 import { map, Observable, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-departments-info',
-  imports: [AsyncPipe, RouterLink],
+  imports: [AsyncPipe, Hero, DoctorCard],
   templateUrl: './departments-info.html',
   styleUrl: './departments-info.css',
 })
@@ -27,4 +30,9 @@ export class DepartmentsInfo {
       );
     }),
   );
+
+  public readonly contact: Cta = {
+    label: 'Contacter le Département',
+    href: '',
+  };
 }

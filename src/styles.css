@@ -99,13 +99,19 @@ h4 {
     @apply text-white;
   }
 
-  p {
+  p:not(.label) {
     @apply max-w-110 font-light text-white/75;
   }
 
+  p.label {
+    @apply text-xs font-normal text-(--color-light-content);
+  }
+}
+
+.hero:not(:has(.fieldset)) {
   .input:focus,
   .input:focus-within {
-    @apply shadow-white outline-white;
+    @apply border-white outline-white;
   }
 }
 
@@ -151,4 +157,51 @@ h4 {
 
 @utility card-pill {
   @apply relative;
+}
+
+@utility badge {
+  @apply h-auto gap-1.5 px-3 py-1.25 text-xs font-semibold;
+}
+
+@utility label {
+  @apply text-[13px] font-semibold text-base-content;
+}
+
+p.label {
+  @apply whitespace-normal;
+}
+
+@utility label-required {
+  @apply after:content-['*'];
+}
+
+@utility input {
+  @apply rounded-xl border-[1.5px] border-(--border-main) text-sm outline-0;
+}
+
+@utility textarea {
+  @apply rounded-xl border-[1.5px] border-(--border-main) text-sm outline-0;
+}
+
+@utility select {
+  @apply rounded-xl border-[1.5px] border-(--border-main) text-sm outline-0;
+}
+
+:is(.input, .textarea) {
+  transition: 200ms linear;
+  transition-property: border, box-shadow;
+
+  &:focus,
+  &:focus-within {
+    @apply border-primary;
+    box-shadow: 0 0 0 3px var(--color-base-200);
+  }
+}
+
+@utility validator-error {
+  @apply text-xs text-error-content;
+}
+
+@utility input-error {
+  @apply border-error-content!;
 }

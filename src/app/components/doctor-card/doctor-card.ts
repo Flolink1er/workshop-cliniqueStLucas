@@ -9,4 +9,5 @@ import { TeamData } from 'interfaces/team.interface';
 })
 export class DoctorCard {
   public readonly doctor: InputSignal<TeamData> = input.required<TeamData>();
+  public readonly isHead: InputSignal<boolean | undefined> = input<boolean>();
 }

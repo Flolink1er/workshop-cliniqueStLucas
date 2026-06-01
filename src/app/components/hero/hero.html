@@ -13,12 +13,12 @@
       @if (tag()) {
         <span class="hero-tag">{{ tag() }}</span>
       }
-      <h1>{{ title() }}</h1>
+      <h1 class="pb-2">{{ title() }}</h1>
       @if (subtitle()) {
-        <p class="py-6">{{ subtitle() }}</p>
+        <p class="py-4">{{ subtitle() }}</p>
       }
       @if (actions() && actions()!.length <= 2) {
-        <div class="flex flex-wrap gap-4 max-sm:justify-center xl:justify-center">
+        <div class="flex flex-wrap gap-4 pt-2 max-sm:justify-center xl:justify-center">
           @for (action of actions(); track action.href) {
             <button
               class="btn btn-lg odd:btn-accent even:btn-outline-alt"
@@ -49,51 +49,114 @@
       }
     </div>
     @if (contactForm()) {
-      <div class="maw-w-sm card w-96 shrink-0 bg-base-100 shadow-2xl">
-        <form [formGroup]="contactForm()!" (submit)="contactFormSubmit()" class="card-body">
-          <fieldset class="fieldset">
-            <label class="label" for="email">Email</label>
+      <div class="maw-w-sm card w-full shrink-0 overflow-hidden bg-white shadow-sm sm:w-96">
+        <form
+          [formGroup]="contactForm()!"
+          (submit)="contactFormSubmit()"
+          class="relative card-body">
+          <fieldset class="fieldset w-full">
+            <label class="label" [class.label-required]="isRequired('email')" for="email"
+              >Email</label
+            >
             <input
               type="email"
               id="email"
               class="input w-full"
+              [class.input-error]="
+                contactForm()?.controls?.email?.errors && contactForm()?.controls?.email?.touched
+              "
               formControlName="email"
               placeholder="Email…" />
-            <div class="flex gap-x-2">
+            @if (
+              contactForm()?.controls?.email?.touched && contactForm()?.controls?.email?.errors
+            ) {
+              @if (contactForm()?.controls?.email?.hasError('required')) {
+                <span class="validator-error">Ce champ est requis.</span>
+              } @else if (contactForm()?.controls?.email?.hasError('email')) {
+                <span class="validator-error">Veuillez entrer une adresse email valide.</span>
+              }
+            } @else {
+              <p class="label">Nous vous répondrons dans les 48h ouvrables.</p>
+            }
+            <div class="grid grid-cols-1 gap-2 sm:grid-cols-2">
               <span>
-                <label class="label" for="firstname">Prénom</label>
+                <label
+                  class="label mb-1.5"
+                  [class.label-required]="isRequired('firstName')"
+                  for="firstname"
+                  >Prénom</label
+                >
                 <input
                   type="text"
                   id="firstname"
                   class="input"
+                  [class.input-error]="
+                    contactForm()?.controls?.firstName?.errors &&
+                    contactForm()?.controls?.firstName?.touched
+                  "
                   formControlName="firstName"
                   placeholder="Prénom…" />
+                @if (contactForm()?.controls?.firstName?.touched) {
+                  @if (contactForm()?.controls?.firstName?.hasError('required')) {
+                    <span class="validator-error">Ce champ est requis.</span>
+                  }
+                }
               </span>
               <span>
-                <label class="label" for="lastname">Nom</label>
+                <label
+                  class="label mb-1.5"
+                  [class.label-required]="isRequired('lastName')"
+                  for="lastname"
+                  >Nom</label
+                >
                 <input
                   type="text"
                   id="lastname"
                   class="input"
+                  [class.input-error]="
+                    contactForm()?.controls?.lastName?.errors &&
+                    contactForm()?.controls?.lastName?.touched
+                  "
                   formControlName="lastName"
                   placeholder="Nom…" />
+                @if (contactForm()?.controls?.lastName?.touched) {
+                  @if (contactForm()?.controls?.lastName?.hasError('required')) {
+                    <span class="validator-error">Ce champ est requis.</span>
+                  }
+                }
               </span>
             </div>
-            <label class="label" for="subject">Sujet</label>
-            <input
-              type="text"
-              id="subject"
-              class="input w-full"
-              formControlName="subject"
-              placeholder="Sujet…" />
-            <label class="label" for="message">Message</label>
+            <label class="label" [class.label-required]="isRequired('subject')" for="subject"
+              >Objet</label
+            >
+            <select formControlName="subject" class="select w-full" id="subject">
+              <option value="Demande de renseignement">Demande de renseignement</option>
+              <option value="Rendez-vous">Rendez-vous</option>
+              <option value="Autre">Autre</option>
+            </select>
+            <label class="label" [class.label-required]="isRequired('message')" for="message"
+              >Message</label
+            >
             <textarea
               id="message"
               class="textarea w-full resize-none"
+              [class.input-error]="
+                contactForm()?.controls?.message?.errors &&
+                contactForm()?.controls?.message?.touched
+              "
               formControlName="message"
               placeholder="Message…"></textarea>
-            <button [disabled]="contactForm()!.invalid" class="btn mt-4 btn-neutral"
-              >Contactez Nous</button
+            @if (contactForm()?.controls?.message?.touched) {
+              @if (contactForm()?.controls?.message?.hasError('required')) {
+                <span class="validator-error">Ce champ est requis.</span>
+              } @else if (contactForm()?.controls?.message?.hasError('minlength')) {
+                <span class="validator-error"
+                  >Le message doit contenir au moins 20 caractères.</span
+                >
+              }
+            }
+            <button [disabled]="contactForm()!.invalid" class="btn mt-4 btn-primary"
+              >Envoyer le Message</button
             >
           </fieldset>
         </form>
