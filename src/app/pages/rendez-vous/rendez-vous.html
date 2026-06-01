@@ -1,70 +1,138 @@
-<div class="hero min-h-full bg-base-200">
-  <div class="hero-content text-center">
-    <div class="max-w-lg py-6">
-      <h1 class="text-5xl font-bold">Prendre Rendez-vous</h1>
-    </div>
-  </div>
-</div>
-<form
-  class="fieldset w-xs rounded-box border border-base-200 bg-base-300 p-4"
-  [formGroup]="appointmentForm"
-  (submit)="sendData()">
-  <label class="label" for="doctor">Médecin</label>
-  <select formControlName="doctorId" class="select" id="doctor">
-    <option value="null">Choisir un Médecin</option>
-    @for (doctor of doctors$ | async; track doctor.id) {
-      <option [value]="doctor.id"
-        >{{ doctor.title }} {{ doctor.firstName }} {{ doctor.lastName }}</option
-      >
-    }
-  </select>
-  <label for="email" class="label">Email</label>
-  <input type="email" formControlName="email" id="email" class="input" placeholder="Email…" />
-  <div class="flex gap-2">
-    <span>
-      <label for="firstname" class="label">Prénom</label>
-      <input
-        type="text"
-        id="firstname"
-        class="input"
-        formControlName="firstName"
-        placeholder="Prénom…" />
-    </span>
-    <span>
-      <label for="lastname" class="label">Nom</label>
-      <input
-        type="text"
-        id="lastname"
-        class="input"
-        formControlName="lastName"
-        placeholder="Nom…" />
-    </span>
-  </div>
-  <label for="phone" class="label">N° de Téléphone</label>
-  <input
-    type="tel"
-    id="phone"
-    class="input"
-    formControlName="phone"
-    placeholder="N° de Téléphone…" />
-  <label for="date" class="label">Date</label>
-  <input
-    type="date"
-    id="date"
-    [min]="getClosestDate()"
-    class="input"
-    formControlName="preferredDate" />
-  <label for="reason" class="label">Raison</label>
-  <textarea id="reason" class="textarea" formControlName="reason" placeholder="Raison…"></textarea>
-  <label for="service" class="label">Service</label>
-  <select id="service" class="select" formControlName="serviceId">
-    <option value="null">Choisir un Service</option>
-    @for (service of services$ | async; track service.id) {
-      <option [value]="service.id">{{ service.name }}</option>
-    }
-  </select>
+<app-hero title="Prendre Rendez-vous" />
 
-  <button type="submit" [disabled]="appointmentForm.invalid" class="btn mt-4 btn-neutral"
-    >Prendre Rendez-vous</button
-  >
-</form>
+<div class="mx-auto w-xs py-4 sm:w-md">
+  <form
+    class="fieldset w-full rounded-[20px] bg-white p-6 shadow-sm"
+    [formGroup]="appointmentForm"
+    (submit)="sendData()">
+    <label class="label" for="doctor" [class.label-required]="isRequired('doctorId')"
+      >Médecin</label
+    >
+    <select formControlName="doctorId" class="select w-full" id="doctor">
+      <option value="null">Choisir un Médecin</option>
+      @for (doctor of doctors$ | async; track doctor.id) {
+        <option [value]="doctor.id"
+          >{{ doctor.title }} {{ doctor.firstName }} {{ doctor.lastName }}</option
+        >
+      }
+    </select>
+    <label for="email" class="label" [class.label-required]="isRequired('email')">Email</label>
+    <input
+      type="email"
+      formControlName="email"
+      id="email"
+      class="input w-full"
+      [class.input-error]="
+        appointmentForm.controls.email.touched && appointmentForm.controls.email.errors
+      "
+      placeholder="Email…" />
+    @if (appointmentForm.controls.email.touched) {
+      @if (appointmentForm.controls.email.hasError('required')) {
+        <span class="validator-error">Ce champ est requis.</span>
+      }
+      @if (appointmentForm.controls.email.hasError('email')) {
+        <span class="validator-error">Veuillez entrer une adresse email valide.</span>
+      }
+    }
+    <div class="grid grid-cols-1 gap-x-2 sm:grid-cols-2">
+      <div class="fieldset">
+        <label for="firstname" class="label" [class.label-required]="isRequired('firstName')"
+          >Prénom</label
+        >
+        <input
+          type="text"
+          id="firstname"
+          class="input"
+          [class.input-error]="
+            appointmentForm.controls.firstName.touched && appointmentForm.controls.firstName.errors
+          "
+          formControlName="firstName"
+          placeholder="Prénom…" />
+        @if (
+          appointmentForm.controls.firstName.touched &&
+          appointmentForm.controls.firstName.hasError('required')
+        ) {
+          <span class="validator-error">Ce champ est requis.</span>
+        }
+      </div>
+      <div class="fieldset">
+        <label for="lastname" class="label" [class.label-required]="isRequired('lastName')"
+          >Nom</label
+        >
+        <input
+          type="text"
+          id="lastname"
+          class="input"
+          [class.input-error]="
+            appointmentForm.controls.lastName.touched && appointmentForm.controls.lastName.errors
+          "
+          formControlName="lastName"
+          placeholder="Nom…" />
+        @if (
+          appointmentForm.controls.lastName.touched &&
+          appointmentForm.controls.lastName.hasError('required')
+        ) {
+          <span class="validator-error">Ce champ est requis.</span>
+        }
+      </div>
+    </div>
+    <label for="phone" class="label" [class.label-required]="isRequired('phone')"
+      >N° de Téléphone</label
+    >
+    <input
+      type="tel"
+      id="phone"
+      class="input w-full"
+      [class.input-error]="
+        appointmentForm.controls.phone.touched && appointmentForm.controls.phone.errors
+      "
+      formControlName="phone"
+      placeholder="N° de Téléphone…" />
+    @if (appointmentForm.controls.phone.touched) {
+      @if (appointmentForm.controls.phone.hasError('required')) {
+        <span class="validator-error">Ce champ est requis.</span>
+      }
+      @if (appointmentForm.controls.phone.hasError('pattern')) {
+        <span class="validator-error">Veuillez entrer une combinaison de 10 chiffres.</span>
+      }
+    }
+    <label for="date" class="label" [class.label-required]="isRequired('preferredDate')"
+      >Date</label
+    >
+    <input
+      type="date"
+      id="date"
+      [min]="getClosestDate()"
+      class="input w-full"
+      [class.input-error]="
+        appointmentForm.controls.preferredDate.touched &&
+        appointmentForm.controls.preferredDate.errors
+      "
+      formControlName="preferredDate" />
+    @if (
+      appointmentForm.controls.preferredDate.touched &&
+      appointmentForm.controls.preferredDate.hasError('required')
+    ) {
+      <span class="validator-error">Ce champ est requis.</span>
+    }
+    <label for="reason" class="label" [class.label-required]="isRequired('reason')">Raison</label>
+    <textarea
+      id="reason"
+      class="textarea w-full resize-none"
+      formControlName="reason"
+      placeholder="Raison…"></textarea>
+    <label for="service" class="label" [class.label-required]="isRequired('serviceId')"
+      >Service</label
+    >
+    <select id="service" class="select w-full" formControlName="serviceId">
+      <option value="null">Choisir un Service</option>
+      @for (service of services$ | async; track service.id) {
+        <option [value]="service.id">{{ service.name }}</option>
+      }
+    </select>
+
+    <button type="submit" [disabled]="appointmentForm.invalid" class="btn mt-4 btn-primary"
+      >Prendre Rendez-vous</button
+    >
+  </form>
+</div>

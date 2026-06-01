@@ -1,6 +1,13 @@
 import { AsyncPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
+import { Hero } from 'components/hero/hero';
 import { ServiceData } from 'interfaces/service-data';
 import { TeamData } from 'interfaces/team.interface';
 import { ApiService } from 'models/services/api.service';
@@ -8,7 +15,7 @@ import { combineLatest, map, Observable, startWith } from 'rxjs';
 
 @Component({
   selector: 'app-rendez-vous',
-  imports: [AsyncPipe, ReactiveFormsModule],
+  imports: [AsyncPipe, ReactiveFormsModule, Hero],
   templateUrl: './rendez-vous.html',
   styleUrl: './rendez-vous.css',
 })
@@ -24,16 +31,16 @@ export class RendezVous {
 
   public appointmentForm = new FormGroup({
     doctorId: new FormControl<number | string | null>(null, [
-      Validators.pattern(/^-?(?:0|[1-9]\d*)$/g),
+      Validators.pattern(/^-?(?:0|[1-9]\d*)$/gm),
     ]),
-    email: new FormControl<string>('', Validators.required),
+    email: new FormControl<string>('', [Validators.required, Validators.email]),
     firstName: new FormControl<string>('', Validators.required),
     lastName: new FormControl<string>('', Validators.required),
-    phone: new FormControl<string>('', Validators.required),
+    phone: new FormControl<string>('', [Validators.required, Validators.pattern(/^\d{10}$/gm)]),
     preferredDate: new FormControl<string>(this.getClosestDate(), Validators.required),
     reason: new FormControl<string | null>(null),
     serviceId: new FormControl<number | string | null>(null, [
-      Validators.pattern(/^-?(?:0|[1-9]\d*)$/g),
+      Validators.pattern(/^-?(?:0|[1-9]\d*)$/gm),
     ]),
   });
 
@@ -73,5 +80,10 @@ export class RendezVous {
 
   private dateToValue(date: Date): string {
     return date.toISOString().substring(0, 10);
+  }
+
+  public isRequired(fieldName: string): boolean {
+    const validator = this.appointmentForm.get(fieldName)?.validator?.({} as AbstractControl);
+    return validator && validator['required'];
   }
 }
