@@ -1,5 +1,4 @@
 import { Component, inject, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { Hero } from 'components/hero/hero';
 import { ErrorService } from 'models/services/error.service';
 
@@ -10,12 +9,15 @@ import { ErrorService } from 'models/services/error.service';
   styleUrl: './error.css',
 })
 export class Error implements OnDestroy {
-  private readonly _activatedRoute: ActivatedRoute = inject(ActivatedRoute);
   private readonly _errorService: ErrorService = inject(ErrorService);
   public errorData = {
-    title: `Erreur ${this._errorService.lastError.code() || 404}`,
+    title: `Erreur ${this._errorService.lastError.code() ?? 404}`,
     subtitle: this._errorService.lastError.message() || 'Page not Found',
   };
+
+  constructor() {
+    console.log(this._errorService.lastError.code());
+  }
 
   // constructor() {
   //   switch (this._errorCode) {

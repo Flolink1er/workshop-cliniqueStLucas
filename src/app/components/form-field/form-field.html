@@ -1,0 +1,30 @@
+<div class="fieldset">
+  <label class="label" [class.label-required]="isRequired()" for="{{ fieldName() | lowercase }}">{{
+    fieldName() | titlecase
+  }}</label>
+  @if (fieldType() === 'textarea') {
+    <textarea
+      id="{{ fieldName() | lowercase }}"
+      class="textarea w-full resize-none"
+      [class.input-error]="fieldValidators() && control.errors && control.touched"
+      [formControl]="control"
+      placeholder="{{ fieldName() | titlecase }}…"></textarea>
+  } @else {
+    <input
+      [type]="fieldType()"
+      id="{{ fieldName() | lowercase }}"
+      class="input"
+      [class.input-error]="fieldValidators() && control.errors && control.touched"
+      [formControl]="control"
+      placeholder="{{ fieldName() | titlecase }}…" />
+  }
+  @if (fieldValidators() && control.touched && control.errors) {
+    @for (validator of fieldValidators(); track validator) {
+      @if (control.hasError(validator)) {
+        <span class="validator-error">{{ validatorHint(validator) }}</span>
+      }
+    }
+  } @else if (fieldHint()) {
+    <p class="label">{{ fieldHint() }}</p>
+  }
+</div>

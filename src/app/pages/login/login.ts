@@ -18,7 +18,10 @@ export class Login {
   private readonly userAccount: UserAccountService = inject(UserAccountService);
 
   public loginForm = new FormGroup({
-    email: new FormControl('patient@clinique.be', [Validators.required, Validators.email]),
+    email: new FormControl(
+      'patient@clinique.be',
+      Validators.compose([Validators.required, Validators.email]),
+    ),
     password: new FormControl('Patient2026!', Validators.required),
   });
 
@@ -32,5 +35,9 @@ export class Login {
   public isRequired(fieldName: string): boolean {
     const validator = this.loginForm.get(fieldName)?.validator?.({} as AbstractControl);
     return validator && validator['required'];
+  }
+
+  public logValidators(fieldName: string) {
+    console.log(this.loginForm.get(fieldName)?.validator?.({} as AbstractControl));
   }
 }

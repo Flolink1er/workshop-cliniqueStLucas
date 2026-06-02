@@ -1,12 +1,15 @@
 import { Component, inject, input, InputSignal } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
+import { FormField } from 'components/form-field/form-field';
+import { ActionLinks } from 'interfaces/actions.interface';
 import { ApiService } from 'models/services/api.service';
 import { ContactForm } from 'pages/contact/contact';
 
 @Component({
   selector: 'app-hero',
-  imports: [RouterLink, ReactiveFormsModule],
+  standalone: true,
+  imports: [ReactiveFormsModule, FormField, RouterLink],
   templateUrl: './hero.html',
 })
 export class Hero {
@@ -15,7 +18,7 @@ export class Hero {
   public readonly tag: InputSignal<string | undefined> = input<string>();
   public readonly title: InputSignal<string> = input.required<string>();
   public readonly subtitle: InputSignal<string | undefined> = input<string>();
-  public readonly actions: InputSignal<any[] | undefined> = input<any[]>();
+  public readonly actions: InputSignal<ActionLinks[] | undefined> = input<ActionLinks[]>();
   public readonly searchField: InputSignal<FormControl<string | null> | undefined> =
     input<FormControl<string | null>>();
   public readonly contactForm: InputSignal<FormGroup<ContactForm> | undefined> =

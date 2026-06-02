@@ -3,6 +3,7 @@ import { Component, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DoctorCard } from 'components/doctor-card/doctor-card';
 import { Hero } from 'components/hero/hero';
+import { Loader } from 'components/loader/loader';
 import { DepartData } from 'interfaces/departments.interface';
 import { TeamData } from 'interfaces/team.interface';
 import { ApiService } from 'models/services/api.service';
@@ -10,7 +11,7 @@ import { map, Observable, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-departments-info',
-  imports: [AsyncPipe, Hero, DoctorCard],
+  imports: [AsyncPipe, Hero, DoctorCard, Loader],
   templateUrl: './departments-info.html',
   styleUrl: './departments-info.css',
 })

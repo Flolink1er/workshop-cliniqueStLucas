@@ -8,10 +8,11 @@ import { ServiceData } from 'interfaces/service-data';
 import { TeamData } from 'interfaces/team.interface';
 import { ApiService } from 'models/services/api.service';
 import { map, Observable, switchMap } from 'rxjs';
+import { Loader } from "components/loader/loader";
 
 @Component({
   selector: 'app-service-info',
-  imports: [AsyncPipe, Hero, StatCard, DoctorCard],
+  imports: [AsyncPipe, Hero, StatCard, DoctorCard, Loader],
   templateUrl: './service-info.html',
   styleUrl: './service-info.css',
 })

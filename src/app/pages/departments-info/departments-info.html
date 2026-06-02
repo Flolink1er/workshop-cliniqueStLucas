@@ -1,18 +1,9 @@
 @if (pageData$ | async; as pageData) {
-  <!-- <div class="bg-base-200">
-    <div class="hero min-h-screen">
-      <div class="hero-content text-center">
-        <div class="max-w-3xl">
-          <h1 class="mb-5 text-5xl font-bold">{{ pageData.name }}</h1>
-          <p class="mt-4">{{ pageData.description }}</p>
-        </div>
-      </div>
-    </div>
-  </div> -->
-
   <app-hero
     [title]="pageData.name"
-    [actions]="[{ label: 'Appeler le Département', href: phoneNbrToLink(pageData.phone) }]" />
+    [actions]="[
+      { label: 'Appeler le Département', href: phoneNbrToLink(pageData.phone), type: 'legacy' },
+    ]" />
 
   <div class="mx-auto max-w-2xl py-4 text-center">
     <h2 class="mb-2">Infos Pratiques</h2>
@@ -31,10 +22,14 @@
         </div>
       }
     </div>
+  } @else {
+    <app-loader [dots]="true" />
   }
 
   <div class="flex flex-col items-center gap-4 py-4 text-center">
     <h2 class="text-4xl font-bold">Notre Équipement</h2>
     <span class="loading loading-xs loading-dots"></span>
   </div>
+} @else {
+  <app-loader />
 }

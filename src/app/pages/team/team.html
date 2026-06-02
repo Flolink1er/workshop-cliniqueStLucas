@@ -1,6 +1,6 @@
-<app-hero title="Notre Équipe Médicale" [searchField]="searchInput" />
-
 @if (pageData$ | async; as team) {
+  <app-hero title="Notre Équipe Médicale" [searchField]="searchInput" />
+
   <div
     class="grid-col-1 mx-auto grid gap-4 p-4 sm:max-sm:w-md md:grid-cols-2 xl:w-7xl xl:grid-cols-3">
     @for (doc of team; track doc.id) {
@@ -9,4 +9,6 @@
   </div>
 
   <router-outlet />
+} @else {
+  <app-loader />
 }

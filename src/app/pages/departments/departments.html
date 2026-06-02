@@ -1,9 +1,12 @@
-<app-hero title="Départements" subtitle="Liste de nos Départements" />
 @if (pageData$ | async; as pageData) {
+  <app-hero title="Départements" subtitle="Liste de nos Départements" />
+
   <div
     class="mx-auto grid grid-cols-1 gap-4 p-4 sm:grid-cols-2 md:w-2xl lg:w-full lg:grid-cols-3 xl:w-5xl">
     @for (depart of pageData; track depart.id) {
       <app-info-card tag="département" [departmentInfo]="depart" />
     }
   </div>
+} @else {
+  <app-loader />
 }

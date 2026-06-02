@@ -6,10 +6,11 @@ import { InfoCard } from 'components/info-card/info-card';
 import { ServiceData } from 'models/interfaces/service-data';
 import { combineLatest, map, Observable, startWith } from 'rxjs';
 import { ApiService } from 'services/api.service';
+import { Loader } from "components/loader/loader";
 
 @Component({
   selector: 'app-services',
-  imports: [AsyncPipe, ReactiveFormsModule, Hero, InfoCard],
+  imports: [AsyncPipe, ReactiveFormsModule, Hero, InfoCard, Loader],
   templateUrl: './services.html',
   styleUrl: './services.css',
 })

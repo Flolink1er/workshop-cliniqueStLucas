@@ -61,7 +61,7 @@ export const routes: Routes = [
     component: RendezVous,
     canActivate: [loggedInGuard],
   },
-  { path: 'error/:code', title: 'Error', component: Error, canActivate: [errorGuard] },
+  { path: 'error', title: 'Error', component: Error, canActivate: [errorGuard] },
   { path: '', pathMatch: 'full', redirectTo: 'home' },
-  { path: '**', redirectTo: 'error/404' },
+  { path: '**', redirectTo: 'error' },
 ];

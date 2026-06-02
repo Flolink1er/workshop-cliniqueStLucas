@@ -1,20 +1,21 @@
 import { AsyncPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { RouterOutlet } from '@angular/router';
+import { ActivatedRoute, RouterOutlet } from '@angular/router';
 import { DoctorCard } from 'components/doctor-card/doctor-card';
 import { Hero } from 'components/hero/hero';
+import { Loader } from 'components/loader/loader';
 import { TeamData } from 'interfaces/team.interface';
 import { ApiService } from 'models/services/api.service';
 import { combineLatest, map, Observable, startWith } from 'rxjs';
 
 @Component({
   selector: 'app-team',
-  imports: [AsyncPipe, RouterOutlet, ReactiveFormsModule, Hero, DoctorCard],
+  imports: [AsyncPipe, RouterOutlet, ReactiveFormsModule, Hero, DoctorCard, Loader],
   templateUrl: './team.html',
-  styleUrl: './team.css',
 })
 export class Team {
+  private readonly _activatedRoute: ActivatedRoute = inject(ActivatedRoute);
   private readonly _api: ApiService = inject(ApiService);
   public searchInput = new FormControl<string | null>('');
   public readonly pageData$: Observable<TeamData[]> = combineLatest([

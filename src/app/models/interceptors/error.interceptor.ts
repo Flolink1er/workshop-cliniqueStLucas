@@ -11,7 +11,7 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
   return next(req).pipe(
     catchError((error: HttpErrorResponse) => {
       errorService.lastError = [error.status, error.statusText];
-      router.navigate(['/error', error.status]);
+      router.navigateByUrl('/error');
 
       if (error.status === 0) {
         return EMPTY;

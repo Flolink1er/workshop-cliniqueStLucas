@@ -8,6 +8,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { FormField } from 'components/form-field/form-field';
 import { Hero } from 'components/hero/hero';
 import { ServiceData } from 'interfaces/service-data';
 import { TeamData } from 'interfaces/team.interface';
@@ -16,9 +17,8 @@ import { combineLatest, map, Observable, startWith } from 'rxjs';
 
 @Component({
   selector: 'app-rendez-vous',
-  imports: [AsyncPipe, ReactiveFormsModule, Hero],
+  imports: [AsyncPipe, ReactiveFormsModule, Hero, FormField],
   templateUrl: './rendez-vous.html',
-  styleUrl: './rendez-vous.css',
 })
 export class RendezVous {
   private readonly _activatedRoutes: ActivatedRoute = inject(ActivatedRoute);
@@ -90,5 +90,12 @@ export class RendezVous {
   public isRequired(fieldName: string): boolean {
     const validator = this.appointmentForm.get(fieldName)?.validator?.({} as AbstractControl);
     return validator && validator['required'];
+  }
+
+  constructor() {
+    this.doctors$.subscribe(doctors => {
+      if (!doctors.length) this.appointmentForm.controls.doctorId.disable();
+      else this.appointmentForm.controls.doctorId.enable();
+    });
   }
 }

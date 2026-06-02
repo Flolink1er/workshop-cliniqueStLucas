@@ -1,28 +1,15 @@
 @if (pageData$ | async; as pageData) {
-  <!-- <div
-    class="hero min-h-screen bg-cover bg-fixed bg-center"
-    style="
-      background-image: url('{{ pageData.image }}');
-    ">
-    <div class="hero-overlay backdrop-blur-sm"></div>
-    <div class="hero-content text-center text-neutral-content">
-      <div class="max-w-xl">
-        <h1 class="mb-5 text-5xl font-bold">{{ pageData.name }}</h1>
-        <p class="mb-5">{{ pageData.shortDescription }}</p>
-        <p class="mt-4">{{ pageData.description }}</p>
-      </div>
-    </div>
-  </div> -->
   <app-hero
     [title]="pageData.name"
     [subtitle]="pageData.shortDescription"
+    [background]="pageData.image"
     [actions]="[
       {
         label: 'Prendre Rendez-vous',
         href: ['/rendez-vous', { service: pageData.id }],
         type: 'router',
       },
-      { label: 'Appeler le Service', href: phoneNbrToLink(pageData.phone) },
+      { label: 'Appeler le Service', href: phoneNbrToLink(pageData.phone), type: 'legacy' },
     ]" />
   <div class="mx-auto grid grid-cols-1 gap-4 p-4 text-center sm:w-md xl:w-3xl">
     <h2 class="mb-2">Infos Pratiques</h2>
@@ -42,5 +29,9 @@
         </div>
       }
     </div>
+  } @else {
+    <app-loader [dots]="true" />
   }
+} @else {
+  <app-loader />
 }

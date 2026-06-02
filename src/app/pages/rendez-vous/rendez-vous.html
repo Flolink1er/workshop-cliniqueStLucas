@@ -9,11 +9,7 @@
       >Médecin</label
     >
     @if (doctors$ | async; as doctors) {
-      <select
-        formControlName="doctorId"
-        class="select w-full"
-        [disabled]="doctors.length === 0"
-        id="doctor">
+      <select formControlName="doctorId" class="select w-full" id="doctor">
         <option value="null">Choisir un Médecin</option>
         @for (doctor of doctors; track doctor.id) {
           <option [value]="doctor.id"
@@ -22,111 +18,34 @@
         }
       </select>
     }
-    <label for="email" class="label" [class.label-required]="isRequired('email')">Email</label>
-    <input
-      type="email"
+    <app-form-field
       formControlName="email"
-      id="email"
-      class="input w-full"
-      [class.input-error]="
-        appointmentForm.controls.email.touched && appointmentForm.controls.email.errors
-      "
-      placeholder="Email…" />
-    @if (appointmentForm.controls.email.touched) {
-      @if (appointmentForm.controls.email.hasError('required')) {
-        <span class="validator-error">Ce champ est requis.</span>
-      }
-      @if (appointmentForm.controls.email.hasError('email')) {
-        <span class="validator-error">Veuillez entrer une adresse email valide.</span>
-      }
-    }
+      fieldName="email"
+      fieldType="email"
+      [fieldValidators]="['required', 'email']" />
     <div class="grid grid-cols-1 gap-x-2 sm:grid-cols-2">
-      <div class="fieldset">
-        <label for="firstname" class="label" [class.label-required]="isRequired('firstName')"
-          >Prénom</label
-        >
-        <input
-          type="text"
-          id="firstname"
-          class="input"
-          [class.input-error]="
-            appointmentForm.controls.firstName.touched && appointmentForm.controls.firstName.errors
-          "
-          formControlName="firstName"
-          placeholder="Prénom…" />
-        @if (
-          appointmentForm.controls.firstName.touched &&
-          appointmentForm.controls.firstName.hasError('required')
-        ) {
-          <span class="validator-error">Ce champ est requis.</span>
-        }
-      </div>
-      <div class="fieldset">
-        <label for="lastname" class="label" [class.label-required]="isRequired('lastName')"
-          >Nom</label
-        >
-        <input
-          type="text"
-          id="lastname"
-          class="input"
-          [class.input-error]="
-            appointmentForm.controls.lastName.touched && appointmentForm.controls.lastName.errors
-          "
-          formControlName="lastName"
-          placeholder="Nom…" />
-        @if (
-          appointmentForm.controls.lastName.touched &&
-          appointmentForm.controls.lastName.hasError('required')
-        ) {
-          <span class="validator-error">Ce champ est requis.</span>
-        }
-      </div>
+      <app-form-field
+        formControlName="firstName"
+        fieldName="prénom"
+        fieldType="text"
+        [fieldValidators]="['required']" />
+      <app-form-field
+        formControlName="lastName"
+        fieldName="nom"
+        fieldType="text"
+        [fieldValidators]="['required']" />
     </div>
-    <label for="phone" class="label" [class.label-required]="isRequired('phone')"
-      >N° de Téléphone</label
-    >
-    <input
-      type="tel"
-      id="phone"
-      class="input w-full"
-      [class.input-error]="
-        appointmentForm.controls.phone.touched && appointmentForm.controls.phone.errors
-      "
+    <app-form-field
       formControlName="phone"
-      placeholder="N° de Téléphone…" />
-    @if (appointmentForm.controls.phone.touched) {
-      @if (appointmentForm.controls.phone.hasError('required')) {
-        <span class="validator-error">Ce champ est requis.</span>
-      }
-      @if (appointmentForm.controls.phone.hasError('pattern')) {
-        <span class="validator-error">Veuillez entrer une combinaison de 10 chiffres.</span>
-      }
-    }
-    <label for="date" class="label" [class.label-required]="isRequired('preferredDate')"
-      >Date</label
-    >
-    <input
-      type="date"
-      id="date"
-      [min]="getClosestDate()"
-      class="input w-full"
-      [class.input-error]="
-        appointmentForm.controls.preferredDate.touched &&
-        appointmentForm.controls.preferredDate.errors
-      "
-      formControlName="preferredDate" />
-    @if (
-      appointmentForm.controls.preferredDate.touched &&
-      appointmentForm.controls.preferredDate.hasError('required')
-    ) {
-      <span class="validator-error">Ce champ est requis.</span>
-    }
-    <label for="reason" class="label" [class.label-required]="isRequired('reason')">Raison</label>
-    <textarea
-      id="reason"
-      class="textarea w-full resize-none"
-      formControlName="reason"
-      placeholder="Raison…"></textarea>
+      fieldName="n° de téléphone"
+      fieldType="tel"
+      [fieldValidators]="['required', 'pattern']" />
+    <app-form-field
+      formControlName="preferredDate"
+      fieldName="date"
+      fieldType="date"
+      [fieldValidators]="['required']" />
+    <app-form-field formControlName="reason" fieldName="raison" fieldType="textarea" />
     <label for="service" class="label" [class.label-required]="isRequired('serviceId')"
       >Service</label
     >

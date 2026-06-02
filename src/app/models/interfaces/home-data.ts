@@ -1,6 +1,7 @@
 export interface Cta {
   label: string;
-  href: string;
+  // href: string;
+  href: string | (string | Record<string, number>)[];
 }
 
 export interface FlavouredCta extends Cta {

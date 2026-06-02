@@ -93,7 +93,7 @@ h4 {
 }
 
 @utility hero {
-  @apply place-items-center sm:max-xl:place-items-start;
+  @apply relative place-items-center overflow-hidden sm:max-xl:place-items-start;
 
   h1 {
     @apply text-white;
@@ -176,7 +176,7 @@ p.label {
 }
 
 @utility input {
-  @apply rounded-xl border-[1.5px] border-(--border-main) text-sm outline-0;
+  @apply w-full rounded-xl border-[1.5px] border-(--border-main) text-sm outline-0;
 }
 
 @utility textarea {
@@ -204,4 +204,12 @@ p.label {
 
 @utility input-error {
   @apply border-error-content!;
+}
+
+@utility background-container {
+  @apply absolute inset-0;
+}
+
+@utility background-overlay {
+  @apply absolute inset-0 backdrop-blur-sm backdrop-brightness-75;
 }

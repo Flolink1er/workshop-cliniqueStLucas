@@ -5,10 +5,11 @@ import { InfoCard } from 'components/info-card/info-card';
 import { DepartData } from 'interfaces/departments.interface';
 import { ApiService } from 'models/services/api.service';
 import { Observable } from 'rxjs';
+import { Loader } from "components/loader/loader";
 
 @Component({
   selector: 'app-departments',
-  imports: [AsyncPipe, Hero, InfoCard],
+  imports: [AsyncPipe, Hero, InfoCard, Loader],
   templateUrl: './departments.html',
   styleUrl: './departments.css',
 })
