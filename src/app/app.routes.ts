@@ -27,7 +27,12 @@ export const routes: Routes = [
   },
   { path: 'login', title: 'Connexion', component: Login, canActivate: [loggedOffGuard] },
   { path: 'services', title: 'Services', component: Services, canActivate: [loggedInGuard] },
-  { path: 'services/:id', title: 'Services', component: ServiceInfo, canActivate: [loggedInGuard] },
+  {
+    path: 'services/:slug',
+    title: 'Services',
+    component: ServiceInfo,
+    canActivate: [loggedInGuard],
+  },
   {
     path: 'departments',
     title: 'Départements',
@@ -35,7 +40,7 @@ export const routes: Routes = [
     canActivate: [loggedInGuard],
   },
   {
-    path: 'departments/:id',
+    path: 'departments/:slug',
     title: 'Départements',
     component: DepartmentsInfo,
     canActivate: [loggedInGuard],

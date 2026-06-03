@@ -7,7 +7,7 @@ import { Loader } from 'components/loader/loader';
 import { DepartData } from 'interfaces/departments.interface';
 import { TeamData } from 'interfaces/team.interface';
 import { ApiService } from 'models/services/api.service';
-import { map, Observable, switchMap } from 'rxjs';
+import { combineLatest, map, Observable, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-departments-info',
@@ -18,8 +18,15 @@ import { map, Observable, switchMap } from 'rxjs';
 export class DepartmentsInfo {
   private readonly _activatedRoute: ActivatedRoute = inject(ActivatedRoute);
   private readonly _api: ApiService = inject(ApiService);
-  public pageData$: Observable<DepartData> = this._activatedRoute.params.pipe(
-    map(params => params['id'] as string),
+  public pageData$: Observable<DepartData> = combineLatest([
+    this._activatedRoute.params,
+    this._api.departmentsData,
+  ]).pipe(
+    map(([params, departments]) => {
+      const slug = params['slug'] as string;
+      const id = departments.find(department => department.slug === slug)?.id;
+      return id;
+    }),
     switchMap(id => this._api.loadData<DepartData>('departments/' + id)),
   );
 

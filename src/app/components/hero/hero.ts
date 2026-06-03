@@ -15,7 +15,6 @@ import { ContactForm } from 'pages/contact/contact';
 export class Hero {
   private readonly _api: ApiService = inject(ApiService);
 
-  public readonly fullHeight: InputSignal<boolean | undefined> = input<boolean>();
   public readonly tag: InputSignal<string | undefined> = input<string>();
   public readonly title: InputSignal<string> = input.required<string>();
   public readonly subtitle: InputSignal<string | undefined> = input<string>();

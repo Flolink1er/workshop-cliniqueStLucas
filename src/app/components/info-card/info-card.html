@@ -27,8 +27,8 @@
       class="btn btn-sm btn-outline btn-primary"
       routerLink="/{{
         sectionInfo()?.id || serviceInfo()
-          ? 'services/' + serviceInfo()?.id
-          : 'departments/' + departmentInfo()?.id
+          ? 'services/' + serviceInfo()?.slug
+          : 'departments/' + departmentInfo()?.slug
       }}"
       >Détails</button
     >
