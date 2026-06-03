@@ -11,15 +11,15 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
   return next(req).pipe(
     catchError((error: HttpErrorResponse) => {
       errorService.lastError = [error.status, error.statusText];
-      router.navigateByUrl('/error');
 
       if (error.status === 0) {
+        router.navigateByUrl('/error');
         return EMPTY;
       }
 
       if (error.status === 401) {
         router.navigateByUrl('/login');
-        delete localStorage['token'];
+        localStorage.removeItem('token');
         return EMPTY;
       }
 
