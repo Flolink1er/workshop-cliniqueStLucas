@@ -24,10 +24,12 @@ export class DepartmentsInfo {
   ]).pipe(
     map(([params, departments]) => {
       const slug = params['slug'] as string;
-      const id = departments.find(department => department.slug === slug)?.id;
-      return id;
+      const department = departments.find(d => d.slug === slug);
+
+      if (!department) throw new Error(`Le département ${slug} est introuvable`);
+
+      return department;
     }),
-    switchMap(id => this._api.loadData<DepartData>('departments/' + id)),
   );
 
   public readonly team$: Observable<TeamData[]> = this.pageData$.pipe(

@@ -18,17 +18,21 @@ import { combineLatest, map, Observable, switchMap } from 'rxjs';
 export class ServiceInfo {
   private readonly _activatedRoute: ActivatedRoute = inject(ActivatedRoute);
   private readonly _api: ApiService = inject(ApiService);
+
   public pageData$: Observable<ServiceData> = combineLatest([
     this._activatedRoute.params,
     this._api.servicesData,
   ]).pipe(
     map(([params, services]) => {
       const slug = params['slug'] as string;
-      const id = services.find(service => service.slug === slug)?.id;
-      return id;
+      const service = services.find(s => s.slug === slug);
+
+      if (!service) throw new Error(`Le service ${slug} est introuvable`);
+
+      return service;
     }),
-    switchMap(id => this._api.loadData<ServiceData>('services/' + id)),
   );
+
   public readonly team$: Observable<TeamData[]> = this.pageData$.pipe(
     switchMap(serviceData => {
       return this._api.teamData.pipe(
