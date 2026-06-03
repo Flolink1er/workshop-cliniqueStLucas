@@ -1,7 +1,7 @@
 import { AsyncPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { ActivatedRoute, RouterOutlet } from '@angular/router';
+import { RouterOutlet } from '@angular/router';
 import { DoctorCard } from 'components/doctor-card/doctor-card';
 import { Hero } from 'components/hero/hero';
 import { Loader } from 'components/loader/loader';
@@ -15,15 +15,14 @@ import { combineLatest, map, Observable, startWith } from 'rxjs';
   templateUrl: './team.html',
 })
 export class Team {
-  private readonly _activatedRoute: ActivatedRoute = inject(ActivatedRoute);
   private readonly _api: ApiService = inject(ApiService);
-  public searchInput = new FormControl<string | null>('');
+  public searchInput: FormControl<string | null> = new FormControl<string | null>('');
   public readonly pageData$: Observable<TeamData[]> = combineLatest([
     this._api.teamData,
     this.searchInput.valueChanges.pipe(startWith('')),
   ]).pipe(
     map(([members, searchTerm]) => {
-      const search = (searchTerm || '').toLowerCase();
+      const search: string = (searchTerm || '').toLowerCase();
       return members.filter(
         member =>
           member.firstName.toLowerCase().includes(search) ||

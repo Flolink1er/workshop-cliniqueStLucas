@@ -1,11 +1,16 @@
 <div
-  class="hero min-h-full flex items-center max-xs:justify-center xl:justify-center {{
+  class="hero h-[inherit] flex items-center max-xs:justify-center xl:justify-center {{
     background() ? '' : 'bg-linear-135 from-primary via-secondary via-60% to-[#051F38] to-100%'
   }}">
   @if (background()) {
     <div class="background-container">
       <div class="background-overlay"></div>
-      <img class="size-full object-cover object-center" [src]="background()" alt="" />
+      <img
+        class="size-full object-cover object-center"
+        [ngSrc]="background()!"
+        width="988"
+        height="672"
+        alt="" />
     </div>
   }
   <div

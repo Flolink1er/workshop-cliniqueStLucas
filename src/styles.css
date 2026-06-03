@@ -213,3 +213,7 @@ p.label {
 @utility background-overlay {
   @apply absolute inset-0 backdrop-blur-sm backdrop-brightness-75;
 }
+
+@utility skeleton {
+  @apply bg-base-200;
+}

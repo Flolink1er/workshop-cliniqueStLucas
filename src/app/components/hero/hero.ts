@@ -1,3 +1,4 @@
+import { NgOptimizedImage } from '@angular/common';
 import { Component, inject, input, InputSignal } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
@@ -9,7 +10,7 @@ import { ContactForm } from 'pages/contact/contact';
 @Component({
   selector: 'app-hero',
   standalone: true,
-  imports: [ReactiveFormsModule, FormField, RouterLink],
+  imports: [ReactiveFormsModule, FormField, RouterLink, NgOptimizedImage],
   templateUrl: './hero.html',
 })
 export class Hero {

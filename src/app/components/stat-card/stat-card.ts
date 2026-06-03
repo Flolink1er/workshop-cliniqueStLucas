@@ -1,8 +1,9 @@
+import { NgOptimizedImage } from '@angular/common';
 import { Component, input, InputSignal } from '@angular/core';
 
 @Component({
   selector: 'app-stat-card',
-  imports: [],
+  imports: [NgOptimizedImage],
   templateUrl: './stat-card.html',
 })
 export class StatCard {

@@ -6,9 +6,17 @@
   <nav>
     <h6 class="footer-title cursor-pointer hover:underline" routerLink="/services">Services</h6>
     @for (service of services$ | async; track service.id) {
-      <button class="link link-hover" routerLink="/services/{{ service.id }}">{{
+      <button class="link link-hover" routerLink="/services/{{ service.slug }}">{{
         service.name
       }}</button>
+    } @empty {
+      <div class="flex w-52 flex-col gap-y-4">
+        <div class="h-2 w-full skeleton"></div>
+        <div class="h-2 w-full skeleton"></div>
+        <div class="h-2 w-full skeleton"></div>
+        <div class="h-2 w-full skeleton"></div>
+        <div class="h-2 w-full skeleton"></div>
+      </div>
     }
   </nav>
   <nav>
@@ -16,9 +24,17 @@
       >Départements</h6
     >
     @for (department of departments$ | async; track department.id) {
-      <button class="link link-hover" routerLink="/departments/{{ department.id }}">{{
+      <button class="link link-hover" routerLink="/departments/{{ department.slug }}">{{
         department.name
       }}</button>
+    } @empty {
+      <div class="flex w-52 flex-col gap-y-4">
+        <div class="h-2 w-full skeleton"></div>
+        <div class="h-2 w-full skeleton"></div>
+        <div class="h-2 w-full skeleton"></div>
+        <div class="h-2 w-full skeleton"></div>
+        <div class="h-2 w-full skeleton"></div>
+      </div>
     }
   </nav>
 </footer>
