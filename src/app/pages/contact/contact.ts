@@ -14,7 +14,6 @@ export interface ContactForm {
   selector: 'app-contact',
   imports: [ReactiveFormsModule, Hero],
   templateUrl: './contact.html',
-  styleUrl: './contact.css',
 })
 export class Contact {
   public readonly contactForm = new FormGroup<ContactForm>({
