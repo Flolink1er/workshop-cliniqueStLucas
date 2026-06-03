@@ -9,6 +9,14 @@
       <button class="link link-hover" routerLink="/services/{{ service.slug }}">{{
         service.name
       }}</button>
+    } @empty {
+      <div class="flex w-52 flex-col gap-y-4">
+        <div class="h-2 w-full skeleton"></div>
+        <div class="h-2 w-full skeleton"></div>
+        <div class="h-2 w-full skeleton"></div>
+        <div class="h-2 w-full skeleton"></div>
+        <div class="h-2 w-full skeleton"></div>
+      </div>
     }
   </nav>
   <nav>
@@ -19,6 +27,14 @@
       <button class="link link-hover" routerLink="/departments/{{ department.slug }}">{{
         department.name
       }}</button>
+    } @empty {
+      <div class="flex w-52 flex-col gap-y-4">
+        <div class="h-2 w-full skeleton"></div>
+        <div class="h-2 w-full skeleton"></div>
+        <div class="h-2 w-full skeleton"></div>
+        <div class="h-2 w-full skeleton"></div>
+        <div class="h-2 w-full skeleton"></div>
+      </div>
     }
   </nav>
 </footer>
