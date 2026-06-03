@@ -1,8 +1,10 @@
+import { inject } from '@angular/core';
 import { Routes } from '@angular/router';
 import { DoctorSheet } from 'components/doctor-sheet/doctor-sheet';
 import { errorGuard } from 'models/guards/error.guard';
 import { loggedInGuard } from 'models/guards/logged-in.guard';
 import { loggedOffGuard } from 'models/guards/logged-off.guard';
+import { ErrorService } from 'models/services/error.service';
 import { ActualiteInfo } from 'pages/actualite-info/actualite-info';
 import { Actualites } from 'pages/actualites/actualites';
 import { Contact } from 'pages/contact/contact';
@@ -63,5 +65,12 @@ export const routes: Routes = [
   },
   { path: 'error', title: 'Error', component: Error, canActivate: [errorGuard] },
   { path: '', pathMatch: 'full', redirectTo: 'home' },
-  { path: '**', redirectTo: 'error' },
+  {
+    path: '**',
+    redirectTo: () => {
+      const errorService = inject(ErrorService);
+      errorService.lastError = [404, 'Page non trouvée'];
+      return 'error';
+    },
+  },
 ];

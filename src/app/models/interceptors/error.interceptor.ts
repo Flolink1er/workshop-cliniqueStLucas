@@ -13,6 +13,7 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
       errorService.lastError = [error.status, error.statusText];
 
       if (error.status === 0) {
+        errorService.lastError = [error.status, "L'API a mis n'a émis aucune réponse"];
         router.navigateByUrl('/error');
         return EMPTY;
       }
