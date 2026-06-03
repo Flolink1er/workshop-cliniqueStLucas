@@ -1,11 +1,12 @@
 import { Component, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { Hero } from 'components/hero/hero';
 import { ActualitesData } from 'interfaces/actualites-data';
 import { ApiService } from 'models/services/api.service';
 
 @Component({
   selector: 'app-actualites',
-  imports: [RouterLink],
+  imports: [RouterLink, Hero],
   templateUrl: './actualites.html',
   styleUrl: './actualites.css',
 })
