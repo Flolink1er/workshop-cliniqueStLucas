@@ -5,7 +5,12 @@
   @if (background()) {
     <div class="background-container">
       <div class="background-overlay"></div>
-      <img class="size-full object-cover object-center" [src]="background()" alt="" />
+      <img
+        class="size-full object-cover object-center"
+        [ngSrc]="background()!"
+        width="1190"
+        height="670"
+        alt="" />
     </div>
   }
   <div

@@ -1,4 +1,4 @@
-import { AsyncPipe } from '@angular/common';
+import { AsyncPipe, NgOptimizedImage } from '@angular/common';
 import { Component, DOCUMENT, inject, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { TeamData } from 'interfaces/team.interface';
@@ -7,7 +7,7 @@ import { map, Observable, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-doctor-sheet',
-  imports: [AsyncPipe, RouterLink],
+  imports: [AsyncPipe, RouterLink, NgOptimizedImage],
   templateUrl: './doctor-sheet.html',
 })
 export class DoctorSheet implements OnInit, OnDestroy {

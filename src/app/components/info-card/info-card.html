@@ -3,7 +3,7 @@
     @if (serviceInfo()) {
       <img
         class="absolute inset-0 size-full object-cover object-center"
-        [src]="serviceInfo()?.image"
+        [ngSrc]="serviceInfo()!.image" width="288" height="140"
         alt="" />
     }
   </div>

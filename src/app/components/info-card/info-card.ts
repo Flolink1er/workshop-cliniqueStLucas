@@ -1,3 +1,4 @@
+import { NgOptimizedImage } from '@angular/common';
 import { Component, inject, input, InputSignal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { DepartData } from 'interfaces/departments.interface';
@@ -7,7 +8,7 @@ import { ApiService } from 'models/services/api.service';
 
 @Component({
   selector: 'app-info-card',
-  imports: [RouterLink],
+  imports: [RouterLink, NgOptimizedImage],
   templateUrl: './info-card.html',
 })
 export class InfoCard {
