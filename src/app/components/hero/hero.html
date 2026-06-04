@@ -1,5 +1,5 @@
 <div
-  class="hero h-[inherit] flex items-center justify-center sm:max-lg:justify-start {{
+  class="hero h-[inherit] flex sm:max-xl:justify-start justify-center {{
     background() ? '' : 'bg-linear-135 from-primary via-secondary via-60% to-[#051F38] to-100%'
   }}">
   @if (background()) {
@@ -14,12 +14,14 @@
     </div>
   }
   <div
-    class="hero-content {{
-      contactForm() ? 'flex-col lg:flex-row-reverse' : 'max-sm:text-center xl:text-center'
+    class="hero-content sm:max-xl:text-start text-center {{
+      contactForm() ? 'flex-col lg:flex-row-reverse' : ''
     }}">
     <div
       class="{{
-        contactForm() ? 'text-center lg:text-left' : 'max-w-md sm:max-w-lg xl:place-items-center'
+        contactForm()
+          ? 'text-center lg:text-left'
+          : 'max-w-md sm:max-w-lg flex-col flex place-items-center sm:max-xl:items-start'
       }}">
       @if (tag()) {
         <span class="hero-tag">{{ tag() }}</span>
