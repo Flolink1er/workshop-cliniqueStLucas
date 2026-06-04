@@ -1,4 +1,4 @@
-import { DatePipe } from '@angular/common';
+import { DatePipe, NgClass } from '@angular/common';
 import { ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ActualitesData } from 'interfaces/news.interface';
@@ -7,7 +7,7 @@ import { combineLatest } from 'rxjs';
 
 @Component({
   selector: 'app-news-info',
-  imports: [DatePipe, RouterLink],
+  imports: [DatePipe, RouterLink, NgClass],
   templateUrl: './news-info.html',
 })
 export class NewsInfo implements OnInit {
