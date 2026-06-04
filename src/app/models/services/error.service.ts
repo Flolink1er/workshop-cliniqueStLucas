@@ -1,15 +1,16 @@
-import { Injectable, Signal, signal } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
+import { ErrorObject, ReadOnlyErrorObject } from 'interfaces/error.interface';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ErrorService {
-  private _lastError = {
+  private _lastError: ErrorObject = {
     code: signal<number | null>(null),
     message: signal<string | null>(null),
   };
 
-  public get lastError(): { code: Signal<number | null>; message: Signal<string | null> } {
+  public get lastError(): ReadOnlyErrorObject {
     return {
       code: this._lastError.code.asReadonly(),
       message: this._lastError.message.asReadonly(),

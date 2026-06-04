@@ -1,6 +1,7 @@
-<div class="flex {{ dots() ? 'py-2' : 'min-h-full' }} w-full flex-col items-center justify-center">
-  <span class="loading {{ dots() ? 'loading-dots loading-md' : 'loading-xl loading-ring' }}"></span>
-  @if (!dots()) {
+<div class="flex w-full flex-col items-center justify-center py-2">
+  <span
+    class="loading loading-{{ loaderStyle() || 'ring' }} loading-{{ loaderSize() || 'md' }}"></span>
+  @if (loaderStyle() === 'spinner' || loaderStyle() === undefined || loaderStyle() || 'ring') {
     <p class="text-regular">Chargement…</p>
   }
 </div>

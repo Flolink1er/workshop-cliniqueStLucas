@@ -1,4 +1,4 @@
-export interface DepartData {
+export interface DepartmentData {
   id: number;
   slug: string;
   name: string;

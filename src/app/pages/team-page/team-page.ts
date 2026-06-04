@@ -12,9 +12,9 @@ import { combineLatest, map, Observable, startWith } from 'rxjs';
 @Component({
   selector: 'app-team',
   imports: [AsyncPipe, RouterOutlet, ReactiveFormsModule, Hero, DoctorCard, Loader],
-  templateUrl: './team.html',
+  templateUrl: './team-page.html',
 })
-export class Team {
+export class TeamPage {
   private readonly _api: ApiService = inject(ApiService);
   public searchInput: FormControl<string | null> = new FormControl<string | null>('');
   public readonly pageData$: Observable<TeamData[]> = combineLatest([

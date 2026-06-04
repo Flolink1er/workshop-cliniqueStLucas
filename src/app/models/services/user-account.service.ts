@@ -1,20 +1,9 @@
 import { HttpClient } from '@angular/common/http';
-import { inject, Injectable, signal, WritableSignal } from '@angular/core';
+import { inject, Injectable, Signal, signal, WritableSignal } from '@angular/core';
 import { Router } from '@angular/router';
+import { LoginResponseBody } from 'interfaces/login.interface';
 import { firstValueFrom } from 'rxjs';
 import { ApiService } from './api.service';
-
-interface LoginResponseBody {
-  token: string;
-  tokenType: string;
-  expiresIn: number;
-  user: {
-    id: number;
-    name: string;
-    email: string;
-    role: string;
-  };
-}
 
 @Injectable({
   providedIn: 'root',
@@ -51,7 +40,7 @@ export class UserAccountService {
     }
   }
 
-  public get isLoggedIn() {
-    return this._isLoggedIn;
+  public get isLoggedIn(): Signal<boolean> {
+    return this._isLoggedIn.asReadonly();
   }
 }

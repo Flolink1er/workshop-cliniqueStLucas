@@ -11,10 +11,10 @@ import { UserAccountService } from 'models/services/user-account.service';
 @Component({
   selector: 'app-login',
   imports: [ReactiveFormsModule],
-  templateUrl: './login.html',
-  styleUrl: './login.css',
+  templateUrl: './login-page.html',
+  styleUrl: './login-page.css',
 })
-export class Login {
+export class LoginPage {
   private readonly userAccount: UserAccountService = inject(UserAccountService);
 
   public loginForm = new FormGroup({

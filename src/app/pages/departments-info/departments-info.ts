@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { DoctorCard } from 'components/doctor-card/doctor-card';
 import { Hero } from 'components/hero/hero';
 import { Loader } from 'components/loader/loader';
-import { DepartData } from 'interfaces/departments.interface';
+import { DepartmentData } from 'interfaces/departments.interface';
 import { TeamData } from 'interfaces/team.interface';
 import { ApiService } from 'models/services/api.service';
 import { combineLatest, map, Observable, switchMap } from 'rxjs';
@@ -13,12 +13,11 @@ import { combineLatest, map, Observable, switchMap } from 'rxjs';
   selector: 'app-departments-info',
   imports: [AsyncPipe, Hero, DoctorCard, Loader],
   templateUrl: './departments-info.html',
-  styleUrl: './departments-info.css',
 })
 export class DepartmentsInfo {
   private readonly _activatedRoute: ActivatedRoute = inject(ActivatedRoute);
   private readonly _api: ApiService = inject(ApiService);
-  public pageData$: Observable<DepartData> = combineLatest([
+  public pageData$: Observable<DepartmentData> = combineLatest([
     this._activatedRoute.params,
     this._api.departmentsData,
   ]).pipe(

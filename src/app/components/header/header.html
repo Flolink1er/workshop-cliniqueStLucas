@@ -19,9 +19,9 @@
         <ul
           tabindex="-1"
           class="dropdown-content menu z-1 mt-3 w-52 menu-sm rounded-box bg-base-100 p-2 shadow">
-          @for (link of links; track link.url) {
+          @for (link of links; track link.href) {
             <li
-              ><button [routerLink]="link.url" routerLinkActive="active">{{
+              ><button [routerLink]="link.href" routerLinkActive="active">{{
                 link.label
               }}</button></li
             >
@@ -32,11 +32,11 @@
     </div>
     <div class="navbar-center hidden lg:flex">
       <ul class="menu menu-horizontal gap-x-2 px-1">
-        @for (link of links; track link.url) {
+        @for (link of links; track link.href) {
           <li
             ><button
               class="menu-link"
-              [routerLink]="link.url"
+              [routerLink]="link.href"
               routerLinkActive="menu-link-active"
               >{{ link.label }}</button
             ></li

@@ -14,7 +14,7 @@ type ValidatorTypeAttributes = 'required' | 'email' | 'minlength' | 'pattern';
   templateUrl: './form-field.html',
 })
 export class FormField implements OnInit {
-  private readonly ngControl = inject(NgControl, { self: true });
+  private readonly ngControl: NgControl = inject(NgControl, { self: true });
   public readonly fieldName: InputSignal<string> = input.required<string>();
   public readonly fieldType: InputSignal<HTMLInputTypeAttributes> =
     input.required<HTMLInputTypeAttributes>();

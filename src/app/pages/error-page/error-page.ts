@@ -5,9 +5,9 @@ import { ErrorService } from 'models/services/error.service';
 @Component({
   selector: 'app-error',
   imports: [Hero],
-  templateUrl: './error.html',
+  templateUrl: './error-page.html',
 })
-export class Error implements OnDestroy {
+export class ErrorPage implements OnDestroy {
   private readonly _errorService: ErrorService = inject(ErrorService);
   private readonly _errorCode: number = this._errorService.lastError.code()!;
   public errorData = {

@@ -1,10 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal, WritableSignal } from '@angular/core';
-import { ActualitesData } from 'interfaces/actualites-data';
-import { DepartData } from 'interfaces/departments.interface';
+import { DepartmentData } from 'interfaces/departments.interface';
+import { ActualitesData } from 'interfaces/news.interface';
+import { ServiceData } from 'interfaces/services.interface';
 import { TeamData } from 'interfaces/team.interface';
 import { HomeData } from 'models/interfaces/home-data';
-import { ServiceData } from 'models/interfaces/service-data';
 import { Observable, shareReplay } from 'rxjs';
 
 @Injectable({
@@ -26,7 +26,9 @@ export class ApiService {
   private readonly _news$: Observable<ActualitesData[]> = this.loadData<ActualitesData[]>(
     'news',
   ).pipe(shareReplay(1));
-  private readonly _departments$ = this.loadData<DepartData[]>('departments').pipe(shareReplay(1));
+  private readonly _departments$: Observable<DepartmentData[]> = this.loadData<DepartmentData[]>(
+    'departments',
+  ).pipe(shareReplay(1));
 
   public token: WritableSignal<string> = signal<string>(localStorage.getItem('token') || '');
 
@@ -46,7 +48,7 @@ export class ApiService {
     return this._news$;
   }
 
-  public get departmentsData(): Observable<DepartData[]> {
+  public get departmentsData(): Observable<DepartmentData[]> {
     return this._departments$;
   }
 

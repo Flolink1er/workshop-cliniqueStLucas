@@ -5,7 +5,7 @@ import { DoctorCard } from 'components/doctor-card/doctor-card';
 import { Hero } from 'components/hero/hero';
 import { Loader } from 'components/loader/loader';
 import { StatCard } from 'components/stat-card/stat-card';
-import { ServiceData } from 'interfaces/service-data';
+import { ServiceData } from 'interfaces/services.interface';
 import { TeamData } from 'interfaces/team.interface';
 import { ApiService } from 'models/services/api.service';
 import { ErrorService } from 'models/services/error.service';

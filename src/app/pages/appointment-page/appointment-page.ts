@@ -10,17 +10,17 @@ import {
 import { ActivatedRoute } from '@angular/router';
 import { FormField } from 'components/form-field/form-field';
 import { Hero } from 'components/hero/hero';
-import { ServiceData } from 'interfaces/service-data';
+import { ServiceData } from 'interfaces/services.interface';
 import { TeamData } from 'interfaces/team.interface';
 import { ApiService } from 'models/services/api.service';
 import { combineLatest, map, Observable, startWith } from 'rxjs';
 
 @Component({
-  selector: 'app-rendez-vous',
+  selector: 'app-appointment',
   imports: [AsyncPipe, ReactiveFormsModule, Hero, FormField],
-  templateUrl: './rendez-vous.html',
+  templateUrl: './appointment-page.html',
 })
-export class RendezVous {
+export class AppointmentPage {
   private readonly _activatedRoutes: ActivatedRoute = inject(ActivatedRoute);
   private readonly _api: ApiService = inject(ApiService);
   public readonly services$: Observable<ServiceData[]> = this._api.servicesData;

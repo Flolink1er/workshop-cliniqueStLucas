@@ -6,11 +6,11 @@ import { ApiService } from 'models/services/api.service';
 import { map, Observable, switchMap } from 'rxjs';
 
 @Component({
-  selector: 'app-doctor-sheet',
+  selector: 'app-doctor-modal',
   imports: [AsyncPipe, RouterLink, NgOptimizedImage],
-  templateUrl: './doctor-sheet.html',
+  templateUrl: './doctor-modal.html',
 })
-export class DoctorSheet implements OnInit, OnDestroy {
+export class DoctorModal implements OnInit, OnDestroy {
   private readonly _api: ApiService = inject(ApiService);
   private readonly _activatedRoute: ActivatedRoute = inject(ActivatedRoute);
   private readonly _document: Document = inject(DOCUMENT);

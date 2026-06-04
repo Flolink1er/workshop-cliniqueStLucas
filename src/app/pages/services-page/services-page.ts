@@ -3,18 +3,17 @@ import { Component, inject } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { Hero } from 'components/hero/hero';
 import { InfoCard } from 'components/info-card/info-card';
-import { ServiceData } from 'models/interfaces/service-data';
+import { Loader } from 'components/loader/loader';
+import { ServiceData } from 'interfaces/services.interface';
 import { combineLatest, map, Observable, startWith } from 'rxjs';
 import { ApiService } from 'services/api.service';
-import { Loader } from "components/loader/loader";
 
 @Component({
   selector: 'app-services',
   imports: [AsyncPipe, ReactiveFormsModule, Hero, InfoCard, Loader],
-  templateUrl: './services.html',
-  styleUrl: './services.css',
+  templateUrl: './services-page.html',
 })
-export class Services {
+export class ServicesPage {
   private readonly _api: ApiService = inject(ApiService);
   public searchInput = new FormControl<string | null>('');
   public pageData$: Observable<ServiceData[]> = combineLatest([

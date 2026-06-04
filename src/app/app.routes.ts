@@ -1,32 +1,42 @@
 import { inject } from '@angular/core';
 import { Routes } from '@angular/router';
-import { DoctorSheet } from 'components/doctor-sheet/doctor-sheet';
+import { DoctorModal } from 'components/doctor-modal/doctor-modal';
 import { errorGuard } from 'models/guards/error.guard';
 import { loggedInGuard } from 'models/guards/logged-in.guard';
 import { loggedOffGuard } from 'models/guards/logged-off.guard';
 import { ErrorService } from 'models/services/error.service';
-import { ActualiteInfo } from 'pages/actualite-info/actualite-info';
-import { Actualites } from 'pages/actualites/actualites';
-import { Contact } from 'pages/contact/contact';
+import { AppointmentPage } from 'pages/appointment-page/appointment-page';
+import { ContactPage } from 'pages/contact-page/contact-page';
 import { DepartmentsInfo } from 'pages/departments-info/departments-info';
-import { Departments } from 'pages/departments/departments';
-import { Error } from 'pages/error/error';
-import { Home } from 'pages/home/home';
-import { Login } from 'pages/login/login';
-import { RendezVous } from 'pages/rendez-vous/rendez-vous';
+import { DepartmentsPage } from 'pages/departments-page/departments-page';
+import { ErrorPage } from 'pages/error-page/error-page';
+import { HomePage } from 'pages/home-page/home-page';
+import { LoginPage } from 'pages/login-page/login-page';
+import { NewsInfo } from 'pages/news-info/news-info';
+import { NewsPage } from 'pages/news-page/news-page';
 import { ServiceInfo } from 'pages/service-info/service-info';
-import { Services } from 'pages/services/services';
-import { Team } from 'pages/team/team';
+import { ServicesPage } from 'pages/services-page/services-page';
+import { TeamPage } from 'pages/team-page/team-page';
 
 export const routes: Routes = [
   {
     path: 'home',
     title: 'Accueil',
-    component: Home,
+    component: HomePage,
     canActivate: [loggedInGuard],
   },
-  { path: 'login', title: 'Connexion', component: Login, canActivate: [loggedOffGuard] },
-  { path: 'services', title: 'Services', component: Services, canActivate: [loggedInGuard] },
+  {
+    path: 'login',
+    title: 'Connexion',
+    component: LoginPage,
+    canActivate: [loggedOffGuard],
+  },
+  {
+    path: 'services',
+    title: 'Services',
+    component: ServicesPage,
+    canActivate: [loggedInGuard],
+  },
   {
     path: 'services/:slug',
     title: 'Services',
@@ -36,7 +46,7 @@ export const routes: Routes = [
   {
     path: 'departments',
     title: 'Départements',
-    component: Departments,
+    component: DepartmentsPage,
     canActivate: [loggedInGuard],
   },
   {
@@ -48,28 +58,52 @@ export const routes: Routes = [
   {
     path: 'team',
     title: 'Équipe',
-    component: Team,
+    component: TeamPage,
     canActivate: [loggedInGuard],
     children: [
-      { path: ':id', title: 'Équipe', component: DoctorSheet, canActivate: [loggedInGuard] },
+      {
+        path: ':id',
+        title: 'Équipe',
+        component: DoctorModal,
+        canActivate: [loggedInGuard],
+      },
     ],
   },
-  { path: 'news', title: 'Actualités', component: Actualites, canActivate: [loggedInGuard] },
+  {
+    path: 'news',
+    title: 'Actualités',
+    component: NewsPage,
+    canActivate: [loggedInGuard],
+  },
   {
     path: 'news/:slug',
     title: 'Actualités',
-    component: ActualiteInfo,
+    component: NewsInfo,
     canActivate: [loggedInGuard],
   },
-  { path: 'contact', title: 'Contact', component: Contact, canActivate: [loggedInGuard] },
+  {
+    path: 'contact',
+    title: 'Contact',
+    component: ContactPage,
+    canActivate: [loggedInGuard],
+  },
   {
     path: 'rendez-vous',
     title: 'Prendre Rendez-vous',
-    component: RendezVous,
+    component: AppointmentPage,
     canActivate: [loggedInGuard],
   },
-  { path: 'error', title: 'Error', component: Error, canActivate: [errorGuard] },
-  { path: '', pathMatch: 'full', redirectTo: 'home' },
+  {
+    path: 'error',
+    title: 'Error',
+    component: ErrorPage,
+    canActivate: [errorGuard],
+  },
+  {
+    path: '',
+    pathMatch: 'full',
+    redirectTo: 'home',
+  },
   {
     path: '**',
     redirectTo: () => {

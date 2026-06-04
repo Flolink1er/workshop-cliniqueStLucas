@@ -1,7 +1,10 @@
 export interface Cta {
   label: string;
-  // href: string;
   href: string | (string | Record<string, number>)[];
+}
+
+export interface ActionLinks extends Cta {
+  type?: 'router' | 'legacy' | undefined;
 }
 
 export interface FlavouredCta extends Cta {
