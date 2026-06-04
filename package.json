@@ -12,7 +12,7 @@
   },
   "devDependencies": {
     "@angular/build": "^21.2.13",
-    "@angular/cli": "^21.2.13",
+    "@angular/cli": "^21.2.14",
     "@angular/compiler-cli": "^21.2.15",
     "@eslint/js": "^10.0.1",
     "@tailwindcss/postcss": "^4.3.0",
@@ -24,8 +24,8 @@
     "prettier-plugin-tailwindcss": "^0.8.0",
     "tailwindcss": "^4.3.0",
     "typescript": "~5.9.3",
-    "typescript-eslint": "8.60.0",
-    "vitest": "^4.1.7"
+    "typescript-eslint": "8.60.1",
+    "vitest": "^4.1.8"
   },
   "name": "clinique-st-lucas",
   "packageManager": "npm@11.16.0",
