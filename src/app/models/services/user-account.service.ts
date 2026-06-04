@@ -14,7 +14,12 @@ export class UserAccountService {
   private readonly _http: HttpClient = inject(HttpClient);
   private readonly _router: Router = inject(Router);
   private readonly _toast: ToastsService = inject(ToastsService);
-  private _isLoggedIn: WritableSignal<boolean> = signal(!!localStorage.getItem('token'));
+  private readonly _isLoggedIn: WritableSignal<boolean> = signal(!!localStorage.getItem('token'));
+  public readonly isLoggedIn: Signal<boolean> = this._isLoggedIn.asReadonly();
+
+  public setLoggedState(state: boolean): void {
+    this._isLoggedIn.set(state);
+  }
 
   public async userLogin(email: string, password: string): Promise<void> {
     try {
@@ -32,9 +37,5 @@ export class UserAccountService {
     } catch (err) {
       this._toast.show('error', 'Échec de la connexion', `Erreur lors de la connexion: ${err}`);
     }
-  }
-
-  public get isLoggedIn(): Signal<boolean> {
-    return this._isLoggedIn.asReadonly();
   }
 }

@@ -9,6 +9,7 @@ import {
 import { inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { ErrorService } from 'models/services/error.service';
+import { UserAccountService } from 'models/services/user-account.service';
 import { catchError, EMPTY, Observable } from 'rxjs';
 
 export const errorInterceptor: HttpInterceptorFn = (
@@ -17,6 +18,7 @@ export const errorInterceptor: HttpInterceptorFn = (
 ): Observable<HttpSentEvent | HttpEvent<unknown>> => {
   const router: Router = inject(Router);
   const errorService: ErrorService = inject(ErrorService);
+  const userAccount: UserAccountService = inject(UserAccountService);
 
   return next(req).pipe(
     catchError((error: HttpErrorResponse) => {
@@ -29,8 +31,10 @@ export const errorInterceptor: HttpInterceptorFn = (
       }
 
       if (error.status === 401) {
-        router.navigateByUrl('/login');
+        userAccount.setLoggedState(false);
+        console.log('must redirect');
         localStorage.removeItem('token');
+        router.navigateByUrl('/login');
         return EMPTY;
       }
 

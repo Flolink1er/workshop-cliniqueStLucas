@@ -1,6 +1,5 @@
-<div class="flex w-full flex-col items-center justify-center py-2">
-  <span
-    class="loading loading-{{ loaderStyle() || 'ring' }} loading-{{ loaderSize() || 'md' }}"></span>
+<div class="flex size-full flex-col items-center justify-center py-2">
+  <span class="loading" [class]="loadingClasses"></span>
   @if (loaderStyle() === 'spinner' || loaderStyle() === undefined || loaderStyle() || 'ring') {
     <p class="text-regular">Chargement…</p>
   }
