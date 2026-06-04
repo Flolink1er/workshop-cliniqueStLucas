@@ -38,7 +38,12 @@ export class UserAccountService {
       this._toast.show('success', 'Connexion réussie', 'Vous êtes maintenant connecté·e.');
       await this._router.navigateByUrl('/home');
     } catch (err) {
-      this._toast.show('error', 'Échec de la connexion', `Erreur lors de la connexion: ${err}`);
+      console.log(err);
+      this._toast.show(
+        'error',
+        'Échec de la connexion',
+        `Erreur lors de la connexion: Le mot de passe ou email est incorrect.`,
+      );
     }
   }
 
