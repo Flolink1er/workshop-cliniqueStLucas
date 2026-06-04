@@ -7,3 +7,9 @@ export interface ContactForm {
   message: FormControl<string | null>;
   subject: FormControl<string | null>;
 }
+
+export interface ContactResponse {
+  success: boolean;
+  message: string;
+  referenceId: string;
+}

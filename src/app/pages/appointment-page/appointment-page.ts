@@ -10,9 +10,11 @@ import {
 import { ActivatedRoute } from '@angular/router';
 import { FormField } from 'components/form-field/form-field';
 import { Hero } from 'components/hero/hero';
+import { AppointmentResponse } from 'interfaces/appointment.interface';
 import { ServiceData } from 'interfaces/services.interface';
 import { TeamData } from 'interfaces/team.interface';
 import { ApiService } from 'models/services/api.service';
+import { ToastsService } from 'models/services/toasts.service';
 import { combineLatest, map, Observable, startWith } from 'rxjs';
 
 @Component({
@@ -23,6 +25,7 @@ import { combineLatest, map, Observable, startWith } from 'rxjs';
 export class AppointmentPage {
   private readonly _activatedRoutes: ActivatedRoute = inject(ActivatedRoute);
   private readonly _api: ApiService = inject(ApiService);
+  private readonly _toast: ToastsService = inject(ToastsService);
   public readonly services$: Observable<ServiceData[]> = this._api.servicesData;
 
   private readonly _defaultService: number | null =
@@ -80,7 +83,14 @@ export class AppointmentPage {
       serviceId: this.appointmentForm.value.serviceId,
     };
 
-    this._api.sendData('appointments', body).subscribe(res => console.log(res));
+    this._api.sendData('appointments', body).subscribe({
+      next: (res: AppointmentResponse): void => {
+        if (res.success) this._toast.show('success', 'Demande envoyée', res.message);
+        else this._toast.show('warning', 'Attention', res.message);
+      },
+      error: err =>
+        this._toast.show('error', 'Erreur', `Le demande n'a pas pu être envoyée: ${err}`),
+    });
   }
 
   private dateToValue(date: Date): string {

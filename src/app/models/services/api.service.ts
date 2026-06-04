@@ -56,7 +56,7 @@ export class ApiService {
     return this._http.get<T>(this._baseUrl + page);
   }
 
-  public sendData(page: string, body: object): Observable<object> {
+  public sendData(page: string, body: object): Observable<any> {
     return this._http.post(this._baseUrl + page, body);
   }
 }

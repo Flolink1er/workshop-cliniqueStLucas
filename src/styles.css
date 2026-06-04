@@ -44,6 +44,25 @@ body {
   --noise: 0;
 }
 
+@keyframes toastInOut {
+  0% {
+    translate: 0 100%;
+    opacity: 0;
+  }
+  5% {
+    translate: 0 0;
+    opacity: 1;
+  }
+  95% {
+    translate: 0 0;
+    opacity: 1;
+  }
+  100% {
+    translate: 0 100%;
+    opacity: 0;
+  }
+}
+
 @utility navbar {
   @apply h-16 gap-x-10 border-b border-b-(--border-main) bg-white md:px-8;
 }
@@ -216,4 +235,29 @@ p.label {
 
 @utility skeleton {
   @apply bg-base-200;
+}
+
+@utility alert {
+  @apply fixed bottom-0 m-3 flex translate-y-full gap-3.5 self-center rounded-xl border-0! border-l-3! border-l-(--border-color)! px-5 py-4 text-sm opacity-0 shadow-sm;
+  animation: toastInOut 5s ease-in-out 0s 1;
+}
+
+@utility alert-warning {
+  --border-color: #f5a623;
+}
+
+@utility alert-info {
+  --border-color: var(--color-primary);
+}
+
+@utility alert-error {
+  --border-color: currentColor;
+}
+
+@utility alert-success {
+  --border-color: var(--color-accent);
+}
+
+@utility alert-icon {
+  @apply shrink-0 text-lg;
 }
