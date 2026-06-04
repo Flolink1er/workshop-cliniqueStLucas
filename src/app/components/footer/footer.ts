@@ -13,6 +13,6 @@ import { Observable } from 'rxjs';
 })
 export class Footer {
   private readonly _api: ApiService = inject(ApiService);
-  public readonly services$: Observable<ServiceData[]> = this._api.servicesData;
-  public readonly departments$: Observable<DepartmentData[]> = this._api.departmentsData;
+  public readonly services$: Observable<ServiceData[]> = this._api.services$;
+  public readonly departments$: Observable<DepartmentData[]> = this._api.departments$;
 }

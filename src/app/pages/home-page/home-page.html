@@ -9,7 +9,11 @@
     <div class="mx-4 flex max-w-4xl flex-col gap-y-4 py-6 lg:mx-auto">
       <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
         @for (stat of pageData.stats; track stat) {
-          <app-stat-card [icon]="stat.icon!" [label]="stat.label!" [value]="stat.value" />
+          <app-stat-card
+            [animated]="true"
+            [icon]="stat.icon!"
+            [label]="stat.label!"
+            [value]="stat.value" />
         }
       </div>
       <div class="grid grid-cols-1 justify-items-center gap-4 sm:grid-cols-2 lg:grid-cols-3">

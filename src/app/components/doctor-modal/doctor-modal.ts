@@ -21,7 +21,7 @@ export class DoctorModal implements OnInit, OnDestroy {
 
   private readonly _department$: Observable<string | undefined> = this.memberData$.pipe(
     switchMap(memberData => {
-      return this._api.departmentsData.pipe(
+      return this._api.departments$.pipe(
         map(departData => departData.find(depart => depart.id === memberData.departmentId)?.name),
       );
     }),

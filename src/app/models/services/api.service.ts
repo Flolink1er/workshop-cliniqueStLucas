@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { inject, Injectable, signal, WritableSignal } from '@angular/core';
+import { inject, Injectable, Signal, signal, WritableSignal } from '@angular/core';
 import { DepartmentData } from 'interfaces/departments.interface';
 import { ActualitesData } from 'interfaces/news.interface';
 import { ServiceData } from 'interfaces/services.interface';
@@ -14,49 +14,39 @@ export class ApiService {
   private readonly _http: HttpClient = inject(HttpClient);
   private readonly _baseUrl: string = 'http://localhost:5150/api/';
 
-  private readonly _homePage$: Observable<HomeData> = this.loadData<HomeData>('homepage').pipe(
-    shareReplay(1),
+  private _pipeShare = <T>() => shareReplay<T>({ bufferSize: 1, refCount: true });
+
+  public readonly homePage$: Observable<HomeData> = this.loadData<HomeData>('homepage').pipe(
+    this._pipeShare(),
   );
-  private readonly _services$: Observable<ServiceData[]> = this.loadData<ServiceData[]>(
+  public readonly services$: Observable<ServiceData[]> = this.loadData<ServiceData[]>(
     'services',
-  ).pipe(shareReplay(1));
-  private readonly _team$: Observable<TeamData[]> = this.loadData<TeamData[]>('team').pipe(
-    shareReplay(1),
+  ).pipe(this._pipeShare());
+  public readonly team$: Observable<TeamData[]> = this.loadData<TeamData[]>('team').pipe(
+    this._pipeShare(),
   );
-  private readonly _news$: Observable<ActualitesData[]> = this.loadData<ActualitesData[]>(
+  public readonly news$: Observable<ActualitesData[]> = this.loadData<ActualitesData[]>(
     'news',
-  ).pipe(shareReplay(1));
-  private readonly _departments$: Observable<DepartmentData[]> = this.loadData<DepartmentData[]>(
+  ).pipe(this._pipeShare());
+  public readonly departments$: Observable<DepartmentData[]> = this.loadData<DepartmentData[]>(
     'departments',
-  ).pipe(shareReplay(1));
+  ).pipe(this._pipeShare());
 
-  public token: WritableSignal<string> = signal<string>(localStorage.getItem('token') || '');
+  private readonly _token: WritableSignal<string> = signal<string>(
+    localStorage.getItem('token') || '',
+  );
+  public readonly token: Signal<string> = this._token.asReadonly();
 
-  public get homeData(): Observable<HomeData> {
-    return this._homePage$;
+  public setToken(token: string): void {
+    localStorage.setItem('token', token);
+    this._token.set(token);
   }
 
-  public get servicesData(): Observable<ServiceData[]> {
-    return this._services$;
+  public loadData<T>(endpoint: string): Observable<T> {
+    return this._http.get<T>(`${this._baseUrl}${endpoint}`);
   }
 
-  public get teamData(): Observable<TeamData[]> {
-    return this._team$;
-  }
-
-  public get actualitesData(): Observable<ActualitesData[]> {
-    return this._news$;
-  }
-
-  public get departmentsData(): Observable<DepartmentData[]> {
-    return this._departments$;
-  }
-
-  public loadData<T>(page: string): Observable<T> {
-    return this._http.get<T>(this._baseUrl + page);
-  }
-
-  public sendData(page: string, body: object): Observable<any> {
-    return this._http.post(this._baseUrl + page, body);
+  public sendData<T>(endpoint: string, body: unknown): Observable<T> {
+    return this._http.post<T>(`${this._baseUrl}${endpoint}`, body);
   }
 }

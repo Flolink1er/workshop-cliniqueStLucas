@@ -10,10 +10,16 @@ import { ContactForm } from 'interfaces/contact.interface';
 })
 export class ContactPage {
   public readonly contactForm: FormGroup<ContactForm> = new FormGroup<ContactForm>({
-    email: new FormControl<string | null>('', [Validators.email, Validators.required]),
+    email: new FormControl<string | null>(
+      '',
+      Validators.compose([Validators.email, Validators.required]),
+    ),
     firstName: new FormControl<string | null>('', Validators.required),
     lastName: new FormControl<string | null>('', Validators.required),
-    message: new FormControl<string | null>('', [Validators.required, Validators.minLength(20)]),
+    message: new FormControl<string | null>(
+      '',
+      Validators.compose([Validators.required, Validators.minLength(20)]),
+    ),
     subject: new FormControl<string | null>('Demande de renseignement', Validators.required),
   });
 }

@@ -19,7 +19,7 @@ export class DepartmentsInfo {
   private readonly _api: ApiService = inject(ApiService);
   public pageData$: Observable<DepartmentData> = combineLatest([
     this._activatedRoute.params,
-    this._api.departmentsData,
+    this._api.departments$,
   ]).pipe(
     map(([params, departments]) => {
       const slug = params['slug'] as string;
@@ -33,7 +33,7 @@ export class DepartmentsInfo {
 
   public readonly team$: Observable<TeamData[]> = this.pageData$.pipe(
     switchMap(DepartData => {
-      return this._api.teamData.pipe(
+      return this._api.team$.pipe(
         map(teamMembers => teamMembers.filter(member => member.departmentId === DepartData.id)),
       );
     }),

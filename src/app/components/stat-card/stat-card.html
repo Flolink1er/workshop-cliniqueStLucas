@@ -4,7 +4,13 @@
   </div>
   <div>
     <div class="mb-2 text-3xl font-bold text-primary">
-      {{ value().replace('—', '-') }}
+      {{
+        animated()
+          ? dynamicValue()
+              .toString()
+              .replace(/(\d)(\d{3})$/gm, '$1 $2')
+          : value().replace('—', '-')
+      }}
     </div>
     <div class="text-alt">{{ label() }}</div>
   </div>

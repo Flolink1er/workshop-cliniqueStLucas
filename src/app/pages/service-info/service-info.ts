@@ -24,7 +24,7 @@ export class ServiceInfo {
 
   public pageData$: Observable<ServiceData> = combineLatest([
     this._activatedRoute.params,
-    this._api.servicesData,
+    this._api.services$,
   ]).pipe(
     map(([params, services]) => {
       const slug = params['slug'] as string;
@@ -42,7 +42,7 @@ export class ServiceInfo {
 
   public readonly team$: Observable<TeamData[]> = this.pageData$.pipe(
     switchMap(serviceData => {
-      return this._api.teamData.pipe(
+      return this._api.team$.pipe(
         map(teamMembers =>
           teamMembers.filter(member => member.departmentId === serviceData.departmentId),
         ),

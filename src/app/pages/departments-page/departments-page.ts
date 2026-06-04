@@ -15,5 +15,5 @@ import { Observable } from 'rxjs';
 export class DepartmentsPage {
   private readonly _api: ApiService = inject(ApiService);
 
-  public pageData$: Observable<DepartmentData[]> = this._api.departmentsData;
+  public pageData$: Observable<DepartmentData[]> = this._api.departments$;
 }

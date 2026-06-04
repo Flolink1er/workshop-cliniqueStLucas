@@ -14,7 +14,7 @@ export class NewsPage {
   public actus: WritableSignal<ActualitesData[]> = signal<ActualitesData[]>([]);
   // public readonly actus: Observable<ActualitesData[]> = this.apiService.actualitesData;
   constructor() {
-    this._apiService.actualitesData.subscribe(actusArray =>
+    this._apiService.news$.subscribe(actusArray =>
       actusArray.forEach(actu => {
         this.actus.update(current => [...current, actu]);
       }),

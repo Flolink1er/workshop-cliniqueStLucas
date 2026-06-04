@@ -19,7 +19,7 @@ export class NewsInfo implements OnInit {
   public annexedActu: ActualitesData[] = [];
 
   ngOnInit(): void {
-    combineLatest([this._activatedRoute.params, this._apiService.actualitesData]).subscribe(
+    combineLatest([this._activatedRoute.params, this._apiService.news$]).subscribe(
       ([params, actus]) => {
         this.currentActu = actus.find(actu => actu.slug === params['slug']);
 
@@ -32,7 +32,7 @@ export class NewsInfo implements OnInit {
       },
     );
 
-    this._apiService.actualitesData.subscribe(actus => {
+    this._apiService.news$.subscribe(actus => {
       if (!this.currentActu) {
         this.annexedActu = [];
         return;

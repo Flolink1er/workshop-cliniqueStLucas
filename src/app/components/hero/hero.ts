@@ -36,12 +36,13 @@ export class Hero {
       subject: this.contactForm()!.value.subject!,
     };
 
-    this._api.sendData('contact', body).subscribe({
-      next: (res: ContactResponse): void => {
+    this._api.sendData<ContactResponse>('contact', body).subscribe({
+      next: (res): void => {
         if (res.success) this._toast.show('success', 'Message envoyé avec succès', res.message);
         else if (!res.success && res.message) this._toast.show('warning', 'Attention', res.message);
       },
-      error: (err) => this._toast.show('error', 'Erreur', `Le message n'a pas pu être envoyé: ${err}`)
+      error: err =>
+        this._toast.show('error', 'Erreur', `Le message n'a pas pu être envoyé: ${err}`),
     });
   }
 

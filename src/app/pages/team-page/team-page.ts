@@ -18,7 +18,7 @@ export class TeamPage {
   private readonly _api: ApiService = inject(ApiService);
   public searchInput: FormControl<string | null> = new FormControl<string | null>('');
   public readonly pageData$: Observable<TeamData[]> = combineLatest([
-    this._api.teamData,
+    this._api.team$,
     this.searchInput.valueChanges.pipe(startWith('')),
   ]).pipe(
     map(([members, searchTerm]) => {

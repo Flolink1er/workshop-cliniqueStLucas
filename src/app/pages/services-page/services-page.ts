@@ -17,7 +17,7 @@ export class ServicesPage {
   private readonly _api: ApiService = inject(ApiService);
   public searchInput = new FormControl<string | null>('');
   public pageData$: Observable<ServiceData[]> = combineLatest([
-    this._api.servicesData,
+    this._api.services$,
     this.searchInput.valueChanges.pipe(startWith('')),
   ]).pipe(
     map(([services, searchTerm]) => {

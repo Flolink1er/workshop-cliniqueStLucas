@@ -26,7 +26,7 @@ export class AppointmentPage {
   private readonly _activatedRoutes: ActivatedRoute = inject(ActivatedRoute);
   private readonly _api: ApiService = inject(ApiService);
   private readonly _toast: ToastsService = inject(ToastsService);
-  public readonly services$: Observable<ServiceData[]> = this._api.servicesData;
+  public readonly services$: Observable<ServiceData[]> = this._api.services$;
 
   private readonly _defaultService: number | null =
     Number(this._activatedRoutes.snapshot.params['service']) || null;
@@ -38,23 +38,28 @@ export class AppointmentPage {
   }
 
   public appointmentForm = new FormGroup({
-    doctorId: new FormControl<number | string | null>(null, [
+    doctorId: new FormControl<number | string | null>(
+      null,
       Validators.pattern(/^-?(?:0|[1-9]\d*)$/gm),
-    ]),
-    email: new FormControl<string>('', [Validators.required, Validators.email]),
+    ),
+    email: new FormControl<string>('', Validators.compose([Validators.required, Validators.email])),
     firstName: new FormControl<string>('', Validators.required),
     lastName: new FormControl<string>('', Validators.required),
-    phone: new FormControl<string>('', [Validators.required, Validators.pattern(/^\d{10}$/gm)]),
+    phone: new FormControl<string>(
+      '',
+      Validators.compose([Validators.required, Validators.pattern(/^\d{10}$/gm)]),
+    ),
     preferredDate: new FormControl<string>(this.getClosestDate(), Validators.required),
     reason: new FormControl<string | null>(null),
-    serviceId: new FormControl<number | string | null>(this._defaultService, [
+    serviceId: new FormControl<number | string | null>(
+      this._defaultService,
       Validators.pattern(/^-?(?:0|[1-9]\d*)$/gm),
-    ]),
+    ),
   });
 
   public doctors$: Observable<TeamData[]> = combineLatest([
-    this._api.teamData,
-    this._api.servicesData,
+    this._api.team$,
+    this._api.services$,
     this.appointmentForm.controls.serviceId.valueChanges.pipe(
       startWith(this.appointmentForm.value.serviceId),
     ),
@@ -62,8 +67,10 @@ export class AppointmentPage {
     map(([doctors, services, serviceId]) => {
       if (serviceId === null || serviceId === 'null' || serviceId === '') return doctors;
 
-      const selectedServiceId = Number(serviceId);
-      const currentService = services.find(s => s.id === selectedServiceId);
+      const selectedServiceId: number | null = Number(serviceId);
+      const currentService: ServiceData | undefined = services.find(
+        s => s.id === selectedServiceId,
+      );
 
       if (!currentService || currentService.departmentId === null) return [];
 
@@ -83,8 +90,8 @@ export class AppointmentPage {
       serviceId: this.appointmentForm.value.serviceId,
     };
 
-    this._api.sendData('appointments', body).subscribe({
-      next: (res: AppointmentResponse): void => {
+    this._api.sendData<AppointmentResponse>('appointments', body).subscribe({
+      next: (res): void => {
         if (res.success) this._toast.show('success', 'Demande envoyée', res.message);
         else this._toast.show('warning', 'Attention', res.message);
       },
