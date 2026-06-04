@@ -5,8 +5,7 @@
       <h1 class="text-center text-2xl font-bold text-base-content"> Nos dernières actualités</h1>
       <div class="flex w-full max-w-7xl flex-col gap-5 lg:flex-row">
         @if (actus()[0]) {
-          <div
-            class="card bg-base-100 shadow-sm transition-all hover:scale-[1.005] hover:shadow-lg lg:card-side lg:flex-1">
+          <div class="card bg-base-100 shadow-sm transition-all lg:card-side lg:flex-1">
             <figure class="lg:w-1/2">
               <img
                 class="h-64 w-full object-cover lg:h-full"
@@ -17,7 +16,7 @@
             <div class="card-body lg:w-1/2">
               <h2 class="card-title">{{ actus()[0].title }}</h2>
               <p>{{ actus()[0].summary }}</p>
-              <div class="flex justify-start">
+              <div class="flex justify-start text-sm text-base-content/70 italic">
                 Le {{ actus()[0].publishedAt | date: 'd MMMM y' }}
               </div>
 
@@ -31,13 +30,12 @@
         }
         <div class="flex flex-col gap-5 lg:w-96">
           @if (actus()[1]) {
-            <div
-              class="card bg-base-100 shadow-sm transition-all hover:scale-[1.01] hover:shadow-lg">
+            <div class="card bg-base-100 shadow-sm transition-all">
               <div class="card-body">
                 <h2 class="card-title">{{ actus()[1].title }}</h2>
                 <p>{{ actus()[1].summary }}</p>
 
-                <div class="flex justify-start">
+                <div class="flex justify-start text-sm text-base-content/70 italic">
                   Le {{ actus()[1].publishedAt | date: 'd MMMM y' }}
                 </div>
                 <div class="card-actions justify-end">
@@ -49,12 +47,11 @@
             </div>
           }
           @if (actus()[2]) {
-            <div
-              class="card bg-base-100 shadow-sm transition-all hover:scale-[1.01] hover:shadow-lg">
+            <div class="card bg-base-100 shadow-sm transition-all">
               <div class="card-body">
                 <h2 class="card-title">{{ actus()[2].title }}</h2>
                 <p>{{ actus()[2].summary }}</p>
-                <div class="flex justify-start">
+                <div class="flex justify-start text-sm text-base-content/70 italic">
                   Le {{ actus()[2].publishedAt | date: 'd MMMM y' }}
                 </div>
                 <div class="card-actions justify-end">
@@ -76,8 +73,7 @@
         @if (actus().length > 0) {
           <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-3">
             @for (actu of actus(); track actu.id) {
-              <div
-                class="card bg-base-100 shadow-sm transition-all hover:scale-[1.01] hover:shadow-lg">
+              <div class="card bg-base-100 shadow-sm transition-all">
                 <figure class="px-4 pt-4 md:px-6 md:pt-6">
                   <img
                     src="https://images.cnrs.fr/system/files/styles/full_image_desktop_watermark/private/media/images/2011/07/CNRS_20110001_1747_42944.jpg?itok=CH6YBufm"
@@ -92,7 +88,7 @@
                     {{ actu.summary }}
                   </p>
 
-                  <div class="flex justify-start">
+                  <div class="flex justify-start text-sm text-base-content/70 italic">
                     Le {{ actu.publishedAt | date: 'd MMMM y' }}
                   </div>
                   <div class="card-actions">
@@ -114,8 +110,7 @@
           <h1 class="text-center text-2xl font-bold text-base-content"> Résultats de recherche </h1>
           <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-3">
             @for (actu of pageData; track actu.id) {
-              <div
-                class="card bg-base-100 shadow-sm transition-all hover:scale-[1.01] hover:shadow-lg">
+              <div class="card bg-base-100 shadow-sm transition-all">
                 <figure class="px-4 pt-4 md:px-6 md:pt-6">
                   <img
                     src="https://images.cnrs.fr/system/files/styles/full_image_desktop_watermark/private/media/images/2011/07/CNRS_20110001_1747_42944.jpg?itok=CH6YBufm"
@@ -129,6 +124,10 @@
                   <p>
                     {{ actu.summary }}
                   </p>
+
+                  <div class="flex justify-start text-sm text-base-content/70 italic">
+                    Le {{ actu.publishedAt | date: 'd MMMM y' }}
+                  </div>
 
                   <div class="card-actions">
                     <a routerLink="/news/{{ actu.slug }}" class="btn btn-primary"> Lire plus </a>

@@ -262,45 +262,18 @@ p.label {
   @apply shrink-0 text-lg;
 }
 
-.IRM {
+.Équipement {
   background-color: #f5a623;
 }
-.Technologie {
+.Prévention {
   background-color: #1a5f9e;
 }
-.Neurologie {
+.Infrastructure {
   background-color: #0d3d6b;
 }
-.Vaccination {
+.Prix {
   background-color: #00c9a7;
 }
-.Prévention {
+.Services {
   background-color: #740202;
-}
-.Maternité {
-  background-color: #ff81cf;
-}
-.Rénovation {
-  background-color: #ffcccb;
-}
-.Néonatologie {
-  background-color: #f4b1f9;
-}
-.Prix {
-  background-color: #035d09;
-}
-.Cardiologie {
-  background-color: #01d6d6;
-}
-.Qualité {
-  background-color: gold;
-}
-.Téléconsultation {
-  background-color: #032e5a;
-}
-.Innovation {
-  background-color: #63d74f;
-}
-.Numérique {
-  background-color: rgb(25, 122, 131);
 }
