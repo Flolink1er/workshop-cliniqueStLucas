@@ -6,8 +6,8 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 import { UserAccountService } from 'models/services/user-account.service';
-import { RouterLink } from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -19,11 +19,8 @@ export class LoginPage {
   private readonly userAccount: UserAccountService = inject(UserAccountService);
 
   public loginForm = new FormGroup({
-    email: new FormControl(
-      'patient@clinique.be',
-      Validators.compose([Validators.required, Validators.email]),
-    ),
-    password: new FormControl('Patient2026!', Validators.required),
+    email: new FormControl('', Validators.compose([Validators.required, Validators.email])),
+    password: new FormControl('', Validators.required),
   });
 
   public onLoginSubmit(): void {
