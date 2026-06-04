@@ -1,4 +1,4 @@
-import { AsyncPipe } from '@angular/common';
+import { AsyncPipe, DatePipe } from '@angular/common';
 import { Component, inject, signal, WritableSignal } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { RouterLink } from '@angular/router';
@@ -9,7 +9,7 @@ import { combineLatest, map, Observable, startWith } from 'rxjs';
 
 @Component({
   selector: 'app-news',
-  imports: [RouterLink, Hero, AsyncPipe],
+  imports: [RouterLink, Hero, AsyncPipe, DatePipe],
   templateUrl: './news-page.html',
 })
 export class NewsPage {
