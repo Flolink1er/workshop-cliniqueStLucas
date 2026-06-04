@@ -14,6 +14,7 @@ import { HomePage } from 'pages/home-page/home-page';
 import { LoginPage } from 'pages/login-page/login-page';
 import { NewsInfo } from 'pages/news-info/news-info';
 import { NewsPage } from 'pages/news-page/news-page';
+import { RegisterPage } from 'pages/register-page/register-page';
 import { ServiceInfo } from 'pages/service-info/service-info';
 import { ServicesPage } from 'pages/services-page/services-page';
 import { TeamPage } from 'pages/team-page/team-page';
@@ -29,6 +30,12 @@ export const routes: Routes = [
     path: 'login',
     title: 'Connexion',
     component: LoginPage,
+    canActivate: [loggedOffGuard],
+  },
+  {
+    path: 'register',
+    title: 'Inscription',
+    component: RegisterPage,
     canActivate: [loggedOffGuard],
   },
   {
