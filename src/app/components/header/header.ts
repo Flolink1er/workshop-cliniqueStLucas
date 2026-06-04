@@ -9,10 +9,10 @@ import { UserAccountService } from 'models/services/user-account.service';
   templateUrl: './header.html',
 })
 export class Header {
-  private readonly _account: UserAccountService = inject(UserAccountService);
+  public readonly account: UserAccountService = inject(UserAccountService);
   public shrinkHeader: WritableSignal<boolean> = signal(true);
 
-  public readonly isLoggedIn: Signal<boolean> = this._account.isLoggedIn;
+  public readonly isLoggedIn: Signal<boolean> = this.account.isLoggedIn;
 
   public readonly links: Cta[] = [
     { label: 'Accueil', href: '/home' },

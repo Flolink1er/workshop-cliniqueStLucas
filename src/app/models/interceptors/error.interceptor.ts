@@ -31,10 +31,7 @@ export const errorInterceptor: HttpInterceptorFn = (
       }
 
       if (error.status === 401) {
-        userAccount.setLoggedState(false);
-        console.log('must redirect');
-        localStorage.removeItem('token');
-        router.navigateByUrl('/login');
+        userAccount.userLogout();
         return EMPTY;
       }
 

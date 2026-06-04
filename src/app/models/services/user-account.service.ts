@@ -16,6 +16,7 @@ export class UserAccountService {
   private readonly _toast: ToastsService = inject(ToastsService);
   private readonly _isLoggedIn: WritableSignal<boolean> = signal(!!localStorage.getItem('token'));
   public readonly isLoggedIn: Signal<boolean> = this._isLoggedIn.asReadonly();
+  public readonly username: WritableSignal<string> = signal(localStorage.getItem('username') || '');
 
   public setLoggedState(state: boolean): void {
     this._isLoggedIn.set(state);
@@ -32,10 +33,21 @@ export class UserAccountService {
 
       this._api.setToken(`${res.tokenType} ${res.token}`);
       this._isLoggedIn.set(this._api.token() !== '');
+      this.username.set(res.user.name);
+      localStorage.setItem('username', this.username());
       this._toast.show('success', 'Connexion réussie', 'Vous êtes maintenant connecté·e.');
       await this._router.navigateByUrl('/home');
     } catch (err) {
       this._toast.show('error', 'Échec de la connexion', `Erreur lors de la connexion: ${err}`);
     }
+  }
+
+  public userLogout(): void {
+    this.setLoggedState(false);
+    localStorage.removeItem('token');
+    localStorage.removeItem('username');
+    this.username.set('');
+    this._toast.show('info', 'Information', 'Vous avez été déconnecté.');
+    this._router.navigateByUrl('/login');
   }
 }

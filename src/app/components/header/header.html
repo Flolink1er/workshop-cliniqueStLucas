@@ -46,8 +46,13 @@
     </div>
     <div class="navbar-end gap-2">
       @if (isLoggedIn()) {
-        <button class="btn navbar-end w-fit btn-sm btn-primary">Espace patient</button>
-        <button class="btn navbar-end w-fit btn-sm btn-primary">Se Déconnecter</button>
+        <details class="dropdown dropdown-end">
+          <summary class="btn m-1 btn-sm btn-primary">Espace patient</summary>
+          <ul class="dropdown-content menu z-1 w-52 rounded-box bg-base-100 p-2 shadow-sm">
+            <li class="my-2 ml-3">{{ account.username() }}</li>
+            <li><button (click)="account.userLogout()">Déconnexion</button></li>
+          </ul>
+        </details>
       }
     </div>
   </div>
